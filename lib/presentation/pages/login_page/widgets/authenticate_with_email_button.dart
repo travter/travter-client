@@ -41,10 +41,10 @@ class AuthenticateWithEmailButton extends StatelessWidget {
         width: context.dims.width * 0.4,
         height: context.dims.height * loginButtonsHeight,
         decoration: BoxDecoration(
-            color: isLogin ? Colors.blue : Colors.transparent,
+            color: isLogin ? Colors.amber: Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: !isLogin ? Colors.blue : Colors.transparent,
+              color: !isLogin ? Colors.amber : Colors.transparent,
               width: 2,
             )),
         alignment: Alignment.center,
@@ -52,6 +52,7 @@ class AuthenticateWithEmailButton extends StatelessWidget {
           _text,
           style: const TextStyle(
             color: Colors.white,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

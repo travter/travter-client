@@ -6,9 +6,10 @@ import 'package:injectable/injectable.dart';
 
 import '../../domain/authentication/auth_failure.dart';
 import '../../domain/authentication/authentication_facade_interface.dart';
-import '../../domain/user/user.dart';
 import '../../domain/authentication/value_objects.dart';
 import '../../domain/core/typedefs.dart';
+import '../../domain/core/value_validators.dart';
+import '../../domain/user/user.dart';
 import 'firebase_user_mapper.dart';
 
 @LazySingleton(as: AuthenticationFacadeInterface)
@@ -76,6 +77,8 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
     final emailStr = email.getOrCrash();
     final passwordStr = password.getOrCrash();
 
+    print('WITAM');
+
     await _firebaseAuth.signInWithEmailAndPassword(
       email: emailStr,
       password: passwordStr,
@@ -91,6 +94,19 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
   }) async {
     final emailStr = email.getOrCrash();
     final passwordStr = password.getOrCrash();
+
+    final isPasswordValid = validatePassword(passwordStr);
+    final isEmailValid = validateEmailAddress(emailStr);
+
+    print(isPasswordValid);
+
+    var isInvalid = false;
+    isPasswordValid.fold((l) => isInvalid = true, (r) => null);
+    isEmailValid.fold((l) => isInvalid = true, (r) => null);
+
+    if (isInvalid) {
+      return left(const AuthFailure.invalidEmailOrPassword());
+    }
 
     await _firebaseAuth.createUserWithEmailAndPassword(
       email: emailStr,
