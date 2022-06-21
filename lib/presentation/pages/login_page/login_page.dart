@@ -43,15 +43,9 @@ class LoginPage extends StatelessWidget {
                 LoginWithEmailForm(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SignInButton.mini(
-                      buttonType: ButtonType.facebook,
-                      onPressed: () {},
-                    ),
-                    SignInButton.mini(
-                      buttonType: ButtonType.google,
-                      onPressed: () {},
-                    ),
+                  children: const [
+                    LoginWithFacebookButton(),
+                    LoginWithGoogleButton(),
                   ],
                 ),
               ],

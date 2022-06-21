@@ -64,7 +64,11 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
     final facebookAuthCredential = FacebookAuthProvider.credential(
       loginResult.accessToken!.token,
     );
-    await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+    try {
+      await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+    } on FirebaseAuthException catch(err) {
+      return left(const AuthFailure.serverError());
+    }
 
     return right(unit);
   }
