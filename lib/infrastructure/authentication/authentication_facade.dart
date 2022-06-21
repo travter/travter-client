@@ -98,8 +98,6 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
     final isPasswordValid = validatePassword(passwordStr);
     final isEmailValid = validateEmailAddress(emailStr);
 
-    print(isPasswordValid);
-
     var isInvalid = false;
     isPasswordValid.fold((l) => isInvalid = true, (r) => null);
     isEmailValid.fold((l) => isInvalid = true, (r) => null);
@@ -108,10 +106,16 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
       return left(const AuthFailure.invalidEmailOrPassword());
     }
 
-    await _firebaseAuth.createUserWithEmailAndPassword(
-      email: emailStr,
-      password: passwordStr,
-    );
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: emailStr,
+        password: passwordStr,
+      );
+    } on FirebaseAuthException catch(err) {
+      if(err.code == 'email-already-in-use') {
+        return left(const AuthFailure.emailAlreadyInUse());
+      }
+    }
 
     return right(unit);
   }

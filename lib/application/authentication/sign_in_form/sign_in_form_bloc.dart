@@ -108,14 +108,5 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
     });
   }
-
-  Stream<SignInFormState> _performActionOnAuthFacade(
-    Future<AuthResult> Function({
-      required EmailAddress email,
-      required Password password,
-    })
-        forwardedCall,
-  ) async* {
-
-  }
+ 
 }

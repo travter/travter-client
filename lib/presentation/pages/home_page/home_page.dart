@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/authentication/authentication_bloc.dart';
+import '../../core/extensions.dart';
 import '../../router/router.gr.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
                 const LoginRoute(),
               );
             },
-            child: Text(''),//context.l10n.sign_out),
+            child: Text(context.l10n.sign_out),
           )
         ],
       ),

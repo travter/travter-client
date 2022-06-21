@@ -45,6 +45,9 @@ class LoginWithEmailForm extends StatelessWidget {
                     vertical: context.dims.height * 0.05,
                   ),
                   child: TextFormField(
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
                     decoration: InputDecoration(
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -76,6 +79,9 @@ class LoginWithEmailForm extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -126,8 +132,14 @@ class LoginWithEmailForm extends StatelessWidget {
                   ),
                 ),
                 if (state.isSubmitting) ...[
-                  const SizedBox(height: 8),
-                  const LinearProgressIndicator(),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(bottom: context.dims.height * 0.075),
+                    child: const LinearProgressIndicator(
+                      color: Colors.amber,
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
                 ],
               ],
             ),
