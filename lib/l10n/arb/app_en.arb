@@ -1,0 +1,15 @@
+{
+  "connection_established": "Connected back!",
+  "@connection_established": {
+    "description": "Notification message displayed in Snackbar when user is connected back to the internet"
+  },
+  "connection_lost": "No internet connection found...",
+  "@connection_lost": {
+    "description": "Notification message displayed in Snackbar when user is disconnected from the internet."
+  },
+  "login_with_facebook": "Login with Facebook",
+  "login_with_google": "Login with Google",
+  "login_with_email": "Login",
+  "register_with_email": "Register",
+  "sign_out": "Sign out"
+}

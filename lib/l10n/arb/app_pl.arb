@@ -1,0 +1,9 @@
+{
+  "connection_established": "Odzyskano połączenie!",
+  "connection_lost": "Nie znaleziono połączenia z internetem...",
+  "login_with_facebook": "Zaloguj poprzez Facebooka",
+  "login_with_google": "Zaloguj poprzez Google",
+  "login_with_email": "Zaloguj się",
+  "register_with_email": "Zajerejstruj się",
+  "sign_out": "Wyloguj"
+}

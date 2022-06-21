@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../application/authentication/authentication_bloc.dart';
+import '../../injection.dart';
+import '../../l10n/l10n.dart';
+import '../router/router.gr.dart';
+
+/// Main application that is on the top of widget tree,
+/// contains most essential properties and configuration.
+class MyAppWidget extends StatelessWidget {
+  final _appRouter = AppRouter();
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AuthenticationBloc>()
+            ..add(
+              const AuthenticationEvent.authCheckRequested(),
+            ),
+        ),
+      ],
+      child: MaterialApp.router(
+        title: 'ArTiver',
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routerDelegate: _appRouter.delegate(),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('pl', ''),
+        ],
+      ),
+    );
+  }
+}
