@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/authentication/authentication_bloc.dart';
-import '../../../l10n/l10n.dart';
 import '../../router/router.gr.dart';
 
 class HomePage extends StatelessWidget {

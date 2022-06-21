@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../application/authentication/authentication_bloc.dart';
 import '../../injection.dart';
-import '../../l10n/l10n.dart';
 import '../router/router.gr.dart';
 
 /// Main application that is on the top of widget tree,
@@ -25,10 +24,12 @@ class MyAppWidget extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: 'ArTiver',
+        debugShowCheckedModeBanner: false,
+        title: 'Traveler',
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(),
         localizationsDelegates: const [
+          AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
