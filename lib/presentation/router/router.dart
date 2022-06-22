@@ -9,7 +9,9 @@ import '../pages/pages.dart';
     MaterialRoute<LoadingPage>(page: LoadingPage, initial: true),
     MaterialRoute<LoginPage>(page: LoginPage),
     MaterialRoute<HomePage>(page: HomePage),
-    MaterialRoute<ProfilePage>(page: ProfilePage)
+    MaterialRoute<ProfilePage>(page: ProfilePage),
+    MaterialRoute<SettingsPage>(page: SettingsPage),
+    MaterialRoute<EditProfilePage>(page: EditProfilePage),
   ],
 )
 

@@ -23,7 +23,6 @@ class TravelCard extends StatelessWidget {
           color: lightPrimaryColor,
           boxShadow: const [
             BoxShadow(
-              color: Colors.black,
               blurRadius: 5,
               offset: Offset(4, 8),
             ),
@@ -42,11 +41,9 @@ class TravelCard extends StatelessWidget {
                   ),
                   Text('26.04.2022', style: _topTravelInfoStyle),
                   const Expanded(
-                    child: Flexible(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Icon(Icons.more_horiz, color: Colors.grey),
-                      ),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.more_horiz, color: Colors.grey),
                     ),
                   ),
                 ],
