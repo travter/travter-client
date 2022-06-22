@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/constant_colors.dart';
@@ -24,17 +25,23 @@ class SettingsPage extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(bottom: height * 0.025),
-              child: const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Settings',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 0.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Settings',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 0.5,
+                    ),
                   ),
-                ),
+                  InkWell(
+                    onTap: () => context.router.pop(),
+                    child: const Icon(Icons.close, color: Colors.white),
+                  ),
+                ],
               ),
             ),
             const SettingWidget(

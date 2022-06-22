@@ -12,6 +12,9 @@ import '../pages/pages.dart';
     MaterialRoute<ProfilePage>(page: ProfilePage),
     MaterialRoute<SettingsPage>(page: SettingsPage),
     MaterialRoute<EditProfilePage>(page: EditProfilePage),
+    MaterialRoute<CalculationsPage>(page:CalculationsPage),
+    MaterialRoute<AddJourneyPage>(page:AddJourneyPage),
+    MaterialRoute<SearchPage>(page:SearchPage),
   ],
 )
 
