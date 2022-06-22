@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constants/constant_colors.dart';
+import '../../core/extensions.dart';
 import 'widgets/widgets.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -11,12 +12,16 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: primaryColor,
       body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            NickTextWidget(),
-            ProfileSummary(),
-            TravelCard(),
-           ]
+        child: Padding(
+          padding: EdgeInsets.only(bottom: context.dims.height * 0.035),
+          child: Column(
+            children: const [
+              NickTextWidget(),
+              ProfileSummary(),
+              TravelCard(),
+              TravelCard(),
+             ]
+          ),
         ),
       ),
     );
