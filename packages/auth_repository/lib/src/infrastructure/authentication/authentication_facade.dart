@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/authentication/auth_failure.dart';
 import '../../domain/authentication/authentication_facade_interface.dart';
@@ -12,7 +11,6 @@ import '../../domain/core/value_validators.dart';
 import '../../domain/user/user.dart';
 import 'firebase_user_mapper.dart';
 
-@LazySingleton(as: AuthenticationFacadeInterface)
 class AuthenticationFacade implements AuthenticationFacadeInterface {
   AuthenticationFacade(
     this._firebaseAuth,
