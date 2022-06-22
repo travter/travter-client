@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,4 +19,6 @@ void configureInjection(String env) {
 /// It may be confusing, because running a command `flutter pub run build_runner watch/build`
 /// may result in failing and return an error message informing about those type
 /// being unregistered. In order to fix this, just run the application first.
-Future<void> init() async {}
+Future<void> init() async {
+    getIt.registerSingleton<AuthenticationRepository>(AuthenticationRepository());
+}

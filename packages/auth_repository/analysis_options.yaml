@@ -10,7 +10,7 @@ analyzer:
     - "**/firebase_options.dart"
   strong-mode:
     implicit-casts: false
-    implicit-dynamic: false
+    # implicit-dynamic: false
   errors:
     included_file_warning: ignore
     top_level_function_literal_block: ignore

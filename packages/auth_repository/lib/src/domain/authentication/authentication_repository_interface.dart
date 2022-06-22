@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 import '../core/typedefs.dart';
 import '../user/user.dart';
 import 'value_objects.dart';
 
-abstract class AuthenticationFacadeInterface {
+abstract class AuthenticationRepositoryInterface {
   Future<AuthResult> loginWithGoogle();
 
   Future<AuthResult> loginWithFacebook();

@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,30 +15,30 @@ class MyAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<AuthenticationBloc>()
-            ..add(
-              const AuthenticationEvent.authCheckRequested(),
-            ),
+    return RepositoryProvider(
+      create: (context) => getIt<AuthenticationRepository>(),
+      child: BlocProvider(
+        create: (context) => AuthenticationBloc(
+          context.read<AuthenticationRepository>(),
+        )..add(
+            const AuthenticationEvent.authCheckRequested(),
+          ),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Traveler',
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routerDelegate: _appRouter.delegate(),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('pl', ''),
+          ],
         ),
-      ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Traveler',
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: _appRouter.delegate(),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''),
-          Locale('pl', ''),
-        ],
       ),
     );
   }

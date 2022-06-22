@@ -1,12 +1,9 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../domain/authentication/auth_failure.dart';
-import '../../../domain/authentication/authentication_facade_interface.dart';
-import '../../../domain/authentication/value_objects.dart';
-import '../../../domain/core/typedefs.dart';
 
 part 'sign_in_form_bloc.freezed.dart';
 
@@ -16,7 +13,7 @@ part 'sign_in_form_state.dart';
 
 @injectable
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  final AuthenticationFacadeInterface _authFacade;
+  final AuthenticationRepositoryInterface _authFacade;
 
   SignInFormBloc(this._authFacade) : super(SignInFormState.initial()) {
     on<EmailChanged>((event, emit) {

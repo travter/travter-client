@@ -2,21 +2,24 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/authentication/auth_failure.dart';
-import '../../domain/authentication/authentication_facade_interface.dart';
+import '../../domain/authentication/authentication_repository_interface.dart';
 import '../../domain/authentication/value_objects.dart';
 import '../../domain/core/typedefs.dart';
 import '../../domain/core/value_validators.dart';
 import '../../domain/user/user.dart';
 import 'firebase_user_mapper.dart';
 
-class AuthenticationFacade implements AuthenticationFacadeInterface {
-  AuthenticationFacade(
-    this._firebaseAuth,
-    this._googleSignIn,
-    this._facebookAuth,
-  );
+class AuthenticationRepository implements AuthenticationRepositoryInterface {
+  AuthenticationRepository({
+    FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
+    FacebookAuth? facebookAuth,
+  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
+        _facebookAuth = facebookAuth ?? FacebookAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -64,7 +67,7 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
     );
     try {
       await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-    } on FirebaseAuthException catch(err) {
+    } on FirebaseAuthException catch (err) {
       return left(const AuthFailure.serverError());
     }
 
@@ -113,8 +116,8 @@ class AuthenticationFacade implements AuthenticationFacadeInterface {
         email: emailStr,
         password: passwordStr,
       );
-    } on FirebaseAuthException catch(err) {
-      if(err.code == 'email-already-in-use') {
+    } on FirebaseAuthException catch (err) {
+      if (err.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
       }
     }
