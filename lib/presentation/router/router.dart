@@ -1,9 +1,7 @@
 import 'package:auto_route/annotations.dart';
 
-import '../pages/home_page/home_page.dart';
-import '../pages/loading_page/loading_page.dart';
-import '../pages/login_page/login_page.dart';
-import '../pages/profile_page/profile_page.dart';
+
+import '../pages/pages.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',

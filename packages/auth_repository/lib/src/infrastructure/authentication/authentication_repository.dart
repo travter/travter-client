@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/authentication/auth_failure.dart';
 import '../../domain/authentication/authentication_repository_interface.dart';
@@ -68,6 +68,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
     try {
       await _firebaseAuth.signInWithCredential(facebookAuthCredential);
     } on FirebaseAuthException catch (err) {
+      debugPrint(err.toString());
       return left(const AuthFailure.serverError());
     }
 
