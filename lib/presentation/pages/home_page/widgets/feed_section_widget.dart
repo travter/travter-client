@@ -6,7 +6,9 @@ import '../../../core/extensions.dart';
 import '../../../core/widgets/travel_card.dart';
 
 class FeedSectionWidget extends StatelessWidget {
-  const FeedSectionWidget({Key? key}) : super(key: key);
+  const FeedSectionWidget({required this.text, Key? key}) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +22,8 @@ class FeedSectionWidget extends StatelessWidget {
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            _FeedTextWidget(),
+          children: [
+            _FeedTextWidget(text: text),
           ],
         ),
       ),
@@ -30,7 +32,9 @@ class FeedSectionWidget extends StatelessWidget {
 }
 
 class _FeedTextWidget extends StatelessWidget {
-  const _FeedTextWidget({Key? key}) : super(key: key);
+  const _FeedTextWidget({required this.text, Key? key}) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +55,9 @@ class _FeedTextWidget extends StatelessWidget {
                 ),
               ),
             ),
-            child: const Text(
-              'Feed',
-              style: TextStyle(
+            child: Text(
+              text,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

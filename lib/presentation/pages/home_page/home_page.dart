@@ -25,10 +25,10 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: const [
                     WelcomeWidget(),
-                    ResultsOptionsWidget(),
-                    PopularPlacesWidget(),
+                    // ResultsOptionsWidget(),
+                    PopularPlacesWidget(text:'Popular Places'),
                     PopularPeopleWidget(),
-                    FeedSectionWidget(),
+                    FeedSectionWidget(text: 'Feed'),
                   ]
                 ),
               ),

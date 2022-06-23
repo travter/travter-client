@@ -62,10 +62,12 @@ class _PlaceNameWidget extends StatelessWidget {
         left: width * 0.025,
         top: height * 0.01,
       ),
-      child: const Text(
-        'Wiktor Zając',
-        style: TextStyle(
-          color: Colors.white,
+      child: const Center(
+        child: Text(
+          'Wiktor Zając',
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
     );

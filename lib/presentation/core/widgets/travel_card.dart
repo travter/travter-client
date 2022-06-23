@@ -24,7 +24,7 @@ class TravelCard extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               blurRadius: 5,
-              offset: Offset(4, 8),
+              offset: Offset(0, 0),
             ),
           ],
         ),
@@ -34,12 +34,12 @@ class TravelCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: width * 0.025),
               child: Row(
                 children: [
-                  Text('Szeszele', style: _topTravelInfoStyle),
+                  const Text('Szeszele', style: _topTravelInfoStyle),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                    child: Text('•', style: _topTravelInfoStyle),
+                    child: const Text('•', style: _topTravelInfoStyle),
                   ),
-                  Text('26.04.2022', style: _topTravelInfoStyle),
+                  const Text('26.04.2022', style: _topTravelInfoStyle),
                   const Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,

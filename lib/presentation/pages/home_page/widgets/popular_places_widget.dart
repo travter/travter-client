@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
@@ -7,7 +8,9 @@ import 'popular_place_card_widget.dart';
 import 'popular_section_text_widget.dart';
 
 class PopularPlacesWidget extends StatelessWidget {
-  const PopularPlacesWidget({Key? key}) : super(key: key);
+  const PopularPlacesWidget({required this.text, Key? key}) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +22,7 @@ class PopularPlacesWidget extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Column(
         children: [
-          Divider(
-            height: height * 0.05,
-            color: lightPrimaryColor,
-          ),
-          const PopularSectionTextWidget(text: 'Popular Places'),
+          PopularSectionTextWidget(text: text),
           Divider(
             height: height * 0.05,
             color: lightPrimaryColor,
@@ -49,5 +48,10 @@ class PopularPlacesWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
   }
 }

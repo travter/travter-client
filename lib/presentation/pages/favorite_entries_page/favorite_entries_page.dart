@@ -31,13 +31,13 @@ class FavoriteEntriesPage extends StatelessWidget {
                         height: height * 0.05,
                         color: lightPrimaryColor,
                       ),
-                      const GoBackWidget(),
-                      const PopularPlacesWidget(),
+                      // const GoBackWidget(),
+                      const PopularPlacesWidget(text:'Favorite Places'),
                       Divider(
                        height: height * 0.05,
                         color: lightPrimaryColor,
                       ),
-                      const FeedSectionWidget(),
+                      const FeedSectionWidget(text: 'Favorite Posts'),
                     ]
                 ),
               ),
@@ -54,8 +54,8 @@ class FavoriteEntriesPage extends StatelessWidget {
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
     InkWell(
-      onTap: () => context.router.push(const AddJourneyRoute()),
-      child: const Icon(Icons.add_circle_outline, color: Colors.white),
+      onTap: () => context.router.push(const HomeRoute()),
+      child: const Icon(Icons.home, color: Colors.white),
     ),
     InkWell(
       onTap: () => context.router.push(const CalculationsRoute()),
