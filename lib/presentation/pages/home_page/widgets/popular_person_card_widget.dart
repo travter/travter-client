@@ -117,7 +117,7 @@ class _JourneysMade extends StatelessWidget {
             color: lightGreenColor,
           ),
           Text(
-            'Jorneys made: ',
+            'Journeys made: ',
             style: TextStyle(
               color: Colors.white.withOpacity(0.85),
               fontSize: 12,

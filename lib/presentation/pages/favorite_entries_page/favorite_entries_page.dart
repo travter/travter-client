@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
+import '../../core/widgets/go_back_widget.dart';
 import '../../router/router.gr.dart';
 import '../home_page/widgets/feed_section_widget.dart';
 import '../home_page/widgets/popular_people_widget.dart';
@@ -26,6 +27,11 @@ class FavoriteEntriesPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                     children: [
+                      Divider(
+                        height: height * 0.05,
+                        color: lightPrimaryColor,
+                      ),
+                      const GoBackWidget(),
                       const PopularPlacesWidget(),
                       Divider(
                        height: height * 0.05,

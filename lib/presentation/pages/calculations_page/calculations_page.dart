@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
+import '../../core/widgets/go_back_widget.dart';
 import '../../router/router.gr.dart';
 import 'widgets/calculation_card_widget.dart';
 
@@ -20,7 +21,7 @@ class CalculationsPage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: height * 0.05),
-            child: const _GoBackWidget(),
+            child: const GoBackWidget(),
           ),
           ConstrainedBox(
             constraints: BoxConstraints(maxHeight: height * 0.75),
@@ -46,33 +47,7 @@ class CalculationsPage extends StatelessWidget {
   }
 }
 
-class _GoBackWidget extends StatelessWidget {
-  const _GoBackWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final width = context.dims.width;
-    return InkWell(
-      onTap: () => context.router.pop(),
-      child: Container(
-        // width: width * (1 / 3),
-        padding: EdgeInsets.only(left: width * 0.025),
-        child: Row(
-          children: [
-            Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white.withOpacity(0.9),
-            ),
-            const Text(
-              'Back',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
