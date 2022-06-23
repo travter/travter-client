@@ -13,7 +13,7 @@ class PopularPlaceCardWidget extends StatelessWidget {
     final width = context.dims.width;
 
     return Container(
-      width: width * 0.45,
+      width: width * 0.425,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: primaryColor,

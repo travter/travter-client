@@ -5,6 +5,7 @@ import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
 import '../../router/router.gr.dart';
+import 'widgets/popular_peoples_widget.dart';
 import 'widgets/welcome_widget.dart';
 import 'widgets/widgets.dart';
 
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.8),
+              constraints: BoxConstraints(maxHeight: height * 0.85),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -32,9 +33,7 @@ class HomePage extends StatelessWidget {
                       color: lightPrimaryColor,
                     ),
                     const PopularPlacesWidget(),
-                    Container(
-                      height: height * 1,
-                    ),
+                    const PopularPeoplesWidget(),
                   ]
                 ),
               ),
