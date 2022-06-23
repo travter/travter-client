@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constant_colors.dart';
-import '../../../core/extensions.dart';
+import '../constants/constant_colors.dart';
+import '../extensions.dart';
 
 class TravelCard extends StatelessWidget {
   const TravelCard({Key? key}) : super(key: key);

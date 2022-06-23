@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import '../../../core/widgets/travel_card.dart';
 
 class FeedSectionWidget extends StatelessWidget {
   const FeedSectionWidget({Key? key}) : super(key: key);
@@ -35,23 +36,32 @@ class _FeedTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
 
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: lightBlueColor,
-            width: width * 0.005,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: lightBlueColor,
+                width: width * 0.005,
+              ),
+            ),
+          ),
+          child: const Text(
+            'Feed',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      child: const Text(
-        'Feed',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+        const TravelCard(),
+        const TravelCard(),
+        const TravelCard(),
+        const TravelCard(),
+      ],
     );
   }
 }
