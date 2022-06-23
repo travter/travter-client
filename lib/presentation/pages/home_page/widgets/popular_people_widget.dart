@@ -6,8 +6,8 @@ import '../../../core/extensions.dart';
 import 'popular_person_card_widget.dart';
 import 'popular_section_text_widget.dart';
 
-class PopularPeoplesWidget extends StatelessWidget {
-  const PopularPeoplesWidget({Key? key}) : super(key: key);
+class PopularPeopleWidget extends StatelessWidget {
+  const PopularPeopleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

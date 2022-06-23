@@ -19,6 +19,10 @@ class PopularPlacesWidget extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Column(
         children: [
+          Divider(
+            height: height * 0.05,
+            color: lightPrimaryColor,
+          ),
           const PopularSectionTextWidget(text: 'Popular Places'),
           Divider(
             height: height * 0.05,
