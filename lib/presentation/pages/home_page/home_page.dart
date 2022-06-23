@@ -1,18 +1,37 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/constants/constant_colors.dart';
+import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
 import '../../router/router.gr.dart';
+import 'widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final height = context.dims.height;
+
     return SafeArea(
       child: Scaffold(
+        backgroundColor: lightPrimaryColor,
         body: Column(
           children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: height * 0.8),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const ResultsOptionsWidget(),
+                    Container(
+                      height: height * 1,
+                    ),
+                  ]
+                ),
+              ),
+            ),
             BottomNavbarWidget(children: _loadChildren(context)),
           ],
         ),
