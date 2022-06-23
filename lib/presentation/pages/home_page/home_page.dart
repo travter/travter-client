@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.85),
+              constraints: BoxConstraints(maxHeight: height * 0.8),
               child: SingleChildScrollView(
                 child: Column(
                   children: const [
@@ -44,15 +44,18 @@ class HomePage extends StatelessWidget {
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
     InkWell(
-        onTap: () => context.router.push(const SearchRoute()),
-        child: const Icon(Icons.search, color: Colors.white)),
-    InkWell(
       onTap: () => context.router.push(const AddJourneyRoute()),
       child: const Icon(Icons.add_circle_outline, color: Colors.white),
     ),
     InkWell(
       onTap: () => context.router.push(const CalculationsRoute()),
       child: const Icon(Icons.calculate_outlined, color: Colors.white),
+    ),
+    InkWell(
+      onTap: () => context.router.push(
+        const ProfileRoute(),
+      ),
+      child: const Icon(Icons.favorite_border, color: Colors.white),
     ),
     InkWell(
       onTap: () => context.router.push(

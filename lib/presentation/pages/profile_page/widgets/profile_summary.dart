@@ -46,7 +46,7 @@ class ProfileSummary extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: height * 0.02),
               child: const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac mi vitae turpis maximus consequat sit amet et libero. In sollicitudin, elit eu pretium egestas, mauris dui aliquet ante, et dignissim nisi enim vitae tellus. ',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac mi vitae turpis maximus consequat sit amet et libero. In sollicitudin, elit eu pretium egestas, mauris dui aliquet ante ',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
@@ -55,6 +55,32 @@ class ProfileSummary extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+            ),
+            Divider(
+              height: height * 0.015,
+              color: lightPrimaryColor,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  '48 following',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: width * 0.025),
+                  child: const Text(
+                    '12 followers',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
