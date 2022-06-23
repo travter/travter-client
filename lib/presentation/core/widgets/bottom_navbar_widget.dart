@@ -1,12 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../router/router.gr.dart';
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
 
 class BottomNavbarWidget extends StatelessWidget {
-  const BottomNavbarWidget({Key? key}) : super(key: key);
+  const BottomNavbarWidget({required this.children, Key? key}) : super(key: key);
+
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +32,7 @@ class BottomNavbarWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: height * 0.0225),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                  onTap: () => context.router.push(const SearchRoute()),
-                  child: const Icon(Icons.search, color: Colors.white)),
-              InkWell(
-                onTap: () => context.router.push(const AddJourneyRoute()),
-                child:
-                    const Icon(Icons.add_circle_outline, color: Colors.white),
-              ),
-              InkWell(
-                onTap: () => context.router.push(const CalculationsRoute()),
-                child:
-                    const Icon(Icons.calculate_outlined, color: Colors.white),
-              ),
-              InkWell(
-                onTap: () => context.router.push(
-                  const ProfileRoute(),
-                ),
-                child: const Icon(Icons.account_circle, color: Colors.white),
-              ),
-            ],
+            children: children,
           ),
         ),
       ),

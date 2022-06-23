@@ -15,6 +15,7 @@ import '../pages/pages.dart';
     MaterialRoute<CalculationsPage>(page:CalculationsPage),
     MaterialRoute<AddJourneyPage>(page:AddJourneyPage),
     MaterialRoute<SearchPage>(page:SearchPage),
+    MaterialRoute<AddCalculationPage>(page: AddCalculationPage)
   ],
 )
 
