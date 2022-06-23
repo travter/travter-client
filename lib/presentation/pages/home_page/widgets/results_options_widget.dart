@@ -13,7 +13,7 @@ class ResultsOptionsWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding, vertical: height * 0.05),
+      padding: EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Container(
         width: double.infinity,
         child: Row(
