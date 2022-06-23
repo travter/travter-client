@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const ResultsOptionsWidget(),
+                    const PopularPlacesWidget(),
                     Container(
                       height: height * 1,
                     ),
