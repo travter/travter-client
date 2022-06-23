@@ -35,33 +35,37 @@ class _FeedTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = context.dims.width;
+    final height = context.dims.height;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: lightBlueColor,
-                width: width * 0.005,
+    return Padding(
+      padding: EdgeInsets.only(bottom: height * 0.05),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: lightBlueColor,
+                  width: width * 0.005,
+                ),
+              ),
+            ),
+            child: const Text(
+              'Feed',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          child: const Text(
-            'Feed',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const TravelCard(),
-        const TravelCard(),
-        const TravelCard(),
-        const TravelCard(),
-      ],
+          const TravelCard(),
+          const TravelCard(),
+          const TravelCard(),
+          const TravelCard(),
+        ],
+      ),
     );
   }
 }

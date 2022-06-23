@@ -5,10 +5,12 @@ import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
 import '../../router/router.gr.dart';
-import 'widgets/widgets.dart';
+import '../home_page/widgets/feed_section_widget.dart';
+import '../home_page/widgets/popular_people_widget.dart';
+import '../home_page/widgets/popular_places_widget.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class FavoriteEntriesPage extends StatelessWidget {
+  const FavoriteEntriesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,14 @@ class HomePage extends StatelessWidget {
               constraints: BoxConstraints(maxHeight: height * 0.8),
               child: SingleChildScrollView(
                 child: Column(
-                  children: const [
-                    WelcomeWidget(),
-                    ResultsOptionsWidget(),
-                    PopularPlacesWidget(),
-                    PopularPeopleWidget(),
-                    FeedSectionWidget(),
-                  ]
+                    children: [
+                      const PopularPlacesWidget(),
+                      Divider(
+                       height: height * 0.05,
+                        color: lightPrimaryColor,
+                      ),
+                      const FeedSectionWidget(),
+                    ]
                 ),
               ),
             ),
@@ -40,6 +43,7 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
 
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
@@ -67,3 +71,4 @@ List<Widget> _loadChildren(BuildContext context) {
 
   return _children;
 }
+

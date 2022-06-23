@@ -36,7 +36,10 @@ class CalculationsPage extends StatelessWidget {
               ),
             ),
           ),
-          BottomNavbarWidget(children: _loadChildren(context)),
+          BottomNavbarWidget(
+            isSearchNeeded: false,
+            children: _loadChildren(context),
+          ),
         ],
       ),
     );
