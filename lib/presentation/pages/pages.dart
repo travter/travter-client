@@ -1,5 +1,6 @@
 export 'calculations/calculations.dart';
 export 'favorite_entries_page/favorite_entries_page.dart';
+export 'favorite_entries_page/pages/all_favorites_page/all_favorites_page.dart';
 export 'home_page/home_page.dart';
 export 'journeys/journeys.dart';
 export 'loading_page/loading_page.dart';

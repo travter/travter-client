@@ -1,5 +1,7 @@
 import 'package:auto_route/annotations.dart';
 
+import '../pages/home_page/pages/popular_people_page/popular_people_page.dart';
+import '../pages/home_page/pages/popular_places_page/popular_places_page.dart';
 import '../pages/pages.dart';
 
 @MaterialAutoRouter(
@@ -20,14 +22,15 @@ import '../pages/pages.dart';
     MaterialRoute<CalculationPage>(page: CalculationPage),
     MaterialRoute<CalculationsPage>(page: CalculationsPage),
     MaterialRoute<FavoriteEntriesPage>(page: FavoriteEntriesPage),
+    MaterialRoute<AllFavoritesPage>(page: AllFavoritesPage),
     MaterialRoute<EditJourneyPage>(page: EditJourneyPage),
     MaterialRoute<JourneyPage>(page: JourneyPage),
     MaterialRoute<AddJourneyInfoPage>(page: AddJourneyInfoPage),
+    MaterialRoute<PopularPeoplePage>(page: PopularPeoplePage),
+    MaterialRoute<PopularPlacesPage>(page: PopularPlacesPage),
     MaterialRoute<AddCollaborativeJourneyPage>(
         page: AddCollaborativeJourneyPage),
   ],
 )
 
-/// AppRouter class that will be generated with [auto_route](https://pub.dev/packages/auto_route),
-/// based on [MaterialAutoRouter].
- class $AppRouter {}
+class $AppRouter {}

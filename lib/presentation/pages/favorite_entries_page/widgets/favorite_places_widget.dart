@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/popular_section_text_widget.dart';
 import '../../../router/router.gr.dart';
-import 'popular_place_card_widget.dart';
+import '../../home_page/widgets/popular_place_card_widget.dart';
+import '../../../core/widgets/popular_section_text_widget.dart';
 
-class PopularPlacesWidget extends StatelessWidget {
-  const PopularPlacesWidget({required this.text, Key? key}) : super(key: key);
-
-  final String text;
+class FavoritePlacesWidget extends StatelessWidget {
+  const FavoritePlacesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +22,9 @@ class PopularPlacesWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          PopularSectionTextWidget(
-            text: text,
-            redirectRoute: const PopularPlacesRoute(),
+          const PopularSectionTextWidget(
+            text: 'Favorite Places',
+            redirectRoute: AllFavoritesRoute(),
           ),
           Divider(
             height: height * 0.05,
@@ -55,9 +53,4 @@ class PopularPlacesWidget extends StatelessWidget {
     );
   }
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-  }
 }

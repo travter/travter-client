@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import '../../../core/widgets/popular_section_text_widget.dart';
+import '../../../router/router.gr.dart';
 import 'popular_person_card_widget.dart';
-import 'popular_section_text_widget.dart';
 
 class PopularPeopleWidget extends StatelessWidget {
   const PopularPeopleWidget({Key? key}) : super(key: key);
@@ -21,7 +22,10 @@ class PopularPeopleWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const PopularSectionTextWidget(text: 'Popular People'),
+          const PopularSectionTextWidget(
+            text: 'Popular People',
+            redirectRoute: PopularPeopleRoute(),
+          ),
           Divider(
             height: height * 0.05,
             color: lightPrimaryColor,

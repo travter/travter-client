@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:traveler/presentation/pages/favorite_entries_page/widgets/favorite_posts_widget.dart';
 
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
@@ -9,6 +10,7 @@ import '../../router/router.gr.dart';
 import '../home_page/widgets/feed_section_widget.dart';
 import '../home_page/widgets/popular_people_widget.dart';
 import '../home_page/widgets/popular_places_widget.dart';
+import 'widgets/favorite_places_widget.dart';
 
 class FavoriteEntriesPage extends StatelessWidget {
   const FavoriteEntriesPage({Key? key}) : super(key: key);
@@ -32,12 +34,12 @@ class FavoriteEntriesPage extends StatelessWidget {
                         color: lightPrimaryColor,
                       ),
                       // const GoBackWidget(),
-                      const PopularPlacesWidget(text:'Favorite Places'),
+                      const FavoritePlacesWidget(),
                       Divider(
                        height: height * 0.05,
                         color: lightPrimaryColor,
                       ),
-                      const FeedSectionWidget(text: 'Favorite Posts'),
+                      const FavoritePostsWidget(),
                     ]
                 ),
               ),
@@ -47,6 +49,15 @@ class FavoriteEntriesPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _FavoritePlacesWidget extends StatelessWidget {
+  const _FavoritePlacesWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 

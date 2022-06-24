@@ -1,14 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constant_colors.dart';
-import '../../../core/extensions.dart';
+import '../constants/constant_colors.dart';
+import '../extensions.dart';
 
 class PopularSectionTextWidget extends StatelessWidget {
-  const PopularSectionTextWidget({required this.text, Key? key})
-      : super(key: key);
+  const PopularSectionTextWidget({
+    required this.text,
+    required this.redirectRoute,
+    Key? key,
+  }) : super(key: key);
 
   final String text;
+  final PageRouteInfo redirectRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +39,13 @@ class PopularSectionTextWidget extends StatelessWidget {
             ),
           ),
         ),
-        const Text(
-          'View all',
-          style: TextStyle(
-            color: lightBlueColor,
+        InkWell(
+          onTap: () => context.router.push(redirectRoute),
+          child: const Text(
+            'View all',
+            style: TextStyle(
+              color: lightBlueColor,
+            ),
           ),
         ),
       ],
