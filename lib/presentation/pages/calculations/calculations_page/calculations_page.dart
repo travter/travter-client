@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/constant_colors.dart';
-import '../../core/extensions.dart';
-import '../../core/widgets/bottom_navbar_widget.dart';
-import '../../core/widgets/go_back_widget.dart';
-import '../../router/router.gr.dart';
+import '../../../core/constants/constant_colors.dart';
+import '../../../core/extensions.dart';
+import '../../../core/widgets/bottom_navbar_widget.dart';
+import '../../../core/widgets/go_back_widget.dart';
+import '../../../router/router.gr.dart';
 import 'widgets/calculation_card_widget.dart';
 
 class CalculationsPage extends StatelessWidget {

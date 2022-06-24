@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../router/router.gr.dart';
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
 
@@ -24,7 +26,7 @@ class TravelCard extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               blurRadius: 5,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
@@ -40,10 +42,13 @@ class TravelCard extends StatelessWidget {
                     child: const Text('•', style: _topTravelInfoStyle),
                   ),
                   const Text('26.04.2022', style: _topTravelInfoStyle),
-                  const Expanded(
+                  Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Icon(Icons.more_horiz, color: Colors.grey),
+                      child: InkWell(
+                        onTap: () => context.router.push(const EditJourneyRoute()),
+                        child: const Icon(Icons.more_horiz, color: Colors.grey),
+                      ),
                     ),
                   ),
                 ],
@@ -78,18 +83,21 @@ class TravelCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     vertical: height * 0.015,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.keyboard_arrow_down_outlined,
-                          color: Colors.white.withOpacity(0.8)),
-                      Text(
-                        'Show More',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.8),
+                  child: InkWell(
+                    onTap: () => context.router.push(const JourneyRoute()),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.keyboard_arrow_down_outlined,
+                            color: Colors.white.withOpacity(0.8)),
+                        Text(
+                          'Show More',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.8),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constant_colors.dart';
-import '../../../core/extensions.dart';
+import '../../../../core/constants/constant_colors.dart';
+import '../../../../core/extensions.dart';
+import '../../../../router/router.gr.dart';
 
 part 'decorations.dart';
 
@@ -127,9 +129,12 @@ class _OpenCalculationWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: height * 0.03),
-      child: const Align(
+      child: Align(
         alignment: Alignment.topRight,
-        child: Icon(Icons.arrow_forward_ios, color: Colors.grey),
+        child: InkWell(
+          onTap: () => context.router.push(const CalculationRoute()),
+          child: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+        ),
       ),
     );
   }

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
     InkWell(
-      onTap: () => context.router.push(const AddJourneyRoute()),
+      onTap: () => context.router.push(const AddJourneyInfoRoute()),
       child: const Icon(Icons.add_circle_outline, color: Colors.white),
     ),
     InkWell(

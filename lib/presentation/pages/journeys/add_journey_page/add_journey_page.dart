@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/constant_colors.dart';
-import '../../core/extensions.dart';
-import '../../core/widgets/go_back_widget.dart';
-import 'widgets/widgets.dart';
+import '../../../core/constants/constant_colors.dart';
+import '../../../core/extensions.dart';
+import '../../../core/widgets/go_back_widget.dart';
+import '../add_journey_page/widgets/widgets.dart';
+import 'widgets/upload_photos_widget.dart';
 
 class AddJourneyPage extends StatelessWidget {
   const AddJourneyPage({Key? key}) : super(key: key);
