@@ -1,0 +1,1 @@
+export 'journey_image_widget.dart';

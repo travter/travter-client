@@ -6,7 +6,6 @@ final _cardBoxDecoration = BoxDecoration(
   boxShadow: const [
     BoxShadow(
       blurRadius: 5,
-      offset: Offset(2, 1),
     ),
   ],
 );

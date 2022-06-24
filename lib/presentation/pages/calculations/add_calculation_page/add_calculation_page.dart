@@ -7,9 +7,11 @@ class AddCalculationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: lightPrimaryColor,
-      body: Container(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: lightPrimaryColor,
+        body: Container(),
+      ),
     );
   }
 }

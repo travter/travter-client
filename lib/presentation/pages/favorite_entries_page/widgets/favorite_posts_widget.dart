@@ -25,7 +25,7 @@ class FavoritePostsWidget extends StatelessWidget {
           children: const [
             PopularSectionTextWidget(
               text: 'Favorite Posts',
-              redirectRoute: AllFavoritesRoute(),
+              redirectRoute: FavoritePostsRoute(),
             ),
             TravelCard(),
             TravelCard(),

@@ -26,7 +26,6 @@ class TravelCard extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               blurRadius: 5,
-              offset: const Offset(0, 0),
             ),
           ],
         ),

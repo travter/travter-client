@@ -24,7 +24,7 @@ class FavoritePlacesWidget extends StatelessWidget {
         children: [
           const PopularSectionTextWidget(
             text: 'Favorite Places',
-            redirectRoute: AllFavoritesRoute(),
+            redirectRoute: FavoritePlacesRoute(),
           ),
           Divider(
             height: height * 0.05,
