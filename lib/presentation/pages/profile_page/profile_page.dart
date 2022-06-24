@@ -9,18 +9,20 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primaryColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: context.dims.height * 0.035),
-          child: Column(
-            children: const [
-              NickTextWidget(),
-              ProfileSummary(),
-              TravelCard(),
-              TravelCard(),
-             ]
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: primaryColor,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(bottom: context.dims.height * 0.035),
+            child: Column(
+              children: const [
+                NickTextWidget(),
+                ProfileSummary(),
+                TravelCard(),
+                TravelCard(),
+               ]
+            ),
           ),
         ),
       ),

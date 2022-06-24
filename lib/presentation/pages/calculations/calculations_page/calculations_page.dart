@@ -17,37 +17,39 @@ class CalculationsPage extends StatelessWidget {
     final height = context.dims.height;
     final width = context.dims.width;
 
-    return Scaffold(
-      backgroundColor: lightPrimaryColor,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: height * 0.05,
-                bottom: height * 0.05,
-                left: width * homePageHorizontalPadding,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: lightPrimaryColor,
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  top: height * 0.05,
+                  bottom: height * 0.05,
+                  left: width * homePageHorizontalPadding,
+              ),
+              child: const GoBackWidget(),
             ),
-            child: const GoBackWidget(),
-          ),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: height * 0.75),
-            child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  CalculationCardWidget(),
-                  CalculationCardWidget(),
-                  CalculationCardWidget(),
-                  CalculationCardWidget(),
-                  CalculationCardWidget(),
-                ],
+            ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: height * 0.725),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    CalculationCardWidget(),
+                    CalculationCardWidget(),
+                    CalculationCardWidget(),
+                    CalculationCardWidget(),
+                    CalculationCardWidget(),
+                  ],
+                ),
               ),
             ),
-          ),
-          BottomNavbarWidget(
-            isSearchNeeded: false,
-            children: _loadChildren(context),
-          ),
-        ],
+            BottomNavbarWidget(
+              isSearchNeeded: false,
+              children: _loadChildren(context),
+            ),
+          ],
+        ),
       ),
     );
   }
