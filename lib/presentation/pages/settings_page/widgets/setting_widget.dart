@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../application/authentication/authentication_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
-import '../../../router/router.gr.dart';
 
 class SettingWidget extends StatelessWidget {
   const SettingWidget({
@@ -66,9 +65,7 @@ class SettingWidget extends StatelessWidget {
                       context.read<AuthenticationBloc>().add(
                             const AuthenticationEvent.signedOut(),
                           );
-                      context.router.popAndPush(
-                        const LoginRoute(),
-                      );
+                      context.router.popAndPush(redirectRoute);
                       return;
                     }
                     context.router.push(redirectRoute);

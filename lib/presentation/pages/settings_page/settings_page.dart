@@ -52,22 +52,22 @@ class SettingsPage extends StatelessWidget {
             const SettingWidget(
               icon: Icons.privacy_tip_outlined,
               text: 'Privacy Policy',
-              redirectRoute: EditProfileRoute(),
+              redirectRoute: PrivacyPolicyRoute(),
             ),
             const SettingWidget(
               icon: Icons.security_rounded,
               text: 'Terms of service',
-              redirectRoute: EditProfileRoute(),
+              redirectRoute: TermsOfServiceRoute(),
             ),
             const SettingWidget(
               icon: Icons.people_outline,
               text: 'Community Guidelines',
-              redirectRoute: EditProfileRoute(),
+              redirectRoute: CommunityGuidelinesRoute(),
             ),
             const SettingWidget(
               icon: Icons.logout,
               text: 'Log out',
-              redirectRoute: EditProfileRoute(),
+              redirectRoute: LoginRoute(),
               logout: true,
             ),
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/constant_colors.dart';
+import '../../../../core/constants/constant_colors.dart';
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+class TermsOfServicePage extends StatelessWidget {
+  const TermsOfServicePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
