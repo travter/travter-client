@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/constant_colors.dart';
-import '../../../../core/constants/constant_dimensions.dart';
-import '../../../../core/extensions.dart';
+import '../../../core/constants/constant_colors.dart';
+import '../../../core/constants/constant_dimensions.dart';
+import '../../../core/extensions.dart';
 
 class AddJourneyFormWidget extends StatelessWidget {
   const AddJourneyFormWidget({Key? key}) : super(key: key);
