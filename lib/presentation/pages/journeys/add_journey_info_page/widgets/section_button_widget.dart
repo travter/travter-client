@@ -21,7 +21,7 @@ class SectionButtonWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return Padding(
-      padding: EdgeInsets.only(top: height * 0.075),
+      padding: EdgeInsets.only(top: height * 0.05),
       child: Align(
         child: InkWell(
           onTap: () => context.router.push(redirectRoute),
@@ -37,7 +37,6 @@ class SectionButtonWidget extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   blurRadius: 4,
-                  offset: const Offset(0, 0),
                 )
               ]
             ),

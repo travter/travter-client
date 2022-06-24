@@ -13,23 +13,18 @@ class AddJourneyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = context.dims.height;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        top: height * 0.05,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          SectionHeaderWidget('Add Journey'),
-          SectionTextWidget(
-            'You can tell about the places you have visited and emotions you experienced and share it to the world!/n Do not forget to show off the photos!',
-          ),
-          SectionButtonWidget(
-            text: 'Describe your trip!',
-            redirectRoute: AddJourneyRoute(),
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        SectionHeaderWidget('Add Journey'),
+        SectionTextWidget(
+          'You can tell about the places you have visited and emotions you experienced and share it to the world!/n Do not forget to show off the photos!',
+        ),
+        SectionButtonWidget(
+          text: 'Describe your trip!',
+          redirectRoute: AddJourneyRoute(),
+        )
+      ],
     );
   }
 }

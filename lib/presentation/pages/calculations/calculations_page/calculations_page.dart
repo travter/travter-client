@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
+import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/bottom_navbar_widget.dart';
 import '../../../core/widgets/go_back_widget.dart';
@@ -14,13 +15,18 @@ class CalculationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = context.dims.height;
+    final width = context.dims.width;
 
     return Scaffold(
       backgroundColor: lightPrimaryColor,
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: height * 0.05),
+            padding: EdgeInsets.only(
+                top: height * 0.05,
+                bottom: height * 0.05,
+                left: width * homePageHorizontalPadding,
+            ),
             child: const GoBackWidget(),
           ),
           ConstrainedBox(
@@ -46,8 +52,6 @@ class CalculationsPage extends StatelessWidget {
     );
   }
 }
-
-
 
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [

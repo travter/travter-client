@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
+import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/go_back_widget.dart';
 import '../add_journey_page/widgets/widgets.dart';
-import 'widgets/upload_photos_widget.dart';
 
 class AddJourneyPage extends StatelessWidget {
   const AddJourneyPage({Key? key}) : super(key: key);
@@ -19,12 +19,15 @@ class AddJourneyPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(top: height *  0.05),
         child: Column(
-          children: const [
-            GoBackWidget(),
-            AddJourneyFormWidget(),
-            AddPeopleWidget(),
-            UploadPhotosWidget(),
-            AddJourneyButtonWidget(),
+          children:[
+            Padding(
+              padding: EdgeInsets.only(left: width * homePageHorizontalPadding),
+              child: const GoBackWidget(),
+            ),
+            const AddJourneyFormWidget(),
+            // AddPeopleWidget(),
+            const UploadPhotosWidget(),
+            const AddJourneyButtonWidget(),
           ],
         ),
       ),

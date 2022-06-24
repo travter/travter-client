@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import '../../../core/widgets/go_back_widget.dart';
 import 'widgets/widgets.dart';
 
 class AddJourneyInfoPage extends StatelessWidget {
@@ -22,12 +23,21 @@ class AddJourneyInfoPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-                const AddJourneyWidget(),
-                Divider(
-                  color: lightPrimaryColor,
-                  height: height * 0.075,
-                ),
-                const AddCollaborativeJourneyWidget(),
+              Divider(
+                color: lightPrimaryColor,
+                height: height * 0.05,
+              ),
+              const GoBackWidget(),
+              Divider(
+                color: lightPrimaryColor,
+                height: height * 0.025,
+              ),
+              const AddJourneyWidget(),
+              Divider(
+                color: lightPrimaryColor,
+                height: height * 0.05,
+              ),
+              const AddCollaborativeJourneyWidget(),
             ],
           ),
         ),
@@ -35,4 +45,3 @@ class AddJourneyInfoPage extends StatelessWidget {
     );
   }
 }
-
