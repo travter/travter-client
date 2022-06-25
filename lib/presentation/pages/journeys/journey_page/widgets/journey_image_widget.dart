@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions.dart';
@@ -21,22 +22,25 @@ class JourneyImageWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: height * 0.025, left: width * 0.05),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black.withOpacity(0.5),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: height * 0.01,
-                  vertical: width * 0.01,
+          InkWell(
+            onTap: () => context.router.pop(),
+            child: Padding(
+              padding: EdgeInsets.only(top: height * 0.025, left: width * 0.05),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black.withOpacity(0.5),
                 ),
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Colors.white.withOpacity(0.9),
-                  size: 20,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: height * 0.01,
+                    vertical: width * 0.01,
+                  ),
+                  child: Icon(
+                    Icons.keyboard_backspace,
+                    color: Colors.white.withOpacity(0.9),
+                    size: 20,
+                  ),
                 ),
               ),
             ),
