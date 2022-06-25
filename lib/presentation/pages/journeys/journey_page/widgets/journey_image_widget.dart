@@ -59,16 +59,16 @@ class JourneyImageWidget extends StatelessWidget {
                       const Icon(Icons.circle, color: Colors.white, size: 11),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                        child: const Icon(Icons.circle,
-                            color: Colors.grey, size: 11),
+                        child: Icon(Icons.circle,
+                            color: _circleIconGreyColor, size: 11),
                       ),
-                      const Icon(Icons.circle, color: Colors.grey, size: 11),
+                      Icon(Icons.circle, color: _circleIconGreyColor, size: 11),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                        child: const Icon(Icons.circle,
-                            color: Colors.grey, size: 11),
+                        child: Icon(Icons.circle,
+                            color: _circleIconGreyColor, size: 11),
                       ),
-                      const Icon(Icons.circle, color: Colors.grey, size: 11),
+                      Icon(Icons.circle, color: _circleIconGreyColor, size: 11),
                     ],
                   ),
                 ),
@@ -80,3 +80,5 @@ class JourneyImageWidget extends StatelessWidget {
     );
   }
 }
+
+final _circleIconGreyColor = Colors.white.withOpacity(0.25);
