@@ -24,23 +24,30 @@ class CalculationsPage extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: height * 0.05,
-                  bottom: height * 0.05,
-                  left: width * homePageHorizontalPadding,
+                top: height * 0.05,
+                bottom: height * 0.05,
+                left: width * homePageHorizontalPadding,
               ),
               child: const GoBackWidget(),
             ),
             ConstrainedBox(
               constraints: BoxConstraints(maxHeight: height * 0.725),
               child: SingleChildScrollView(
-                child: Column(
-                  children: const [
-                    CalculationCardWidget(),
-                    CalculationCardWidget(),
-                    CalculationCardWidget(),
-                    CalculationCardWidget(),
-                    CalculationCardWidget(),
-                  ],
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: height * 0.015,
+                    left: width * 0.015,
+                    right: width * 0.015,
+                  ),
+                  child: Column(
+                    children: const [
+                      CalculationCardWidget(),
+                      CalculationCardWidget(),
+                      CalculationCardWidget(),
+                      CalculationCardWidget(),
+                      CalculationCardWidget(),
+                    ],
+                  ),
                 ),
               ),
             ),
