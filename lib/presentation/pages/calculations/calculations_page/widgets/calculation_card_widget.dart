@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/extensions.dart';
 import '../../../../router/router.gr.dart';
+import '../../widgets/avatars_stack_widget.dart';
 
 part 'decorations.dart';
 
-const _assetPath = 'assets/images';
 
 class CalculationCardWidget extends StatelessWidget {
   const CalculationCardWidget({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class CalculationCardWidget extends StatelessWidget {
               child: Column(
                 children: const [
                   _OpenCalculationWidget(),
-                  _AvatarsStackWidget(),
+                  AvatarsStackWidget(),
                 ],
               ),
             ),
@@ -140,53 +140,5 @@ class _OpenCalculationWidget extends StatelessWidget {
   }
 }
 
-class _CircleAvatarWidget extends StatelessWidget {
-  const _CircleAvatarWidget(this.assetPath, {Key? key}) : super(key: key);
 
-  final String assetPath;
 
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 16,
-      backgroundColor: lightGreenColor,
-      child: CircleAvatar(
-        radius: 15,
-        backgroundImage: AssetImage(
-          assetPath,
-        ),
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('assetPath', assetPath));
-  }
-}
-
-class _AvatarsStackWidget extends StatelessWidget {
-  const _AvatarsStackWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final width = context.dims.width;
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: width * 0.15),
-            child: const _CircleAvatarWidget('$_assetPath/brad_pitt.jpeg'),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: width * 0.075),
-            child: const _CircleAvatarWidget('$_assetPath/julie_roberts.jpeg'),
-          ),
-          const _CircleAvatarWidget('$_assetPath/profile_picture.jpeg')
-        ],
-      ),
-    );
-  }
-}
