@@ -37,7 +37,12 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                 ),
                 const _MemoryNameFieldWidget(),
                 const _MemoryDescriptionFieldWidget(),
-                const AddPeopleWidget(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * homePageHorizontalPadding,
+                  ),
+                  child: const AddPeopleWidget('Add people to your journey'),
+                ),
                 const UploadPhotosWidget(),
                 const AddJourneyButtonWidget(),
                 Divider(
@@ -60,7 +65,8 @@ class _MemoryExplanationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal:width * homePageHorizontalPadding ),
+      padding:
+          EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Text(
         'Add your first memory to the journey! ',
         style: TextStyle(
