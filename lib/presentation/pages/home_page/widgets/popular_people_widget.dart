@@ -4,7 +4,6 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/popular_section_text_widget.dart';
-import '../../../router/router.gr.dart';
 import 'popular_person_card_widget.dart';
 
 class PopularPeopleWidget extends StatelessWidget {
@@ -24,29 +23,21 @@ class PopularPeopleWidget extends StatelessWidget {
         children: [
           const PopularSectionTextWidget(
             text: 'Popular People',
-            redirectRoute: PopularPeopleRoute(),
           ),
           Divider(
             height: height * 0.05,
             color: lightPrimaryColor,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              PopularPersonCardWidget(),
-              PopularPersonCardWidget(),
-            ],
-          ),
-          Divider(
-            height: height * 0.025,
-            color: lightPrimaryColor,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              PopularPersonCardWidget(),
-              PopularPersonCardWidget(),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: const [
+                PopularPersonCardWidget(),
+                PopularPersonCardWidget(),
+                PopularPersonCardWidget(),
+                PopularPersonCardWidget(),
+              ],
+            ),
           ),
         ],
       ),

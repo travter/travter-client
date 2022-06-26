@@ -26,30 +26,22 @@ class PopularPlacesWidget extends StatelessWidget {
         children: [
           PopularSectionTextWidget(
             text: text,
-            redirectRoute: const PopularPlacesRoute(),
           ),
           Divider(
             height: height * 0.05,
             color: lightPrimaryColor,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              PopularPlaceCardWidget(),
-              PopularPlaceCardWidget(),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: const [
+                PopularPlaceCardWidget(),
+                PopularPlaceCardWidget(),
+                PopularPlaceCardWidget(),
+                PopularPlaceCardWidget(),
+              ],
+            ),
           ),
-          Divider(
-            height: height * 0.025,
-            color: lightPrimaryColor,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              PopularPlaceCardWidget(),
-              PopularPlaceCardWidget(),
-            ],
-          )
         ],
       ),
     );

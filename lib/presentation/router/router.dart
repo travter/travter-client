@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
 
-import '../pages/home_page/pages/popular_people_page/popular_people_page.dart';
-import '../pages/home_page/pages/popular_places_page/popular_places_page.dart';
 import '../pages/pages.dart';
 
 @MaterialAutoRouter(
@@ -27,8 +25,7 @@ import '../pages/pages.dart';
     MaterialRoute<EditJourneyPage>(page: EditJourneyPage),
     MaterialRoute<JourneyPage>(page: JourneyPage),
     MaterialRoute<AddJourneyInfoPage>(page: AddJourneyInfoPage),
-    MaterialRoute<PopularPeoplePage>(page: PopularPeoplePage),
-    MaterialRoute<PopularPlacesPage>(page: PopularPlacesPage),
+    MaterialRoute<PopularPlacePage>(page: PopularPlacePage),
     MaterialRoute<AddCollaborativeJourneyPage>(
         page: AddCollaborativeJourneyPage),
   ],

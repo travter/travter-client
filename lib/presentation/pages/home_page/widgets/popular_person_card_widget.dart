@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
+import '../../../router/router.gr.dart';
 
 const _assetPath = 'assets/images';
 
@@ -12,20 +14,26 @@ class PopularPersonCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
 
-    return Container(
-      width: width * 0.425,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: primaryColor,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          _ImageWidget(),
-          _PlaceNameWidget(),
-          _ShortBioWidget(),
-          _JourneysMade(),
-        ],
+    return Padding(
+      padding: EdgeInsets.only(right: width * 0.05),
+      child: InkWell(
+        onTap: () => context.router.push(const ProfileRoute()),
+        child: Container(
+          width: width * 0.425,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: primaryColor,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              _ImageWidget(),
+              _PlaceNameWidget(),
+              _ShortBioWidget(),
+              _JourneysMade(),
+            ],
+          ),
+        ),
       ),
     );
   }

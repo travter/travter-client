@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
-import 'widgets/journey_image_widget.dart';
+import '../../../core/widgets/journey_image_widget.dart';
 import 'widgets/journey_info_widget.dart';
 
 class JourneyPage extends StatelessWidget {

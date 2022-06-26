@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/extensions.dart';
+import '../extensions.dart';
 
 class JourneyImageWidget extends StatelessWidget {
   const JourneyImageWidget({Key? key}) : super(key: key);

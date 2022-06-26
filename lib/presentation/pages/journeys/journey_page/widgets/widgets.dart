@@ -1,1 +1,1 @@
-export 'journey_image_widget.dart';
+export '../../../../core/widgets/journey_image_widget.dart';

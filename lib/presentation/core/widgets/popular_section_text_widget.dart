@@ -8,12 +8,12 @@ import '../extensions.dart';
 class PopularSectionTextWidget extends StatelessWidget {
   const PopularSectionTextWidget({
     required this.text,
-    required this.redirectRoute,
+    this.redirectRoute,
     Key? key,
   }) : super(key: key);
 
   final String text;
-  final PageRouteInfo redirectRoute;
+  final PageRouteInfo? redirectRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +39,15 @@ class PopularSectionTextWidget extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () => context.router.push(redirectRoute),
+        if (redirectRoute != null) InkWell(
+          onTap: () => context.router.push(redirectRoute!),
           child: const Text(
             'View all',
             style: TextStyle(
               color: lightBlueColor,
             ),
           ),
-        ),
+        ) else Container(),
       ],
     );
   }
