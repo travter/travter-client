@@ -14,29 +14,26 @@ class PopularPlaceCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
 
-    return Padding(
-      padding: EdgeInsets.only(right: width * 0.05),
-      child: InkWell(
-        onTap: () => context.router.push(const PopularPlaceRoute()),
-        child: Container(
-          width: width * 0.425,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: primaryColor,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: const [
-                  _ImageWidget(),
-                  _FavoriteIconWidget(),
-                ],
-              ),
-              const _PlaceNameWidget(),
-              const _PlaceLocationWidget(),
-            ],
-          ),
+    return InkWell(
+      onTap: () => context.router.push(const PopularPlaceRoute()),
+      child: Container(
+        width: width * 0.425,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: primaryColor,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: const [
+                _ImageWidget(),
+                _FavoriteIconWidget(),
+              ],
+            ),
+            const _PlaceNameWidget(),
+            const _PlaceLocationWidget(),
+          ],
         ),
       ),
     );

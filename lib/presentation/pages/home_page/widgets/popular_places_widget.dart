@@ -5,7 +5,6 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/popular_section_text_widget.dart';
-import '../../../router/router.gr.dart';
 import 'popular_place_card_widget.dart';
 
 class PopularPlacesWidget extends StatelessWidget {
@@ -35,10 +34,10 @@ class PopularPlacesWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: const [
-                PopularPlaceCardWidget(),
-                PopularPlaceCardWidget(),
-                PopularPlaceCardWidget(),
-                PopularPlaceCardWidget(),
+                _PaddingWrappedPlaceCardWidget(),
+                _PaddingWrappedPlaceCardWidget(),
+                _PaddingWrappedPlaceCardWidget(),
+                _PaddingWrappedPlaceCardWidget(),
               ],
             ),
           ),
@@ -51,5 +50,19 @@ class PopularPlacesWidget extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(StringProperty('text', text));
+  }
+}
+
+class _PaddingWrappedPlaceCardWidget extends StatelessWidget {
+  const _PaddingWrappedPlaceCardWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: context.dims.width * 0.035,
+      ),
+      child: const PopularPlaceCardWidget(),
+    );
   }
 }

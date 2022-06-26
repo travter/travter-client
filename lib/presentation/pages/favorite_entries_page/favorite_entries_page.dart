@@ -10,6 +10,7 @@ import '../../router/router.gr.dart';
 import '../home_page/widgets/feed_section_widget.dart';
 import '../home_page/widgets/popular_people_widget.dart';
 import '../home_page/widgets/popular_places_widget.dart';
+import 'load_navbar_children.dart';
 import 'widgets/favorite_places_widget.dart';
 
 class FavoriteEntriesPage extends StatelessWidget {
@@ -44,48 +45,10 @@ class FavoriteEntriesPage extends StatelessWidget {
                 ),
               ),
             ),
-            BottomNavbarWidget(children: _loadChildren(context)),
+            BottomNavbarWidget(children: loadChildren(context)),
           ],
         ),
       ),
     );
   }
 }
-
-class _FavoritePlacesWidget extends StatelessWidget {
-  const _FavoritePlacesWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-
-List<Widget> _loadChildren(BuildContext context) {
-  final _children = [
-    InkWell(
-      onTap: () => context.router.push(const HomeRoute()),
-      child: const Icon(Icons.home, color: Colors.white),
-    ),
-    InkWell(
-      onTap: () => context.router.push(const CalculationsRoute()),
-      child: const Icon(Icons.calculate_outlined, color: Colors.white),
-    ),
-    InkWell(
-      onTap: () => context.router.push(
-        const FavoriteEntriesRoute(),
-      ),
-      child: const Icon(Icons.favorite_border, color: Colors.white),
-    ),
-    InkWell(
-      onTap: () => context.router.push(
-        const ProfileRoute(),
-      ),
-      child: const Icon(Icons.account_circle, color: Colors.white),
-    ),
-  ];
-
-  return _children;
-}
-
