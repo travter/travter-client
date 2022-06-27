@@ -5,9 +5,9 @@ import '../../domain/user/user.dart';
 import '../../domain/user/value_objects.dart';
 
 extension FirebaseUserDomainX on firebase.User {
-  User toDomain() {
+  User toDomain(String id) {
     return User(
-      uid: '', username: Username(''),
+      uid: id, username: Username(''),
     );
   }
 }

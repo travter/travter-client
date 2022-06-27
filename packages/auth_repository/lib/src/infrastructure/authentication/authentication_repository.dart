@@ -32,7 +32,8 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
 
   @override
   Future<Option<User>> getSignedInUser() async {
-    return optionOf(_firebaseAuth.currentUser?.toDomain());
+    final currentUser = _firebaseAuth.currentUser;
+    return optionOf(currentUser?.toDomain(currentUser.uid));
   }
 
   @override

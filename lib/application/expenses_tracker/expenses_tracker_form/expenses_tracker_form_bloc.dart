@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,8 +11,7 @@ part 'expenses_tracker_form_state.dart';
 
 class ExpensesTrackerFormBloc
     extends Bloc<ExpensesTrackerFormEvent, ExpensesTrackerFormState> {
-
-  ExpensesTrackerFormBloc(this._dataRepository)
+  ExpensesTrackerFormBloc(this._dataRepository, this._authRepository)
       : super(ExpensesTrackerFormState.initial()) {
     on<TrackerNameChanged>((event, emit) {
       emit(state.copyWith(trackerName: event.name));
@@ -25,23 +25,31 @@ class ExpensesTrackerFormBloc
       emit(state.copyWith(expenseAmount: event.amount));
     });
 
-    on<SubmitFormPressed>((event, emit) {
-      final expense = Expense(
-          name: state.expenseName,
-          moneyAmount: state.expenseAmount,
-          payerId: state.payerId);
+    on<SubmitFormPressed>((event, emit) async {
+      final currentUser = await _authRepository.getSignedInUser();
 
-      final expenseTracker = ExpensesTracker(
-        List.empty(growable: true)..add(expense),
-        name: state.trackerName,
-        authorizedUsers: state.addedPeople,
-        createdAt: DateTime.now(),
-        currency: 'USD',
-        ownerId: state.payerId,
-      );
+      // implement failure on fold
+      currentUser.fold(() => null, (user) {
+        print(user.uid);
+        final expense = Expense(
+            name: state.expenseName,
+            moneyAmount: state.expenseAmount,
+            payerId: user.uid);
 
-      _dataRepository.createExpenseTracker(expenseTracker);
+        final expenseTracker = ExpensesTracker(
+          List.empty(growable: true)..add(expense),
+          name: state.trackerName,
+          authorizedUsers: state.addedPeople,
+          createdAt: DateTime.now(),
+          currency: 'USD',
+          ownerId: user.uid,
+        );
+
+        _dataRepository.createExpenseTracker(expenseTracker);
+      });
     });
   }
+
   final DataRepositoryInterface _dataRepository;
+  final AuthenticationRepository _authRepository;
 }
