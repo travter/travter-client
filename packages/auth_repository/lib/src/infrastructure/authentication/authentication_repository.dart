@@ -83,8 +83,6 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
     final emailStr = email.getOrCrash();
     final passwordStr = password.getOrCrash();
 
-    print('WITAM');
-
     await _firebaseAuth.signInWithEmailAndPassword(
       email: emailStr,
       password: passwordStr,
