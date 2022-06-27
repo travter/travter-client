@@ -1,3 +1,3 @@
 library data_repository;
 
-export 'src/data_repository.dart';
+export 'src/infrastructure/data_repository.dart';
