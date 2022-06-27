@@ -4,7 +4,7 @@ part 'expense.freezed.dart';
 part 'expense.g.dart';
 
 @freezed
-abstract class Expense implements _$Expense {
+class Expense with _$Expense {
   const factory Expense({
     required String name,
     required double moneyAmount,

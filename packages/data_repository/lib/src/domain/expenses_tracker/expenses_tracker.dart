@@ -7,7 +7,7 @@ part 'expenses_tracker.freezed.dart';
 part 'expenses_tracker.g.dart';
 
 @freezed
-abstract class ExpensesTracker implements _$ExpensesTracker {
+class ExpensesTracker with _$ExpensesTracker {
   @JsonSerializable(explicitToJson: true)
   const factory ExpensesTracker(
     @JsonKey(name: 'expenses') List<Expense> expenses, {
