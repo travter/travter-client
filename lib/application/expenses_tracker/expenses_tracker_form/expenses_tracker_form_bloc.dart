@@ -2,6 +2,7 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'expenses_tracker_form_bloc.freezed.dart';
 
@@ -28,13 +29,15 @@ class ExpensesTrackerFormBloc
     on<SubmitFormPressed>((event, emit) async {
       final currentUser = await _authRepository.getSignedInUser();
 
+      const uuid = Uuid();
+
       // implement failure on fold
       currentUser.fold(() => null, (user) {
-        print(user.uid);
         final expense = Expense(
             name: state.expenseName,
             moneyAmount: state.expenseAmount,
-            payerId: user.uid);
+            payerId: user.uid,
+            id: uuid.v1());
 
         final expenseTracker = ExpensesTracker(
           List.empty(growable: true)..add(expense),
@@ -43,6 +46,7 @@ class ExpensesTrackerFormBloc
           createdAt: DateTime.now(),
           currency: 'USD',
           ownerId: user.uid,
+          id: uuid.v1(),
         );
 
         _dataRepository.createExpenseTracker(expenseTracker);
