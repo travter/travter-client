@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -13,7 +15,9 @@ class AddJourneyFormWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding, vertical: height * 0.05),
+      padding: EdgeInsets.symmetric(
+          horizontal: width * homePageHorizontalPadding,
+          vertical: height * 0.05),
       child: Column(
         children: [
           Container(
@@ -33,6 +37,9 @@ class AddJourneyFormWidget extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                onChanged: (val) => context.read<JourneyFormBloc>().add(
+                      JourneyFormEvent.nameChanged(val),
+                    ),
               ),
             ),
           ),
@@ -57,6 +64,11 @@ class AddJourneyFormWidget extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                onChanged: (val) => context.read<JourneyFormBloc>().add(
+                      JourneyFormEvent.visitedPlacesChanged(
+                        List<String>.empty(growable: true)..add(val),
+                      ),
+                    ),
               ),
             ),
           ),
@@ -81,6 +93,9 @@ class AddJourneyFormWidget extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
+                onChanged: (val) => context.read<JourneyFormBloc>().add(
+                      JourneyFormEvent.descriptionChanged(val),
+                    ),
                 maxLines: 8,
               ),
             ),

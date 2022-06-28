@@ -3,7 +3,9 @@ import 'package:data_repository/data_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
 import 'application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
+import 'application/journey/journey_form/journey_form_bloc.dart';
 import 'injection.config.dart';
 
 /// [GetIt] instance required for [injectable] configuration.
@@ -29,6 +31,18 @@ Future<void> init() async {
       ExpensesTrackerFormBloc(
         getIt<DataRepository>(),
         getIt<AuthenticationRepository>(),
+      ),
+    )
+    ..registerSingleton<JourneyFormBloc>(
+      JourneyFormBloc(
+        getIt<AuthenticationRepository>(),
+        getIt<DataRepository>(),
+      ),
+    )
+    ..registerSingleton<CollaborativeJourneyFormBloc>(
+      CollaborativeJourneyFormBloc(
+        getIt<AuthenticationRepository>(),
+        getIt<DataRepository>(),
       ),
     );
 }

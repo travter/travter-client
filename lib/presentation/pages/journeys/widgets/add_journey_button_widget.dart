@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -19,6 +21,9 @@ class AddJourneyButtonWidget extends StatelessWidget {
         top: height * 0.05,
       ),
       child: InkWell(
+        onTap: () => context.read<JourneyFormBloc>().add(
+              const JourneyFormEvent.submitFormPressed(),
+            ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

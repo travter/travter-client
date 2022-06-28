@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/journey/journey_bloc.dart';
+import '../../../../application/journey/journey_form/journey_form_bloc.dart';
+import '../../../../injection.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -18,18 +22,29 @@ class AddJourneyPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
         body: Padding(
-          padding: EdgeInsets.only(top: height *  0.05),
-          child: Column(
-            children:[
-              Padding(
-                padding: EdgeInsets.only(left: width * homePageHorizontalPadding),
-                child: const GoBackWidget(),
-              ),
-              const AddJourneyFormWidget(),
-              // AddPeopleWidget(),
-              const UploadPhotosWidget(),
-              const AddJourneyButtonWidget(),
-            ],
+          padding: EdgeInsets.only(top: height * 0.05),
+          child: BlocProvider(
+            create: (context) => getIt<JourneyFormBloc>(),
+            child: BlocConsumer<JourneyFormBloc, JourneyFormState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: width * homePageHorizontalPadding),
+                      child: const GoBackWidget(),
+                    ),
+                    const AddJourneyFormWidget(),
+                    // AddPeopleWidget(),
+                    const UploadPhotosWidget(),
+                    const AddJourneyButtonWidget(),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
