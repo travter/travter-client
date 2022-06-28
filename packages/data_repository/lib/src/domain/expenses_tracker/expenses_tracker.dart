@@ -16,6 +16,7 @@ class ExpensesTracker with _$ExpensesTracker {
     required DateTime createdAt,
     required String ownerId,
     required List<String> authorizedUsers,
+    required String id,
   }) = _ExpensesTracker;
 
   factory ExpensesTracker.empty() => ExpensesTracker(
@@ -25,6 +26,7 @@ class ExpensesTracker with _$ExpensesTracker {
         ownerId: '',
         createdAt: DateTime.now(),
         authorizedUsers: List.empty(growable: true),
+        id: '',
       );
 
   factory ExpensesTracker.fromJson(Map<String, Object?> json) =>

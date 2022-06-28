@@ -21,8 +21,6 @@ class DataRepository implements DataRepositoryInterface {
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker) async {
     try {
       await _firestore
-          .collection('users')
-          .doc(tracker.ownerId)
           .collection('expense_trackers')
           .add(tracker.toJson())
           .onError(
@@ -36,68 +34,138 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> createCollaborativeJourney(CollaborativeJourney collaborativeJourney) {
-    // TODO: implement createCollaborativeJourney
-    throw UnimplementedError();
+  Future<RequestResult> createCollaborativeJourney(
+      CollaborativeJourney collaborativeJourney) async {
+    try {
+      await _firestore
+          .collection('collaborative_journeys')
+          .add(collaborativeJourney.toJson())
+          .onError(
+            (error, _) => throw FirestoreException(error.toString()),
+          );
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> createExpense(Expense expense) {
-    // TODO: implement createExpense
-    throw UnimplementedError();
+  Future<RequestResult> createExpense(Expense expense) async {
+    try {
+      await _firestore.collection('expenses').add(expense.toJson()).onError(
+            (error, _) => throw FirestoreException(error.toString()),
+          );
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> createJourney(Journey journey) {
-    // TODO: implement createJourney
-    throw UnimplementedError();
+  Future<RequestResult> createJourney(Journey journey) async {
+    try {
+      await _firestore.collection('journeys').add(journey.toJson()).onError(
+            (error, _) => throw FirestoreException(error.toString()),
+          );
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> removeCollaborativeJourney(String id) {
-    // TODO: implement removeCollaborativeJourney
-    throw UnimplementedError();
+  Future<RequestResult> removeCollaborativeJourney(String id) async {
+    try {
+      await _firestore.collection('collaborative_journeys').doc(id).delete();
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> removeExpense(String id) {
-    // TODO: implement removeExpense
-    throw UnimplementedError();
+  Future<RequestResult> removeExpense(String id) async {
+    try {
+      await _firestore.collection('expenses').doc(id).delete();
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestFailure> removeExpenseTracker(String id) {
-    // TODO: implement removeExpenseTracker
-    throw UnimplementedError();
+  Future<RequestResult> removeExpenseTracker(String id) async {
+    try {
+      await _firestore.collection('expense_trackers').doc(id).delete();
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> removeJourney(String id) {
-    // TODO: implement removeJourney
-    throw UnimplementedError();
+  Future<RequestResult> removeJourney(String id) async {
+    try {
+      await _firestore.collection('journeys').doc(id).delete();
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> updateCollaborativeJourney(CollaborativeJourney collaborativeJourney) {
-    // TODO: implement updateCollaborativeJourney
-    throw UnimplementedError();
+  Future<RequestResult> updateCollaborativeJourney(
+      CollaborativeJourney collaborativeJourney) async {
+    try {
+      await _firestore
+          .collection('collaborative_journeys')
+          .doc(collaborativeJourney.id)
+          .update(collaborativeJourney.toJson());
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> updateExpense(Expense expense) {
-    // TODO: implement updateExpense
-    throw UnimplementedError();
+  Future<RequestResult> updateExpense(Expense expense) async {
+    try {
+      await _firestore
+          .collection('expenses')
+          .doc(expense.id)
+          .update(expense.toJson());
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> updateExpenseTracker(ExpensesTracker tracker) {
-    // TODO: implement updateExpenseTracker
-    throw UnimplementedError();
+  Future<RequestResult> updateExpenseTracker(ExpensesTracker tracker) async {
+    try {
+      await _firestore
+          .collection('expense_trackers')
+          .doc(tracker.id)
+          .update(tracker.toJson());
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 
   @override
-  Future<RequestResult> updateJourney(Journey journey) {
-    // TODO: implement updateJourney
-    throw UnimplementedError();
+  Future<RequestResult> updateJourney(Journey journey) async {
+    try {
+      await _firestore
+          .collection('journeys')
+          .doc(journey.id)
+          .update(journey.toJson());
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+    return right(unit);
   }
 }

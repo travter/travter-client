@@ -13,12 +13,16 @@ class CollaborativeJourney with _$CollaborativeJourney {
     @JsonKey(name: 'memories') List<Memory> memories, {
     required String name,
     required List<String> authorizedUsers,
+    required String ownerId,
+    required String id,
   }) = _CollaborativeJourney;
 
   factory CollaborativeJourney.empty() => CollaborativeJourney(
         List.empty(growable: true),
         name: '',
         authorizedUsers: List.empty(growable: true),
+        ownerId: '',
+        id: '',
       );
 
   factory CollaborativeJourney.fromJson(Map<String, Object?> json) =>

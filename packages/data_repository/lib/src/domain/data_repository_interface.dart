@@ -8,7 +8,7 @@ import 'request_failure.dart';
 abstract class DataRepositoryInterface {
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker);
 
-  Future<RequestFailure> removeExpenseTracker(String id);
+  Future<RequestResult> removeExpenseTracker(String id);
 
   Future<RequestResult> updateExpenseTracker(ExpensesTracker tracker);
 

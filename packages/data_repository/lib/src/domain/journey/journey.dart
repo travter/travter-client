@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'journey.freezed.dart';
+
 part 'journey.g.dart';
 
 @freezed
@@ -10,6 +11,8 @@ class Journey with _$Journey {
     required List<String> visitedPlaces,
     required String description,
     required List<String> photos,
+    required String ownerId,
+    required String id,
   }) = _Journey;
 
   factory Journey.empty() => Journey(
@@ -17,6 +20,8 @@ class Journey with _$Journey {
         visitedPlaces: List.empty(growable: true),
         description: '',
         photos: List.empty(growable: true),
+        ownerId: '',
+        id: '',
       );
 
   factory Journey.fromJson(Map<String, Object?> json) =>
