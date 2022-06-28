@@ -1,4 +1,11 @@
 part of 'collaborative_journey_form_bloc.dart';
 
-@immutable
-abstract class CollaborativeJourneyFormEvent {}
+@freezed
+class CollaborativeJourneyFormEvent with _$CollaborativeJourneyFormEvent{
+  const factory CollaborativeJourneyFormEvent.journeyNameChanged(String name) = JourneyNameChanged;
+  const factory CollaborativeJourneyFormEvent.memoryNameChanged(String name) = MemoryNameChanged;
+  const factory CollaborativeJourneyFormEvent.memoryDescriptionChanged(String description) = MemoryDescriptionChanged;
+  const factory CollaborativeJourneyFormEvent.addPeopleStarted() = AddPeopleStarted;
+  const factory CollaborativeJourneyFormEvent.uploadPhotosStarted() = UploadPhotosStarted;
+  const factory CollaborativeJourneyFormEvent.submitFormPressed() = SubmitFormPressed;
+}
