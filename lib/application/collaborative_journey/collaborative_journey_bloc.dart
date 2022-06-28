@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 part 'collaborative_journey_event.dart';
 part 'collaborative_journey_state.dart';
 
+
 class CollaborativeJourneyBloc extends Bloc<CollaborativeJourneyEvent, CollaborativeJourneyState> {
   CollaborativeJourneyBloc() : super(CollaborativeJourneyInitial()) {
     on<CollaborativeJourneyEvent>((event, emit) {

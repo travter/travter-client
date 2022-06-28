@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
+import '../../../../injection.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/go_back_widget.dart';
 import '../widgets/widgets.dart';
+import 'widgets/add_collaborative_journey_button.dart';
 
 class AddCollaborativeJourneyPage extends StatelessWidget {
   const AddCollaborativeJourneyPage({Key? key}) : super(key: key);
@@ -20,36 +24,50 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.only(top: height * 0.05),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(left: width * homePageHorizontalPadding),
-                  child: const GoBackWidget(),
-                ),
-                // const AddJourneyFormWidget(),
-                const _JourneyNameFieldWidget(),
-                const _MemoryExplanationWidget(),
-                Divider(
-                  height: height * 0.01,
-                  color: lightPrimaryColor,
-                ),
-                const _MemoryNameFieldWidget(),
-                const _MemoryDescriptionFieldWidget(),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: width * homePageHorizontalPadding,
-                  ),
-                  child: const AddPeopleWidget('Add people to your journey'),
-                ),
-                const UploadPhotosWidget(),
-                const AddJourneyButtonWidget(),
-                Divider(
-                  height: height * 0.05,
-                  color: lightPrimaryColor,
-                ),
-              ],
+            child: BlocProvider(
+              create: (context) => getIt<CollaborativeJourneyFormBloc>(),
+              child: BlocConsumer<
+                  CollaborativeJourneyFormBloc,
+                  CollaborativeJourneyFormState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding:
+                        EdgeInsets.only(left: width *
+                            homePageHorizontalPadding),
+                        child: const GoBackWidget(),
+                      ),
+                      // const AddJourneyFormWidget(),
+                      const _JourneyNameFieldWidget(),
+                      const _MemoryExplanationWidget(),
+                      Divider(
+                        height: height * 0.01,
+                        color: lightPrimaryColor,
+                      ),
+                      const _MemoryNameFieldWidget(),
+                      const _MemoryDescriptionFieldWidget(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: width * homePageHorizontalPadding,
+                        ),
+                        child: const AddPeopleWidget(
+                            'Add people to your journey'),
+                      ),
+                      const UploadPhotosWidget(),
+                      const AddCollaborativeJourneyButtonWidget(),
+                      Divider(
+                        height: height * 0.05,
+                        color: lightPrimaryColor,
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -66,7 +84,7 @@ class _MemoryExplanationWidget extends StatelessWidget {
     final width = context.dims.width;
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
+      EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Text(
         'Add your first memory to the journey! ',
         style: TextStyle(
@@ -108,6 +126,10 @@ class _JourneyNameFieldWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
+            onChanged: (val) =>
+                context.read<CollaborativeJourneyFormBloc>().add(
+                  CollaborativeJourneyFormEvent.journeyNameChanged(val),
+                ),
           ),
         ),
       ),
@@ -144,6 +166,10 @@ class _MemoryNameFieldWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
+            onChanged: (val) =>
+                context.read<CollaborativeJourneyFormBloc>().add(
+                  CollaborativeJourneyFormEvent.memoryNameChanged(val),
+                ),
           ),
         ),
       ),
@@ -182,6 +208,10 @@ class _MemoryDescriptionFieldWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
+            onChanged: (val) =>
+                context.read<CollaborativeJourneyFormBloc>().add(
+                  CollaborativeJourneyFormEvent.memoryDescriptionChanged(val),
+                ),
           ),
         ),
       ),
