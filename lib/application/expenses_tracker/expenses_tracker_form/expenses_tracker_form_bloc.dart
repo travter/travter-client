@@ -32,7 +32,7 @@ class ExpensesTrackerFormBloc
       const uuid = Uuid();
 
       // implement failure on fold
-      currentUser.fold(() => null, (user) {
+      await currentUser.fold(() => null, (user) async {
         final expense = Expense(
             name: state.expenseName,
             moneyAmount: state.expenseAmount,
@@ -49,11 +49,11 @@ class ExpensesTrackerFormBloc
           id: uuid.v1(),
         );
 
-        _dataRepository.createExpenseTracker(expenseTracker);
+        await _dataRepository.createExpenseTracker(expenseTracker);
       });
     });
   }
 
   final DataRepositoryInterface _dataRepository;
-  final AuthenticationRepository _authRepository;
+  final AuthenticationRepositoryInterface _authRepository;
 }

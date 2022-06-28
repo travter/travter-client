@@ -10,7 +10,6 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final AuthenticationRepositoryInterface _authRepo;
 
   AuthenticationBloc(this._authRepo)
       : super(const AuthenticationState.initial()) {
@@ -26,4 +25,5 @@ class AuthenticationBloc
       emit(const AuthenticationState.unauthenticated());
     });
   }
+  final AuthenticationRepositoryInterface _authRepo;
 }

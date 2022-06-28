@@ -1,15 +1,46 @@
-import 'dart:async';
-
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:data_repository/data_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
+
+part 'journey_form_bloc.freezed.dart';
 
 part 'journey_form_event.dart';
+
 part 'journey_form_state.dart';
 
 class JourneyFormBloc extends Bloc<JourneyFormEvent, JourneyFormState> {
-  JourneyFormBloc() : super(JourneyFormInitial()) {
-    on<JourneyFormEvent>((event, emit) {
-      // TODO: implement event handler
+  JourneyFormBloc(this._authRepository, this._dataRepository)
+      : super(JourneyFormState.initial()) {
+    on<NameChanged>((event, emit) {
+      emit(state.copyWith(name: event.name));
+    });
+    on<VisitedPlacesChanged>((event, emit) {
+      emit(state.copyWith(visitedPlaces: event.places));
+    });
+    on<DescriptionChanged>((event, emit) {
+      emit(state.copyWith(description: event.description));
+    });
+    on<UploadPhotosStarted>((event, emit) {});
+    on<SubmitFormPressed>((event, emit) async {
+      final currentUser = await _authRepository.getSignedInUser();
+
+      const uuid = Uuid();
+      await currentUser.fold(() => null, (user) async {
+        final journey = Journey(
+            name: state.name,
+            visitedPlaces: state.visitedPlaces,
+            description: state.description,
+            photos: state.uploadedPhotos,
+            ownerId: user.uid,
+            id: uuid.v1());
+
+        await _dataRepository.createJourney(journey);
+      });
     });
   }
+
+  final DataRepositoryInterface _dataRepository;
+  final AuthenticationRepositoryInterface _authRepository;
 }
