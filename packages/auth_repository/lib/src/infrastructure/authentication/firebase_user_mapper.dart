@@ -1,11 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
-import '../../domain/core/value_objects.dart';
 import '../../domain/user/user.dart';
-import '../../domain/user/value_objects.dart';
 
 extension FirebaseUserDomainX on firebase.User {
   User toDomain() {
-    return User.empty();
+    return User(
+      uid: uid,
+      username: '',
+      bio: '',
+      followers: List.empty(growable: true),
+      following: List.empty(growable: true),
+      posts: List.empty(growable: true),
+      expensesTrackers: List.empty(growable: true),
+      friends: List.empty(growable: true),
+    );
   }
 }
