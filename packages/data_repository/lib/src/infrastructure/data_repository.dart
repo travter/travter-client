@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:rxdart/subjects.dart';
 
 import '../domain/collaborative_journey/collaborative_journey.dart';
 import '../domain/core/firestore_exception.dart';
@@ -16,6 +17,8 @@ class DataRepository implements DataRepositoryInterface {
   }) : _firestore = firestore ?? FirebaseFirestore.instance;
 
   final FirebaseFirestore _firestore;
+
+  final _expensesStreamController = BehaviorSubject<List<ExpensesTracker>>.seeded(const []);
 
   @override
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker) async {
@@ -167,5 +170,25 @@ class DataRepository implements DataRepositoryInterface {
       return left(const RequestFailure.serverError());
     }
     return right(unit);
+  }
+
+  @override
+  Future<Either<RequestFailure, Stream<List<ExpensesTracker>>>>
+      getAllUsersExpenseTrackers(String userId) async {
+
+    try {
+      final collection = _firestore.collection('expense_trackers');
+      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final trackers = query.docs
+          .map(
+            (el) => ExpensesTracker.fromJson(el.data()),
+          )
+          .toList();
+      _expensesStreamController.add(trackers);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(_expensesStreamController.asBroadcastStream());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,10 @@ part 'decorations.dart';
 
 
 class CalculationCardWidget extends StatelessWidget {
-  const CalculationCardWidget({Key? key}) : super(key: key);
+  const CalculationCardWidget({required this.tracker, Key? key})
+      : super(key: key);
+
+  final ExpensesTracker tracker;
 
   @override
   Widget build(BuildContext context) {

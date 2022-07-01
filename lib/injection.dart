@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
+import 'application/expenses_tracker/expenses_tracker_bloc.dart';
 import 'application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
 import 'application/journey/journey_form/journey_form_bloc.dart';
 import 'injection.config.dart';
@@ -44,5 +45,11 @@ Future<void> init() async {
         getIt<AuthenticationRepository>(),
         getIt<DataRepository>(),
       ),
+    )
+    ..registerSingleton<ExpensesTrackerBloc>(
+      ExpensesTrackerBloc(
+        getIt<DataRepository>(),
+        getIt<AuthenticationRepository>(),
+      )..add(const ExpensesTrackerEvent.fetchTrackersRequested()),
     );
 }

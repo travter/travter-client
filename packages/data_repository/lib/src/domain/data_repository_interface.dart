@@ -1,8 +1,7 @@
+import 'package:dartz/dartz.dart';
+
 import '../../data_repository.dart';
-import 'collaborative_journey/collaborative_journey.dart';
 import 'core/typedefs.dart';
-import 'expenses_tracker/expenses_tracker.dart';
-import 'journey/journey.dart';
 import 'request_failure.dart';
 
 abstract class DataRepositoryInterface {
@@ -31,4 +30,7 @@ abstract class DataRepositoryInterface {
 
   Future<RequestResult> updateCollaborativeJourney(
       CollaborativeJourney collaborativeJourney);
+
+  Future<Either<RequestFailure, Stream<List<ExpensesTracker>>>>
+      getAllUsersExpenseTrackers(String userId);
 }
