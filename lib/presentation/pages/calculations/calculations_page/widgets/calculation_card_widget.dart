@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/extensions.dart';
 import '../../../../router/router.gr.dart';
 import '../../widgets/avatars_stack_widget.dart';
 
 part 'decorations.dart';
-
 
 class CalculationCardWidget extends StatelessWidget {
   const CalculationCardWidget({required this.tracker, Key? key})
@@ -36,18 +37,28 @@ class CalculationCardWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  _CalculationTitleWidget('Seszele'),
-                  _TotalExpensesWidget(),
-                  _ExpensesValueWidget(223),
+                children: [
+                  _CalculationTitleWidget(tracker.name),
+                  const _TotalExpensesWidget(),
+                  _ExpensesValueWidget(tracker.totalExpenses),
                 ],
               ),
             ),
             Expanded(
               child: Column(
-                children: const [
-                  _OpenCalculationWidget(),
-                  AvatarsStackWidget(),
+                children: [
+                  InkWell(
+                    onTap: () {
+                      context.read<ExpensesTrackerBloc>().add(
+                            ExpensesTrackerEvent.currentlyLookedUpTrackerSet(
+                              tracker,
+                            ),
+                          );
+                      context.router.push(const CalculationRoute());
+                    },
+                    child: const _OpenCalculationWidget(),
+                  ),
+                  const AvatarsStackWidget(),
                 ],
               ),
             ),
@@ -133,16 +144,14 @@ class _OpenCalculationWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: height * 0.03),
-      child: Align(
+      child: const Align(
         alignment: Alignment.topRight,
-        child: InkWell(
-          onTap: () => context.router.push(const CalculationRoute()),
-          child: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
-        ),
+        child: Icon(Icons.arrow_forward_ios, color: Colors.grey),
       ),
     );
   }
 }
 
+/*
 
-
+ */

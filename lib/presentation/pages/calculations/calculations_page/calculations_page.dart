@@ -37,8 +37,8 @@ class CalculationsPage extends StatelessWidget {
                     ),
                     child: const GoBackWidget(),
                   ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: height * 0.725),
+                  Container(
+                    height: height * 0.725,
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -48,7 +48,7 @@ class CalculationsPage extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            for(final tracker in state.trackers)
+                            for (final tracker in state.trackers)
                               CalculationCardWidget(
                                 tracker: tracker,
                               ),

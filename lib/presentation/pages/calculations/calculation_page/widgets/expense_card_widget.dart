@@ -1,3 +1,4 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constant_colors.dart';
@@ -5,7 +6,9 @@ import '../../../../core/extensions.dart';
 
 
 class ExpenseCardWidget extends StatelessWidget {
-  const ExpenseCardWidget({Key? key}) : super(key: key);
+  const ExpenseCardWidget({required this.expense, Key? key}) : super(key: key);
+
+  final Expense expense;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +30,9 @@ class ExpenseCardWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Pizza',
-                style: TextStyle(
+              Text(
+                expense.name,
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.white,
                   letterSpacing: 0.5,
@@ -38,8 +41,8 @@ class ExpenseCardWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: height * 0.015),
                 child: Row(
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Money Amount: ',
                       style: TextStyle(
                         color: Colors.grey,
@@ -47,8 +50,8 @@ class ExpenseCardWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$38.00',
-                      style: TextStyle(
+                      '${expense.moneyAmount}',
+                      style: const TextStyle(
                         color: lightBlueColor,
                         fontSize: 13,
                       ),

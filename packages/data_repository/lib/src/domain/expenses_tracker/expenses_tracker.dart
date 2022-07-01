@@ -11,6 +11,7 @@ class ExpensesTracker with _$ExpensesTracker {
   @JsonSerializable(explicitToJson: true)
   const factory ExpensesTracker(
     @JsonKey(name: 'expenses') List<Expense> expenses, {
+    required double totalExpenses,
     required String name,
     required String currency,
     required DateTime createdAt,
@@ -27,6 +28,7 @@ class ExpensesTracker with _$ExpensesTracker {
         createdAt: DateTime.now(),
         authorizedUsers: List.empty(growable: true),
         id: '',
+        totalExpenses: 0,
       );
 
   factory ExpensesTracker.fromJson(Map<String, Object?> json) =>

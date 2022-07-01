@@ -47,6 +47,7 @@ class ExpensesTrackerFormBloc
           currency: 'USD',
           ownerId: user.uid,
           id: uuid.v1(),
+          totalExpenses: state.expenseAmount,
         );
 
         await _dataRepository.createExpenseTracker(expenseTracker);
