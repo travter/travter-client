@@ -21,9 +21,7 @@ class CalculationPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
-        body: BlocProvider(
-          create: (context) => getIt<ExpensesTrackerBloc>(),
-          child: BlocBuilder<ExpensesTrackerBloc, ExpensesTrackerState>(
+        body:  BlocBuilder<ExpensesTrackerBloc, ExpensesTrackerState>(
             builder: (context, state) {
               return SingleChildScrollView(
                 child: Padding(
@@ -47,8 +45,7 @@ class CalculationPage extends StatelessWidget {
                       SizedBox(
                         height: height * 0.025,
                       ),
-                      for (final expense
-                          in state.currentlyLookedUpTracker!.expenses)
+                      for(final expense in state.currentlyLookedUpTracker!.expenses)
                         ExpenseCardWidget(
                           expense: expense,
                         ),
@@ -58,7 +55,6 @@ class CalculationPage extends StatelessWidget {
               );
             },
           ),
-        ),
       ),
     );
   }

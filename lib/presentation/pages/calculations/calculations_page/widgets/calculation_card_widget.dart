@@ -151,7 +151,3 @@ class _OpenCalculationWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-
- */

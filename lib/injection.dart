@@ -45,11 +45,5 @@ Future<void> init() async {
         getIt<AuthenticationRepository>(),
         getIt<DataRepository>(),
       ),
-    )
-    ..registerSingleton<ExpensesTrackerBloc>(
-      ExpensesTrackerBloc(
-        getIt<DataRepository>(),
-        getIt<AuthenticationRepository>(),
-      )..add(const ExpensesTrackerEvent.fetchTrackersRequested()),
     );
 }

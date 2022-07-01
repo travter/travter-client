@@ -23,9 +23,7 @@ class CalculationsPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
-        body: BlocProvider(
-          create: (context) => getIt<ExpensesTrackerBloc>(),
-          child: BlocBuilder<ExpensesTrackerBloc, ExpensesTrackerState>(
+        body:  BlocBuilder<ExpensesTrackerBloc, ExpensesTrackerState>(
             builder: (context, state) {
               return Column(
                 children: [
@@ -66,7 +64,6 @@ class CalculationsPage extends StatelessWidget {
             },
           ),
         ),
-      ),
     );
   }
 }
