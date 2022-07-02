@@ -1,5 +1,6 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -37,7 +38,7 @@ class CollaborativeJourneyFormBloc
           name: state.memoryName,
           photos: List.empty(growable: true),
         );
-        
+
         final collaborativeJourney = CollaborativeJourney(
           List.empty(growable: true)..add(memory),
           name: state.journeyName,
@@ -45,7 +46,11 @@ class CollaborativeJourneyFormBloc
           ownerId: user.uid,
           id: uuid.v1(),
         );
-        await _dataRepository.createCollaborativeJourney(collaborativeJourney);
+        final result = await _dataRepository
+            .createCollaborativeJourney(collaborativeJourney);
+        emit(state.copyWith(
+          requestResult: optionOf(result),
+        ));
       });
     });
   }

@@ -8,6 +8,7 @@ class CollaborativeJourneyFormState with _$CollaborativeJourneyFormState {
     required String memoryDescription,
     required List<String> addedPeople,
     required List<String> addedPhotos,
+    required Option<RequestResult> requestResult,
   }) = _CollaborativeJourneyFormState;
 
   factory CollaborativeJourneyFormState.initial() =>
@@ -15,7 +16,8 @@ class CollaborativeJourneyFormState with _$CollaborativeJourneyFormState {
         journeyName: '',
         memoryName: '',
         memoryDescription: '',
-        addedPeople: List.empty(growable: true),
-        addedPhotos: List.empty(growable: true),
+        addedPeople: [],
+        addedPhotos: [],
+        requestResult: none(),
       );
 }
