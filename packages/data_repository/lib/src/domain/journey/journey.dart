@@ -13,6 +13,7 @@ class Journey with _$Journey {
     required List<String> photos,
     required String ownerId,
     required String id,
+    required DateTime startDate,
   }) = _Journey;
 
   factory Journey.empty() => Journey(
@@ -22,6 +23,7 @@ class Journey with _$Journey {
         photos: List.empty(growable: true),
         ownerId: '',
         id: '',
+        startDate: DateTime.now(),
       );
 
   factory Journey.fromJson(Map<String, Object?> json) =>

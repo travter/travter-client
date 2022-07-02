@@ -27,8 +27,6 @@ class FavoritePostsWidget extends StatelessWidget {
               text: 'Favorite Posts',
               redirectRoute: FavoritePostsRoute(),
             ),
-            TravelCard(),
-            TravelCard(),
           ],
         ),
       ),

@@ -1,12 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:data_repository/data_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../router/router.gr.dart';
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
 
 class TravelCard extends StatelessWidget {
-  const TravelCard({Key? key}) : super(key: key);
+  const TravelCard({required this.journey, Key? key}) : super(key: key);
+
+  final Journey journey;
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +40,18 @@ class TravelCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: width * 0.025),
               child: Row(
                 children: [
-                  const Text('Szeszele', style: _topTravelInfoStyle),
+                  Text(journey.name, style: _topTravelInfoStyle),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: width * 0.01),
                     child: const Text('•', style: _topTravelInfoStyle),
                   ),
-                  const Text('26.04.2022', style: _topTravelInfoStyle),
+                  Text(DateFormat.yMd().format(journey.startDate), style: _topTravelInfoStyle),
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: InkWell(
-                        onTap: () => context.router.push(const EditJourneyRoute()),
+                        onTap: () =>
+                            context.router.push(const EditJourneyRoute()),
                         child: const Icon(Icons.more_horiz, color: Colors.grey),
                       ),
                     ),
@@ -56,9 +62,9 @@ class TravelCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: height * 0.0075, horizontal: width * 0.025),
-              child: const Text(
-                'Probably the best 2 weeks of my life in Victoria!',
-                style: TextStyle(
+              child: Text(
+                journey.description,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                 ),
@@ -105,6 +111,11 @@ class TravelCard extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Journey>('journey', journey));
   }
 }
 

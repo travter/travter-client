@@ -23,10 +23,6 @@ class FavoritePostsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: context.dims.height * 0.05),
                     child: Column(
                       children: const [
-                        TravelCard(),
-                        TravelCard(),
-                        TravelCard(),
-                        TravelCard(),
                       ],
                 ),
                   ),

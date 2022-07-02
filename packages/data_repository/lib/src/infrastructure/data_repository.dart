@@ -9,7 +9,7 @@ import '../domain/data_repository_interface.dart';
 import '../domain/expenses_tracker/expense.dart';
 import '../domain/expenses_tracker/expenses_tracker.dart';
 import '../domain/journey/journey.dart';
-import '../domain/request_failure.dart';
+import '../domain/core/request_failure.dart';
 
 class DataRepository implements DataRepositoryInterface {
   DataRepository({

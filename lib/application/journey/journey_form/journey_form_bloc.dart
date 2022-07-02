@@ -1,5 +1,6 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -29,14 +30,21 @@ class JourneyFormBloc extends Bloc<JourneyFormEvent, JourneyFormState> {
       const uuid = Uuid();
       await currentUser.fold(() => null, (user) async {
         final journey = Journey(
-            name: state.name,
-            visitedPlaces: state.visitedPlaces,
-            description: state.description,
-            photos: state.uploadedPhotos,
-            ownerId: user.uid,
-            id: uuid.v1());
+          name: state.name,
+          visitedPlaces: state.visitedPlaces,
+          description: state.description,
+          photos: state.uploadedPhotos,
+          ownerId: user.uid,
+          id: uuid.v1(),
+          startDate: DateTime.now(),
+        );
+        final _result = await _dataRepository.createJourney(journey);
 
-        await _dataRepository.createJourney(journey);
+        emit(
+          state.copyWith(
+            requestResult: optionOf(_result),
+          ),
+        );
       });
     });
   }

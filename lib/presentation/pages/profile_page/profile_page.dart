@@ -19,8 +19,6 @@ class ProfilePage extends StatelessWidget {
               children: const [
                 NickTextWidget(),
                 ProfileSummary(),
-                TravelCard(),
-                TravelCard(),
                ]
             ),
           ),

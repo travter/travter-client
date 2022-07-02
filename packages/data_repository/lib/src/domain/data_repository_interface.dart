@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../data_repository.dart';
 import 'core/typedefs.dart';
-import 'request_failure.dart';
+import 'core/request_failure.dart';
 
 abstract class DataRepositoryInterface {
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker);

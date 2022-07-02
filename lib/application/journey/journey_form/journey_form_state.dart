@@ -7,6 +7,7 @@ class JourneyFormState with _$JourneyFormState {
     required List<String> visitedPlaces,
     required String description,
     required List<String> uploadedPhotos,
+    required Option<RequestResult> requestResult,
   }) = _JourneyFormState;
 
   factory JourneyFormState.initial() => JourneyFormState(
@@ -14,5 +15,6 @@ class JourneyFormState with _$JourneyFormState {
         visitedPlaces: List.empty(growable: true),
         description: '',
         uploadedPhotos: List.empty(growable: true),
-      );
+        requestResult: none(),
+  );
 }

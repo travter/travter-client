@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/journey/journey_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -20,11 +22,17 @@ class FeedSectionWidget extends StatelessWidget {
       ),
       child: Container(
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _FeedTextWidget(text: text),
-          ],
+        child: BlocBuilder<JourneyBloc, JourneyState>(
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // _FeedTextWidget(text: text),
+                for(final journey in state.journeys)
+                  TravelCard(journey: journey),
+              ],
+            );
+          },
         ),
       ),
     );
