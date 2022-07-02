@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../application/authentication/authentication_bloc.dart';
+import '../../application/collaborative_journey/collaborative_journey_bloc.dart';
 import '../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../application/journey/journey_bloc.dart';
 import '../router/router.gr.dart';
@@ -52,6 +53,12 @@ class _AppView extends StatelessWidget {
             context.read<DataRepository>(),
             context.read<AuthenticationRepository>(),
           )..add(const JourneyEvent.fetchJourneysRequested()),
+        ),
+        BlocProvider(
+          create: (_) => CollaborativeJourneyBloc(
+            context.read<DataRepository>(),
+            context.read<AuthenticationRepository>(),
+          )..add(const CollaborativeJourneyEvent.fetchJourneysRequested()),
         ),
       ],
       child: MaterialApp.router(
