@@ -5,8 +5,6 @@ import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'journey_form/journey_form_bloc.dart';
-
 part 'journey_event.dart';
 part 'journey_state.dart';
 

@@ -4,12 +4,12 @@ import 'package:rxdart/subjects.dart';
 
 import '../domain/collaborative_journey/collaborative_journey.dart';
 import '../domain/core/firestore_exception.dart';
+import '../domain/core/request_failure.dart';
 import '../domain/core/typedefs.dart';
 import '../domain/data_repository_interface.dart';
 import '../domain/expenses_tracker/expense.dart';
 import '../domain/expenses_tracker/expenses_tracker.dart';
 import '../domain/journey/journey.dart';
-import '../domain/core/request_failure.dart';
 
 class DataRepository implements DataRepositoryInterface {
   DataRepository({
@@ -18,8 +18,12 @@ class DataRepository implements DataRepositoryInterface {
 
   final FirebaseFirestore _firestore;
 
-  final _expensesStreamController = BehaviorSubject<List<ExpensesTracker>>.seeded(const []);
-  final _journeysStreamController = BehaviorSubject<List<Journey>>.seeded(const []);
+  final _expensesStreamController =
+      BehaviorSubject<List<ExpensesTracker>>.seeded(const []);
+  final _journeysStreamController =
+      BehaviorSubject<List<Journey>>.seeded(const []);
+  final _collaborativeJourneysStreamController =
+      BehaviorSubject<List<CollaborativeJourney>>.seeded(const []);
 
   @override
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker) async {
@@ -41,12 +45,16 @@ class DataRepository implements DataRepositoryInterface {
   Future<RequestResult> createCollaborativeJourney(
       CollaborativeJourney collaborativeJourney) async {
     try {
+      final journeys = [..._collaborativeJourneysStreamController.value];
+
       await _firestore
           .collection('collaborative_journeys')
           .add(collaborativeJourney.toJson())
           .onError(
             (error, _) => throw FirestoreException(error.toString()),
           );
+      journeys.add(collaborativeJourney);
+      _collaborativeJourneysStreamController.add(journeys);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
@@ -70,9 +78,12 @@ class DataRepository implements DataRepositoryInterface {
   @override
   Future<RequestResult> createJourney(Journey journey) async {
     try {
+      final journeys = [..._journeysStreamController.value];
       await _firestore.collection('journeys').add(journey.toJson()).onError(
             (error, _) => throw FirestoreException(error.toString()),
           );
+      journeys.add(journey);
+      _journeysStreamController.add(journeys);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
@@ -176,7 +187,6 @@ class DataRepository implements DataRepositoryInterface {
   @override
   Future<Either<RequestFailure, Stream<List<ExpensesTracker>>>>
       getAllUsersExpenseTrackers(String userId) async {
-
     try {
       final collection = _firestore.collection('expense_trackers');
       final query = await collection.where('ownerId', isEqualTo: userId).get();
@@ -194,7 +204,8 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<Either<RequestFailure, Stream<List<Journey>>>> getAllUsersJourneys(String userId) async {
+  Future<Either<RequestFailure, Stream<List<Journey>>>> getAllUsersJourneys(
+      String userId) async {
     try {
       final collection = _firestore.collection('journeys');
       final query = await collection.where('ownerId', isEqualTo: userId).get();
@@ -209,5 +220,24 @@ class DataRepository implements DataRepositoryInterface {
     }
 
     return right(_journeysStreamController.asBroadcastStream());
+  }
+
+  @override
+  Future<Either<RequestFailure, Stream<List<CollaborativeJourney>>>>
+      getAllUsersCollaborativeJourneys(String userId) async {
+    try {
+      final collection = _firestore.collection('collaborative_journeys');
+      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final collaborativeJourneys = query.docs
+          .map(
+            (el) => CollaborativeJourney.fromJson(el.data()),
+          )
+          .toList();
+      _collaborativeJourneysStreamController.add(collaborativeJourneys);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(_collaborativeJourneysStreamController.asBroadcastStream());
   }
 }
