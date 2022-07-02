@@ -1,8 +1,9 @@
+import 'package:auth_repository/auth_repository.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
-import '../../../../injection.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -26,9 +27,12 @@ class AddCalculationPage extends StatelessWidget {
             horizontal: width * homePageHorizontalPadding,
           ),
           child: BlocProvider(
-            create: (context) => getIt<ExpensesTrackerFormBloc>(),
+            create: (context) => ExpensesTrackerFormBloc(
+              context.read<DataRepository>(),
+              context.read<AuthenticationRepository>(),
+            ),
             child:
-            BlocConsumer<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
+                BlocConsumer<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
               listener: (context, state) {
                 // TODO: implement listener
               },
@@ -103,14 +107,12 @@ class _TrackerNameFieldWidget extends StatelessWidget {
         color: Colors.white,
       ),
       decoration: _getInputDecoration(_text),
-      onChanged: (value) =>
-          context.read<ExpensesTrackerFormBloc>().add(
+      onChanged: (value) => context.read<ExpensesTrackerFormBloc>().add(
             ExpensesTrackerFormEvent.trackerNameChanged(value),
           ),
     );
   }
 }
-
 
 class _AddExpenseWidget extends StatelessWidget {
   const _AddExpenseWidget({Key? key}) : super(key: key);
@@ -137,9 +139,9 @@ class _AddExpenseWidget extends StatelessWidget {
               decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
-                        color: lightBlueColor,
-                        width: 1.5,
-                      ))),
+                color: lightBlueColor,
+                width: 1.5,
+              ))),
               child: const Text(
                 'Add first expense!',
                 style: TextStyle(
@@ -149,9 +151,11 @@ class _AddExpenseWidget extends StatelessWidget {
             ),
           ),
           const _TextFieldWidget(
-            textFormField: _ExpenseNameFieldWidget('Expense Name'),),
+            textFormField: _ExpenseNameFieldWidget('Expense Name'),
+          ),
           const _TextFieldWidget(
-            textFormField: _MoneyAmountFieldWidget('Money amount'),),
+            textFormField: _MoneyAmountFieldWidget('Money amount'),
+          ),
         ],
       ),
     );
@@ -170,8 +174,7 @@ class _ExpenseNameFieldWidget extends StatelessWidget {
         color: Colors.white,
       ),
       decoration: _getInputDecoration(_text),
-      onChanged: (value) =>
-          context.read<ExpensesTrackerFormBloc>().add(
+      onChanged: (value) => context.read<ExpensesTrackerFormBloc>().add(
             ExpensesTrackerFormEvent.expenseNameChanged(value),
           ),
     );
@@ -190,14 +193,13 @@ class _MoneyAmountFieldWidget extends StatelessWidget {
         color: Colors.white,
       ),
       decoration: _getInputDecoration(_text),
-      onChanged: (value) =>
-          context.read<ExpensesTrackerFormBloc>().add(
-            ExpensesTrackerFormEvent.expenseAmountChanged(double.tryParse(value) ?? 0),
+      onChanged: (value) => context.read<ExpensesTrackerFormBloc>().add(
+            ExpensesTrackerFormEvent.expenseAmountChanged(
+                double.tryParse(value) ?? 0),
           ),
     );
   }
 }
-
 
 class _AddCalculationButtonWidget extends StatelessWidget {
   const _AddCalculationButtonWidget({Key? key}) : super(key: key);
@@ -214,9 +216,9 @@ class _AddCalculationButtonWidget extends StatelessWidget {
         top: height * 0.1,
       ),
       child: InkWell(
-        onTap: () => context.read<ExpensesTrackerFormBloc>().add( const
-          ExpensesTrackerFormEvent.submitFormPressed(),
-        ),
+        onTap: () => context.read<ExpensesTrackerFormBloc>().add(
+              const ExpensesTrackerFormEvent.submitFormPressed(),
+            ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

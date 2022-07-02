@@ -26,9 +26,9 @@ class HomePage extends StatelessWidget {
                   children: const [
                     WelcomeWidget(),
                     // ResultsOptionsWidget(),
-                    PopularPlacesWidget(text:'Popular Places'),
-                    PopularPeopleWidget(),
-                    FeedSectionWidget(text: 'Feed'),
+                    // PopularPlacesWidget(text:'Popular Places'),
+                    // PopularPeopleWidget(),
+                    FeedSectionWidget(text: ''),
                   ]
                 ),
               ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/authentication/sign_in_form/sign_in_form_bloc.dart';
-import '../../../injection.dart';
 import '../../router/router.gr.dart';
 import 'widgets/login_with_email_form.dart';
 import 'widgets/login_with_facebook_button.dart';
@@ -15,7 +14,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignInFormBloc(getIt<AuthenticationRepository>()),
+      create: (context) => SignInFormBloc(context.read<AuthenticationRepository>()),
       child: BlocListener<SignInFormBloc, SignInFormState>(
         listener: (context, state) {
           state.authResult.fold(

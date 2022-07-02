@@ -1,9 +1,10 @@
+import 'package:auth_repository/auth_repository.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/journey/journey_bloc.dart';
 import '../../../../application/journey/journey_form/journey_form_bloc.dart';
-import '../../../../injection.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -24,7 +25,10 @@ class AddJourneyPage extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.only(top: height * 0.05),
           child: BlocProvider(
-            create: (context) => getIt<JourneyFormBloc>(),
+            create: (context) => JourneyBloc(
+              context.read<DataRepository>(),
+              context.read<AuthenticationRepository>(),
+            ),
             child: BlocConsumer<JourneyFormBloc, JourneyFormState>(
               listener: (context, state) {
                 // TODO: implement listener
@@ -51,4 +55,3 @@ class AddJourneyPage extends StatelessWidget {
     );
   }
 }
-

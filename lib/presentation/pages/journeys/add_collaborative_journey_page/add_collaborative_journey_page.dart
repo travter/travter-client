@@ -1,8 +1,9 @@
+import 'package:auth_repository/auth_repository.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
-import '../../../../injection.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -25,9 +26,11 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
           padding: EdgeInsets.only(top: height * 0.05),
           child: SingleChildScrollView(
             child: BlocProvider(
-              create: (context) => getIt<CollaborativeJourneyFormBloc>(),
-              child: BlocConsumer<
-                  CollaborativeJourneyFormBloc,
+              create: (context) => CollaborativeJourneyFormBloc(
+                context.read<AuthenticationRepository>(),
+                context.read<DataRepository>(),
+              ),
+              child: BlocConsumer<CollaborativeJourneyFormBloc,
                   CollaborativeJourneyFormState>(
                 listener: (context, state) {
                   // TODO: implement listener
@@ -37,9 +40,8 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:
-                        EdgeInsets.only(left: width *
-                            homePageHorizontalPadding),
+                        padding: EdgeInsets.only(
+                            left: width * homePageHorizontalPadding),
                         child: const GoBackWidget(),
                       ),
                       // const AddJourneyFormWidget(),
@@ -55,8 +57,8 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: width * homePageHorizontalPadding,
                         ),
-                        child: const AddPeopleWidget(
-                            'Add people to your journey'),
+                        child:
+                            const AddPeopleWidget('Add people to your journey'),
                       ),
                       const UploadPhotosWidget(),
                       const AddCollaborativeJourneyButtonWidget(),
@@ -84,7 +86,7 @@ class _MemoryExplanationWidget extends StatelessWidget {
     final width = context.dims.width;
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
+          EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Text(
         'Add your first memory to the journey! ',
         style: TextStyle(
@@ -128,8 +130,8 @@ class _JourneyNameFieldWidget extends StatelessWidget {
             ),
             onChanged: (val) =>
                 context.read<CollaborativeJourneyFormBloc>().add(
-                  CollaborativeJourneyFormEvent.journeyNameChanged(val),
-                ),
+                      CollaborativeJourneyFormEvent.journeyNameChanged(val),
+                    ),
           ),
         ),
       ),
@@ -168,8 +170,8 @@ class _MemoryNameFieldWidget extends StatelessWidget {
             ),
             onChanged: (val) =>
                 context.read<CollaborativeJourneyFormBloc>().add(
-                  CollaborativeJourneyFormEvent.memoryNameChanged(val),
-                ),
+                      CollaborativeJourneyFormEvent.memoryNameChanged(val),
+                    ),
           ),
         ),
       ),
@@ -208,8 +210,9 @@ class _MemoryDescriptionFieldWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            onChanged: (val) =>
-                context.read<CollaborativeJourneyFormBloc>().add(
+            onChanged: (val) => context
+                .read<CollaborativeJourneyFormBloc>()
+                .add(
                   CollaborativeJourneyFormEvent.memoryDescriptionChanged(val),
                 ),
           ),

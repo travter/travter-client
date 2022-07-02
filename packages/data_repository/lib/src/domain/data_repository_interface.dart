@@ -33,4 +33,7 @@ abstract class DataRepositoryInterface {
 
   Future<Either<RequestFailure, Stream<List<ExpensesTracker>>>>
       getAllUsersExpenseTrackers(String userId);
+
+  Future<Either<RequestFailure, Stream<List<Journey>>>> getAllUsersJourneys(
+      String userId);
 }

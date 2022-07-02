@@ -19,6 +19,7 @@ class DataRepository implements DataRepositoryInterface {
   final FirebaseFirestore _firestore;
 
   final _expensesStreamController = BehaviorSubject<List<ExpensesTracker>>.seeded(const []);
+  final _journeysStreamController = BehaviorSubject<List<Journey>>.seeded(const []);
 
   @override
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker) async {
@@ -190,5 +191,23 @@ class DataRepository implements DataRepositoryInterface {
     }
 
     return right(_expensesStreamController.asBroadcastStream());
+  }
+
+  @override
+  Future<Either<RequestFailure, Stream<List<Journey>>>> getAllUsersJourneys(String userId) async {
+    try {
+      final collection = _firestore.collection('journeys');
+      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final journeys = query.docs
+          .map(
+            (el) => Journey.fromJson(el.data()),
+          )
+          .toList();
+      _journeysStreamController.add(journeys);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(_journeysStreamController.asBroadcastStream());
   }
 }

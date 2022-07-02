@@ -7,12 +7,27 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../application/authentication/authentication_bloc.dart';
 import '../../application/expenses_tracker/expenses_tracker_bloc.dart';
-import '../../injection.dart';
+import '../../application/journey/journey_bloc.dart';
 import '../router/router.gr.dart';
 
 /// Main application that is on the top of widget tree,
 /// contains most essential properties and configuration.
 class MyAppWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthenticationRepository>(
+            create: (context) => AuthenticationRepository()),
+        RepositoryProvider<DataRepository>(
+            create: (context) => DataRepository()),
+      ],
+      child: _AppView(),
+    );
+  }
+}
+
+class _AppView extends StatelessWidget {
   final _appRouter = AppRouter();
 
   @override
@@ -21,16 +36,22 @@ class MyAppWidget extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => AuthenticationBloc(
-            getIt<AuthenticationRepository>(),
+            context.read<AuthenticationRepository>(),
           )..add(
               const AuthenticationEvent.authCheckRequested(),
             ),
         ),
         BlocProvider(
           create: (_) => ExpensesTrackerBloc(
-            getIt<DataRepository>(),
-            getIt<AuthenticationRepository>(),
+            context.read<DataRepository>(),
+            context.read<AuthenticationRepository>(),
           )..add(const ExpensesTrackerEvent.fetchTrackersRequested()),
+        ),
+        BlocProvider(
+          create: (_) => JourneyBloc(
+            context.read<DataRepository>(),
+            context.read<AuthenticationRepository>(),
+          )..add(const JourneyEvent.fetchJourneysRequested()),
         ),
       ],
       child: MaterialApp.router(

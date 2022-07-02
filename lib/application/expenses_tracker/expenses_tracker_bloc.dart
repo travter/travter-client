@@ -18,7 +18,11 @@ class ExpensesTrackerBloc
       emit(state.copyWith(status: TrackersOverviewStatus.fetching));
 
       final user = await _authRepository.getSignedInUser();
-      await user.fold(() => null, (user) async {
+      await user.fold(() {
+        emit(state.copyWith(
+          status: TrackersOverviewStatus.failure,
+        ));
+      }, (user) async {
         final trackers =
             await _dataRepository.getAllUsersExpenseTrackers(user.uid);
         await trackers.fold((_) => null, (stream) async {

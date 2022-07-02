@@ -64,10 +64,7 @@ class _FeedTextWidget extends StatelessWidget {
               ),
             ),
           ),
-          const TravelCard(),
-          const TravelCard(),
-          const TravelCard(),
-          const TravelCard(),
+
         ],
       ),
     );

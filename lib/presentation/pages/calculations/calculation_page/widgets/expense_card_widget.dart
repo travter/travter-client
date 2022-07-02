@@ -67,7 +67,7 @@ class ExpenseCardWidget extends StatelessWidget {
                     AssetImage('assets/images/profile_picture.jpeg'),
                   ),
                   Text(
-                    ' Marek Kowalski',
+                    'Marek Kowalski',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 12.5,
