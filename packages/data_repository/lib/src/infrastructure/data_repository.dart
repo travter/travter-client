@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -248,16 +249,48 @@ class DataRepository implements DataRepositoryInterface {
   Future<RequestResult> saveImagesToStorage(List<String> imagesPaths) async {
     final storageRef = FirebaseStorage.instance.ref();
 
-    for(final imagePath in imagesPaths) {
+    for (final imagePath in imagesPaths) {
       final file = File(imagePath);
       final imageRef = storageRef.child('images/${file.path.split('/').last}');
       try {
         await imageRef.putFile(file);
-      } on FirebaseException catch(err) {
+      } on FirebaseException catch (err) {
         return left(const RequestFailure.serverError());
       }
     }
 
     return right(unit);
   }
+
+  @override
+  Future<RequestResult> saveUser(User user) async {
+    try {
+      final query = await _firestore.collection('users').where('uid', isEqualTo: user.uid).get();
+      if(query.docs.isNotEmpty) {
+        return right(unit);
+      }
+      await _firestore.collection('users').add(user.toJson()).onError(
+            (error, _) => throw FirestoreException(error.toString()),
+          );
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(unit);
+  }
+
+/*
+  @override
+  Future<Either<RequestFailure, List<Friend>>> getUserFriends(String userId) {
+    var friendsList = <Friend>[];
+    try {
+      final collection = _firestore.collection('users').doc(userId).collection(collectionPath);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return right(friendsList);
+  }
+   */
+
 }

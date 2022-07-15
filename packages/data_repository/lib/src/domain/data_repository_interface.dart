@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../data_repository.dart';
@@ -39,4 +40,8 @@ abstract class DataRepositoryInterface {
       getAllUsersCollaborativeJourneys(String userId);
 
   Future<RequestResult> saveImagesToStorage(List<String> imagesPaths);
+
+  // Future<Either<RequestFailure, List<Friend>>> getUserFriends(String userId);
+
+  Future<RequestResult> saveUser(User user);
 }
