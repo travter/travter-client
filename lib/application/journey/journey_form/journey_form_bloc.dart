@@ -41,12 +41,14 @@ class JourneyFormBloc extends Bloc<JourneyFormEvent, JourneyFormState> {
       final currentUser = await _authRepository.getSignedInUser();
 
       const uuid = Uuid();
+      final imageNames = state.uploadedPhotos.map((e) => 'images/${e.split('/').last}').toList();
+
       await currentUser.fold(() => null, (user) async {
         final journey = Journey(
           name: state.name,
           visitedPlaces: state.visitedPlaces,
           description: state.description,
-          photos: state.uploadedPhotos,
+          photos: imageNames,
           ownerId: user.uid,
           id: uuid.v1(),
           startDate: DateTime.now(),
