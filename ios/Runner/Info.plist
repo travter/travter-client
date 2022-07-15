@@ -6,6 +6,12 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To save uploaded by users images of his journey</string>
+	<key>NSCameraUsageDescription</key>
+	<string>to access camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>to access microphone</string>
 	<key>CFBundleDisplayName</key>
 	<string>Traveler</string>
 	<key>CFBundleExecutable</key>

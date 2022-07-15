@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../domain/collaborative_journey/collaborative_journey.dart';
@@ -239,5 +242,22 @@ class DataRepository implements DataRepositoryInterface {
     }
 
     return right(_collaborativeJourneysStreamController.asBroadcastStream());
+  }
+
+  @override
+  Future<RequestResult> saveImagesToStorage(List<String> imagesPaths) async {
+    final storageRef = FirebaseStorage.instance.ref();
+
+    for(final imagePath in imagesPaths) {
+      final file = File(imagePath);
+      final imageRef = storageRef.child('images/${file.path.split('/').last}');
+      try {
+        await imageRef.putFile(file);
+      } on FirebaseException catch(err) {
+        return left(const RequestFailure.serverError());
+      }
+    }
+
+    return right(unit);
   }
 }

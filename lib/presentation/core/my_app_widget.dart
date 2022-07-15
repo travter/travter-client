@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:functionalities_repository/functionalities_repository.dart';
 
 import '../../application/authentication/authentication_bloc.dart';
 import '../../application/collaborative_journey/collaborative_journey_bloc.dart';
@@ -22,6 +23,8 @@ class MyAppWidget extends StatelessWidget {
             create: (context) => AuthenticationRepository()),
         RepositoryProvider<DataRepository>(
             create: (context) => DataRepository()),
+        RepositoryProvider<FunctionalitiesRepository>(
+            create: (context) => FunctionalitiesRepository()),
       ],
       child: _AppView(),
     );

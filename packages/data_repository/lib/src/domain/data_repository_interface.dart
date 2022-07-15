@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 
 import '../../data_repository.dart';
-import 'core/request_failure.dart';
-import 'core/typedefs.dart';
 
 abstract class DataRepositoryInterface {
   Future<RequestResult> createExpenseTracker(ExpensesTracker tracker);
@@ -39,4 +37,6 @@ abstract class DataRepositoryInterface {
 
   Future<Either<RequestFailure, Stream<List<CollaborativeJourney>>>>
       getAllUsersCollaborativeJourneys(String userId);
+
+  Future<RequestResult> saveImagesToStorage(List<String> imagesPaths);
 }

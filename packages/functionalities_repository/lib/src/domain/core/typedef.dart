@@ -3,5 +3,5 @@ import 'package:image_picker/image_picker.dart';
 
 import 'execution_failure.dart';
 
-typedef ImagesList = List<XFile>?;
+typedef ImagesPathsList = List<String>?;
 typedef FunctionResult<T> = Either<ExecutionFailure, T>;
