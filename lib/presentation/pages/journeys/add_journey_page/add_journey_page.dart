@@ -11,6 +11,7 @@ import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/go_back_widget.dart';
 import '../../../router/router.gr.dart';
+import '../widgets/pick_date_widget.dart';
 import '../widgets/widgets.dart';
 
 class AddJourneyPage extends StatelessWidget {
@@ -62,10 +63,22 @@ class _AddJourneyView extends StatelessWidget {
               padding: EdgeInsets.only(left: width * homePageHorizontalPadding),
               child: const GoBackWidget(),
             ),
-            const AddJourneyFormWidget(),
-            // AddPeopleWidget(),
-            const UploadPhotosWidget(),
-            const AddJourneyButtonWidget(),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: context.dims.height * 0.8,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    AddJourneyFormWidget(),
+                    // AddPeopleWidget(),
+                    PickDateWidget(),
+                    UploadPhotosWidget(),
+                    AddJourneyButtonWidget(),
+                  ],
+                ),
+              ),
+            ),
           ],
         );
       },

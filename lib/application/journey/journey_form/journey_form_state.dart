@@ -8,6 +8,7 @@ class JourneyFormState with _$JourneyFormState {
     required String description,
     required List<String> uploadedPhotos,
     required Option<RequestResult> requestResult,
+    required String startDate,
   }) = _JourneyFormState;
 
   factory JourneyFormState.initial() => JourneyFormState(
@@ -16,5 +17,6 @@ class JourneyFormState with _$JourneyFormState {
         description: '',
         uploadedPhotos: List.empty(growable: true),
         requestResult: none(),
+        startDate: DateTime.now().toString(),
   );
 }

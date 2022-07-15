@@ -8,7 +8,7 @@ import '../domain/functionalities_repository_interface.dart';
 
 class FunctionalitiesRepository implements FunctionalitiesRepositoryInterface {
   @override
-  Future<Either<ExecutionFailure, ImagesPathsList>> selectAndSaveImages() async {
+  Future<FunctionResult<ImagesPathsList>> selectAndSaveImages() async {
     final picker = ImagePicker();
 
     final images = await picker.pickMultiImage();
@@ -29,7 +29,7 @@ class FunctionalitiesRepository implements FunctionalitiesRepositoryInterface {
   }
 
   @override
-  Future<Either<ExecutionFailure, Unit>> selectPeople() {
+  Future<FunctionResult<Unit>> selectPeople() {
     // TODO: implement selectPeople
     throw UnimplementedError();
   }

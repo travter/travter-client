@@ -37,11 +37,18 @@ class JourneyFormBloc extends Bloc<JourneyFormEvent, JourneyFormState> {
         ));
       });
     });
+    on<PickDatePressed>((event, emit) async {
+      emit(state.copyWith(
+        startDate: event.date,
+      ));
+    });
     on<SubmitFormPressed>((event, emit) async {
       final currentUser = await _authRepository.getSignedInUser();
 
       const uuid = Uuid();
-      final imageNames = state.uploadedPhotos.map((e) => 'images/${e.split('/').last}').toList();
+      final imageNames = state.uploadedPhotos
+          .map((e) => 'images/${e.split('/').last}')
+          .toList();
 
       await currentUser.fold(() => null, (user) async {
         final journey = Journey(
