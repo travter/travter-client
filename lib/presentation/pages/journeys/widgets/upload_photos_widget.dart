@@ -1,8 +1,7 @@
-import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:functionalities_repository/functionalities_repository.dart';
 
+import '../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 
@@ -15,19 +14,9 @@ class UploadPhotosWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return InkWell(
-      onTap: () async {
-        final imagesPaths = await context.read<FunctionalitiesRepository>()
-            .selectAndSaveImages();
-
-        await imagesPaths.fold((l){
-         print("errorinio");
-        }, (imagesPaths) async {
-          if(imagesPaths == null) {
-            return;
-          }
-          await context.read<DataRepository>().saveImagesToStorage(imagesPaths);
-        });
-      },
+      onTap: () => context
+          .read<JourneyFormBloc>()
+          .add(const JourneyFormEvent.uploadPhotosStarted()),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: width * homePageHorizontalPadding,

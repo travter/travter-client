@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:functionalities_repository/functionalities_repository.dart';
 
 import '../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
@@ -28,6 +29,7 @@ class AddJourneyPage extends StatelessWidget {
             create: (_) => JourneyFormBloc(
               context.read<AuthenticationRepository>(),
               context.read<DataRepository>(),
+              context.read<FunctionalitiesRepository>(),
             ),
             child: const _AddJourneyView(),
           ),
