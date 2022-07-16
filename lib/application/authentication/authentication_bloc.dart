@@ -11,21 +11,33 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc(this._authRepo)
-      : super(const AuthenticationState.initial()) {
+  AuthenticationBloc(this._authRepo) : super(AuthenticationState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
       final userOption = await _authRepo.getSignedInUser();
-      emit(userOption.fold(
-        () => const AuthenticationState.unauthenticated(),
-        (_) => const AuthenticationState.authenticated(),
-      ));
+      userOption.fold(
+        () {
+          emit(state.copyWith(
+            authStatus: AuthenticationStatus.unauthenticated,
+          ));
+        },
+        (_) {
+          emit(state.copyWith(
+            authStatus: AuthenticationStatus.authenticated,
+          ));
+        },
+      );
     });
     on<SignedOut>((event, emit) async {
       await _authRepo.signOut();
-      emit(const AuthenticationState.unauthenticated());
+      emit(state.copyWith(
+        authStatus: AuthenticationStatus.unauthenticated,
+      ));
     });
 
     on<UserSignedIn>((event, emit) async {
+      emit(state.copyWith(
+        user: event.user,
+      ));
     });
   }
 
