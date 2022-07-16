@@ -27,7 +27,7 @@ class JourneyFormBloc extends Bloc<JourneyFormEvent, JourneyFormState> {
     });
     on<UploadPhotosStarted>((event, emit) async {
       final imagesPaths =
-          await _functionalitiesRepository.selectAndSaveImages();
+          await _functionalitiesRepository.selectAndSaveImages(multiple: true);
       imagesPaths.fold((l) => null, (paths) {
         if (paths == null) {
           return;

@@ -6,12 +6,14 @@ class EditProfileState with _$EditProfileState{
     required String username, // value object todo plox
     required String photoReference,
     required String bio,
+    required Either<EditionFailure, Unit> editionResult,
   }) = _EditProfileState;
 
-  factory EditProfileState.initial() => const EditProfileState(
+  factory EditProfileState.initial() => EditProfileState(
     username: '',
     photoReference: '',
     bio: '',
+    editionResult: right(unit),
   );
 }
 

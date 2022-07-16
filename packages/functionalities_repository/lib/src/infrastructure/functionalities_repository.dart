@@ -8,12 +8,23 @@ import '../domain/functionalities_repository_interface.dart';
 
 class FunctionalitiesRepository implements FunctionalitiesRepositoryInterface {
   @override
-  Future<FunctionResult<ImagesPathsList>> selectAndSaveImages() async {
+  Future<FunctionResult<ImagesPathsList>> selectAndSaveImages({bool multiple = true}) async {
+
     final picker = ImagePicker();
 
-    final images = await picker.pickMultiImage();
-    if (images == null) {
-      return left(const ExecutionFailure.abortedByUser());
+    List<XFile>? images = [];
+
+    if(!multiple) {
+      final _image = await picker.pickImage(source: ImageSource.gallery);
+      if(_image == null) {
+        return left(const ExecutionFailure.abortedByUser());
+      }
+      images.add(_image);
+    } else {
+      images = await picker.pickMultiImage();
+      if (images == null) {
+        return left(const ExecutionFailure.abortedByUser());
+      }
     }
 
     final _dir = await getApplicationDocumentsDirectory();
