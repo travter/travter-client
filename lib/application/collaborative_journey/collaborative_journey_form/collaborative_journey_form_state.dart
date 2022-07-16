@@ -11,7 +11,7 @@ class CollaborativeJourneyFormState with _$CollaborativeJourneyFormState {
     required AddPeopleStatus addPeopleStatus,
     required List<String> addedPeople,
     required List<String> addedPhotos,
-    required Option<RequestResult> requestResult,
+    required Option<RequestResult<Unit>> requestResult,
   }) = _CollaborativeJourneyFormState;
 
   factory CollaborativeJourneyFormState.initial() =>

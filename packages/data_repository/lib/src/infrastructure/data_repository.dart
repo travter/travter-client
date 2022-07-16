@@ -30,7 +30,7 @@ class DataRepository implements DataRepositoryInterface {
       BehaviorSubject<List<CollaborativeJourney>>.seeded(const []);
 
   @override
-  Future<RequestResult> createExpenseTracker(ExpensesTracker tracker) async {
+  Future<RequestResult<Unit>> createExpenseTracker(ExpensesTracker tracker) async {
     try {
       await _firestore
           .collection('expense_trackers')
@@ -46,7 +46,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> createCollaborativeJourney(
+  Future<RequestResult<Unit>> createCollaborativeJourney(
       CollaborativeJourney collaborativeJourney) async {
     try {
       final journeys = [..._collaborativeJourneysStreamController.value];
@@ -67,7 +67,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> createExpense(Expense expense) async {
+  Future<RequestResult<Unit>> createExpense(Expense expense) async {
     try {
       await _firestore.collection('expenses').add(expense.toJson()).onError(
             (error, _) => throw FirestoreException(error.toString()),
@@ -80,7 +80,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> createJourney(Journey journey) async {
+  Future<RequestResult<Unit>> createJourney(Journey journey) async {
     try {
       final journeys = [..._journeysStreamController.value];
       await _firestore.collection('journeys').add(journey.toJson()).onError(
@@ -95,7 +95,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> removeCollaborativeJourney(String id) async {
+  Future<RequestResult<Unit>> removeCollaborativeJourney(String id) async {
     try {
       await _firestore.collection('collaborative_journeys').doc(id).delete();
     } on FirestoreException catch (_) {
@@ -106,7 +106,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> removeExpense(String id) async {
+  Future<RequestResult<Unit>> removeExpense(String id) async {
     try {
       await _firestore.collection('expenses').doc(id).delete();
     } on FirestoreException catch (_) {
@@ -116,7 +116,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> removeExpenseTracker(String id) async {
+  Future<RequestResult<Unit>> removeExpenseTracker(String id) async {
     try {
       await _firestore.collection('expense_trackers').doc(id).delete();
     } on FirestoreException catch (_) {
@@ -126,7 +126,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> removeJourney(String id) async {
+  Future<RequestResult<Unit>> removeJourney(String id) async {
     try {
       await _firestore.collection('journeys').doc(id).delete();
     } on FirestoreException catch (_) {
@@ -136,7 +136,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> updateCollaborativeJourney(
+  Future<RequestResult<Unit>> updateCollaborativeJourney(
       CollaborativeJourney collaborativeJourney) async {
     try {
       await _firestore
@@ -150,7 +150,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> updateExpense(Expense expense) async {
+  Future<RequestResult<Unit>> updateExpense(Expense expense) async {
     try {
       await _firestore
           .collection('expenses')
@@ -163,7 +163,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> updateExpenseTracker(ExpensesTracker tracker) async {
+  Future<RequestResult<Unit>> updateExpenseTracker(ExpensesTracker tracker) async {
     try {
       await _firestore
           .collection('expense_trackers')
@@ -176,7 +176,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> updateJourney(Journey journey) async {
+  Future<RequestResult<Unit>> updateJourney(Journey journey) async {
     try {
       await _firestore
           .collection('journeys')
@@ -246,7 +246,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> saveImagesToStorage(List<String> imagesPaths) async {
+  Future<RequestResult<Unit>> saveImagesToStorage(List<String> imagesPaths) async {
     final storageRef = FirebaseStorage.instance.ref();
 
     for (final imagePath in imagesPaths) {
@@ -263,11 +263,11 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult> saveUser(User user) async {
+  Future<RequestResult<User>> saveAndRetrieveUser(User user) async {
     try {
       final query = await _firestore.collection('users').where('uid', isEqualTo: user.uid).get();
       if(query.docs.isNotEmpty) {
-        return right(unit);
+        return right(User.fromJson(query.docs.first.data()));
       }
       await _firestore.collection('users').add(user.toJson()).onError(
             (error, _) => throw FirestoreException(error.toString()),
@@ -276,7 +276,7 @@ class DataRepository implements DataRepositoryInterface {
       return left(const RequestFailure.serverError());
     }
 
-    return right(unit);
+    return right(user);
   }
 
 /*

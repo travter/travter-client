@@ -1,5 +1,6 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'authentication_bloc.freezed.dart';
@@ -10,7 +11,6 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-
   AuthenticationBloc(this._authRepo)
       : super(const AuthenticationState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
@@ -24,6 +24,10 @@ class AuthenticationBloc
       await _authRepo.signOut();
       emit(const AuthenticationState.unauthenticated());
     });
+
+    on<UserSignedIn>((event, emit) async {
+    });
   }
+
   final AuthenticationRepositoryInterface _authRepo;
 }

@@ -7,7 +7,7 @@ class JourneyFormState with _$JourneyFormState {
     required List<String> visitedPlaces,
     required String description,
     required List<String> uploadedPhotos,
-    required Option<RequestResult> requestResult,
+    required Option<RequestResult<Unit>> requestResult,
     required String startDate,
   }) = _JourneyFormState;
 

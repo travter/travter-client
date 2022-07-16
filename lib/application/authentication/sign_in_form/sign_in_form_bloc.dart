@@ -16,7 +16,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final AuthenticationRepositoryInterface _authFacade;
   final DataRepositoryInterface _dataRepository;
 
-  SignInFormBloc(this._authFacade, this._dataRepository) : super(SignInFormState.initial()) {
+  SignInFormBloc(this._authFacade, this._dataRepository)
+      : super(SignInFormState.initial()) {
     on<EmailChanged>((event, emit) {
       emit(state.copyWith(
         email: EmailAddress(event.email),
@@ -70,7 +71,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           email: state.email,
           password: state.password,
         );
-
       }
 
       emit(state.copyWith(
@@ -88,7 +88,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       await result.fold((l) => null, (_) async {
         final currentUser = await _authFacade.getSignedInUser();
         await currentUser.fold(() => null, (user) async {
-            await _dataRepository.saveUser(user);
+          await _dataRepository.saveAndRetrieveUser(user);
         });
       });
 
@@ -106,15 +106,16 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       await result.fold((l) => null, (_) async {
         final currentUser = await _authFacade.getSignedInUser();
         await currentUser.fold(() => null, (user) async {
-          await _dataRepository.saveUser(user);
+          final _user = await _dataRepository.saveAndRetrieveUser(user);
+          await _user.fold((l) => null, (user) async {
+            emit(state.copyWith(
+              signedUser: some(user),
+              isSubmitting: false,
+              authResult: some(result),
+            ));
+          });
         });
       });
-
-
-      emit(state.copyWith(
-        isSubmitting: false,
-        authResult: some(result),
-      ));
     });
   }
 }

@@ -2,6 +2,10 @@ part of 'authentication_bloc.dart';
 
 @freezed
 class AuthenticationState with _$AuthenticationState {
+  const factory AuthenticationState({
+    required Option<User> user,
+  }) = _AuthenticationState;
+
   const factory AuthenticationState.initial() = Initial;
 
   const factory AuthenticationState.authenticated() = Authenticated;

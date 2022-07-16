@@ -12,7 +12,7 @@ class LoadingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        state.map(
+        state.maybeMap(
           authenticated: (_) {
             context.router.push(const HomeRoute());
             context.router.popUntilRouteWithName('HomeRoute');
@@ -21,7 +21,7 @@ class LoadingPage extends StatelessWidget {
             context.router.popAndPush(const LoginRoute());
             context.router.popUntilRouteWithName('LoginRoute');
           },
-          initial: (_) {},
+          orElse: () {},
         );
       },
       child: const Scaffold(
