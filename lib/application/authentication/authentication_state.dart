@@ -5,12 +5,12 @@ enum AuthenticationStatus {initial, authenticated, unauthenticated}
 @freezed
 class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState({
-    required Option<User> user,
+    required User user,
     required AuthenticationStatus authStatus,
   }) = _AuthenticationState;
 
   factory AuthenticationState.initial() => AuthenticationState(
-    user: none(),
+    user: User.empty(),
     authStatus: AuthenticationStatus.initial,
   );
 

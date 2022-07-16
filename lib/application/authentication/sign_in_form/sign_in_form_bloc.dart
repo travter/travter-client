@@ -109,7 +109,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           final _user = await _dataRepository.saveAndRetrieveUser(user);
           await _user.fold((l) => null, (user) async {
             emit(state.copyWith(
-              signedUser: some(user),
+              signedUser: user,
               isSubmitting: false,
               authResult: some(result),
             ));
