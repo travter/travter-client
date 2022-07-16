@@ -13,6 +13,7 @@ class CollaborativeJourneyBloc
     extends Bloc<CollaborativeJourneyEvent, CollaborativeJourneyState> {
   CollaborativeJourneyBloc(this._dataRepository, this._authRepository)
       : super(CollaborativeJourneyState.initial()) {
+
     on<FetchJourneysRequested>((event, emit) async {
       emit(state.copyWith(
         status: CollaborativeJourneyFeedStatus.fetching,

@@ -24,7 +24,12 @@ class CollaborativeJourneyFormBloc
     on<MemoryDescriptionChanged>((event, emit) {
       emit(state.copyWith(memoryDescription: event.description));
     });
-    on<AddPeopleStarted>((event, emit) {});
+    on<AddPeopleStarted>((event, emit) {
+      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.started));
+    });
+    on<AddPeopleFinished>((event, emit) {
+      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.added));
+    });
     on<UploadPhotosStarted>((event, emit) {});
     on<SubmitFormPressed>((event, emit) async {
       final currentUser = await _authRepository.getSignedInUser();

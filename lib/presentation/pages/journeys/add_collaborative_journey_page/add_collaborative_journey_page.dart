@@ -9,6 +9,7 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/go_back_widget.dart';
+import '../../../core/widgets/select_people_widget.dart';
 import '../../../router/router.gr.dart';
 import '../widgets/widgets.dart';
 import 'widgets/add_collaborative_journey_button.dart';
@@ -43,36 +44,52 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                   );
                 },
                 builder: (context, state) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  return Stack(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: width * homePageHorizontalPadding),
-                        child: const GoBackWidget(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: width * homePageHorizontalPadding),
+                            child: const GoBackWidget(),
+                          ),
+                          // const AddJourneyFormWidget(),
+                          const _JourneyNameFieldWidget(),
+                          const _MemoryExplanationWidget(),
+                          Divider(
+                            height: height * 0.01,
+                            color: lightPrimaryColor,
+                          ),
+                          const _MemoryNameFieldWidget(),
+                          const _MemoryDescriptionFieldWidget(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: width * homePageHorizontalPadding,
+                            ),
+                            child: InkWell(
+                              onTap: () => context
+                                  .read<CollaborativeJourneyFormBloc>()
+                                  .add(
+                                const CollaborativeJourneyFormEvent
+                                    .addPeopleStarted(),
+                              ),
+                              child: const AddPeopleWidget(
+                                  'Add people to your journey'),
+                            ),
+                          ),
+                          const UploadPhotosWidget(),
+                          const AddCollaborativeJourneyButtonWidget(),
+                          Divider(
+                            height: height * 0.05,
+                            color: lightPrimaryColor,
+                          ),
+                        ],
                       ),
-                      // const AddJourneyFormWidget(),
-                      const _JourneyNameFieldWidget(),
-                      const _MemoryExplanationWidget(),
-                      Divider(
-                        height: height * 0.01,
-                        color: lightPrimaryColor,
-                      ),
-                      const _MemoryNameFieldWidget(),
-                      const _MemoryDescriptionFieldWidget(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: width * homePageHorizontalPadding,
-                        ),
-                        child:
-                            const AddPeopleWidget('Add people to your journey'),
-                      ),
-                      const UploadPhotosWidget(),
-                      const AddCollaborativeJourneyButtonWidget(),
-                      Divider(
-                        height: height * 0.05,
-                        color: lightPrimaryColor,
-                      ),
+                      if (state.addPeopleStatus == AddPeopleStatus.started)
+                        const SelectPeopleWidget()
+                      else
+                        const SizedBox(),
                     ],
                   );
                 },

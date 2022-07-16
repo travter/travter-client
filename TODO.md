@@ -1,8 +1,5 @@
 1. code refactor
 2. search functionality 
-3. save user to the database
-4. functionality of adding users to friends
-6. add friends to collaborative journey
-7. add journeys to favorites
-
-
+3. functionality of adding users to friends
+4. add friends to collaborative journey
+5. add journeys to favorites

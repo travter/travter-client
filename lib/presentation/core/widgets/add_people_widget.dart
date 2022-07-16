@@ -11,24 +11,26 @@ class AddPeopleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
 
-    return Row(
-      children: [
-        const Icon(
-          Icons.add_circle_outline,
-          color: Colors.white,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: width * 0.015,
+    return InkWell(
+      child: Row(
+        children: [
+          const Icon(
+            Icons.add_circle_outline,
+            color: Colors.white,
           ),
-          child: Text(
-            _text,
-            style: const TextStyle(
-              color: Colors.white,
+          Padding(
+            padding: EdgeInsets.only(
+              left: width * 0.015,
+            ),
+            child: Text(
+              _text,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
