@@ -30,7 +30,8 @@ class DataRepository implements DataRepositoryInterface {
       BehaviorSubject<List<CollaborativeJourney>>.seeded(const []);
 
   @override
-  Future<RequestResult<Unit>> createExpenseTracker(ExpensesTracker tracker) async {
+  Future<RequestResult<Unit>> createExpenseTracker(
+      ExpensesTracker tracker) async {
     try {
       await _firestore
           .collection('expense_trackers')
@@ -163,7 +164,8 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> updateExpenseTracker(ExpensesTracker tracker) async {
+  Future<RequestResult<Unit>> updateExpenseTracker(
+      ExpensesTracker tracker) async {
     try {
       await _firestore
           .collection('expense_trackers')
@@ -246,7 +248,8 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> saveImagesToStorage(List<String> imagesPaths) async {
+  Future<RequestResult<Unit>> saveImagesToStorage(
+      List<String> imagesPaths) async {
     final storageRef = FirebaseStorage.instance.ref();
 
     for (final imagePath in imagesPaths) {
@@ -265,8 +268,11 @@ class DataRepository implements DataRepositoryInterface {
   @override
   Future<RequestResult<User>> saveAndRetrieveUser(User user) async {
     try {
-      final query = await _firestore.collection('users').where('uid', isEqualTo: user.uid).get();
-      if(query.docs.isNotEmpty) {
+      final query = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+      if (query.docs.isNotEmpty) {
         return right(User.fromJson(query.docs.first.data()));
       }
       await _firestore.collection('users').add(user.toJson()).onError(
@@ -279,18 +285,29 @@ class DataRepository implements DataRepositoryInterface {
     return right(user);
   }
 
-/*
   @override
-  Future<Either<RequestFailure, List<Friend>>> getUserFriends(String userId) {
-    var friendsList = <Friend>[];
+  Future<RequestResult<Unit>> updateUser(
+      Map<String, Object?> fieldsToUpdate, String userId) async {
     try {
-      final collection = _firestore.collection('users').doc(userId).collection(collectionPath);
+      final user = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+
+      final _user = user.docs.first;
+
+      final userRef = _firestore.collection('users').doc(_user.id);
+
+      await userRef.update(fieldsToUpdate).onError((error, stackTrace) {
+        print(error);
+        print(stackTrace);
+        throw FirestoreException(
+          error.toString(),
+        );
+      });
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
-
-    return right(friendsList);
+    return right(unit);
   }
-   */
-
 }

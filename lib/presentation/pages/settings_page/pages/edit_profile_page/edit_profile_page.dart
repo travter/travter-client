@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,7 @@ class EditProfilePage extends StatelessWidget {
           create: (context) => EditProfileBloc(
             context.read<FunctionalitiesRepository>(),
             context.read<DataRepository>(),
+            context.read<AuthenticationRepository>(),
           ),
           child: const _EditProfileView(),
         ),
@@ -85,7 +87,7 @@ class _EditProfileView extends StatelessWidget {
                     hintText: 'Bio',
                   ),
                   onChanged: (value) => context.read<EditProfileBloc>().add(
-                        EditProfileEvent.usernameChanged(value),
+                        EditProfileEvent.bioChanged(value),
                       ),
                 ),
                 InkWell(

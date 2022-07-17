@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_repository/data_repository.dart';
@@ -13,7 +14,7 @@ part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  EditProfileBloc(this._functionalitiesRepository, this._dataRepository)
+  EditProfileBloc(this._functionalitiesRepository, this._dataRepository, this._authRepository)
       : super(EditProfileState.initial()) {
     on<UsernameChanged>((event, emit) {
       emit(state.copyWith(username: event.username));
@@ -38,15 +39,36 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     });
     on<SubmitFormPressed>((event, emit) async {
       final paths = [state.photoReference];
-      final result = await _dataRepository.saveImagesToStorage(paths);
-      result.fold((l) {
-        emit(state.copyWith(
-          editionResult: left(const EditionFailure.failedToSaveImage()),
-        ));
-      }, (r) {});
+      final currentUser = await _authRepository.getSignedInUser();
+      await currentUser.fold(() => null, (user) async {
+        final result = await _dataRepository.saveImagesToStorage(paths);
+        await result.fold((_) {
+          emit(state.copyWith(
+            editionResult: left(const EditionFailure.failedToSaveImage()),
+          ));
+        }, (_) async {
+          final fieldsToUpdate = {
+            'username': state.username,
+            'profilePicture': state.photoReference.split('/').last,
+            'bio': state.bio,
+          };
+
+          final updateResult = await _dataRepository.updateUser(fieldsToUpdate, user.uid);
+          updateResult.fold((_) {
+            emit(state.copyWith(
+              editionResult: left(const EditionFailure.unknownError()),
+            ));
+          }, (_) {
+            emit(state.copyWith(
+              editionResult: right(unit),
+            ));
+          });
+        });
+      });
     });
   }
 
   final FunctionalitiesRepositoryInterface _functionalitiesRepository;
   final DataRepositoryInterface _dataRepository;
+  final AuthenticationRepositoryInterface _authRepository;
 }

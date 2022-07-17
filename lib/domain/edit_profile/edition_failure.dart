@@ -6,4 +6,5 @@ part 'edition_failure.freezed.dart';
 class EditionFailure with _$EditionFailure {
   const factory EditionFailure.incorrectData() = IncorrectData;
   const factory EditionFailure.failedToSaveImage() = FailedToSaveImage;
+  const factory EditionFailure.unknownError() = UnknownError;
 }
