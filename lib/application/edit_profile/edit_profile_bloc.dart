@@ -44,7 +44,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         final result = await _dataRepository.saveImagesToStorage(paths);
         await result.fold((_) {
           emit(state.copyWith(
-            editionResult: left(const EditionFailure.failedToSaveImage()),
+            editionResult: some(left(const EditionFailure.failedToSaveImage())),
           ));
         }, (_) async {
           final fieldsToUpdate = {
@@ -56,11 +56,11 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           final updateResult = await _dataRepository.updateUser(fieldsToUpdate, user.uid);
           updateResult.fold((_) {
             emit(state.copyWith(
-              editionResult: left(const EditionFailure.unknownError()),
+              editionResult: some(left(const EditionFailure.unknownError())),
             ));
           }, (_) {
             emit(state.copyWith(
-              editionResult: right(unit),
+              editionResult: some(right(unit)),
             ));
           });
         });

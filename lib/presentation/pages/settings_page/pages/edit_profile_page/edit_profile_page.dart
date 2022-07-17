@@ -1,4 +1,5 @@
 import 'package:auth_repository/auth_repository.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import '../../../../../application/edit_profile/edit_profile_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
+import '../../../../router/router.gr.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -40,7 +42,13 @@ class _EditProfileView extends StatelessWidget {
 
     return BlocConsumer<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
-        // TODO: implement listener
+        state.editionResult.fold(
+          () => null,
+          (result) => result.fold(
+            (l) => null,
+            (_) => context.router.popUntilRouteWithName(const HomeRoute().routeName),
+          ),
+        );
       },
       builder: (context, state) {
         return SingleChildScrollView(

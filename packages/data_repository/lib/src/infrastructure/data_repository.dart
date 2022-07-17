@@ -298,13 +298,11 @@ class DataRepository implements DataRepositoryInterface {
 
       final userRef = _firestore.collection('users').doc(_user.id);
 
-      await userRef.update(fieldsToUpdate).onError((error, stackTrace) {
-        print(error);
-        print(stackTrace);
-        throw FirestoreException(
-          error.toString(),
-        );
-      });
+      await userRef.update(fieldsToUpdate).onError(
+            (error, stackTrace) => throw FirestoreException(
+              error.toString(),
+            ),
+          );
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
