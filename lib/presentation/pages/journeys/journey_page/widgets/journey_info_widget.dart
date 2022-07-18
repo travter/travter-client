@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../application/authentication/authentication_bloc.dart';
+import '../../../../../application/journey/journey_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
@@ -73,13 +76,17 @@ class _JourneyTitleWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: height * 0.015),
-      child: const Text(
-        'Omaha Beach',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
+      child: BlocBuilder<JourneyBloc, JourneyState>(
+        builder: (context, state) {
+          return Text(
+            state.currentlyLookedUpJourney!.name,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          );
+        },
       ),
     );
   }
@@ -122,17 +129,33 @@ class _FavoriteIconWidget extends StatelessWidget {
     final width = context.dims.width;
     final height = context.dims.height;
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: width * 0.015, vertical: height * 0.015),
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: primaryColor,
-      ),
-      child: const Icon(
-        Icons.favorite,
-        color: Colors.red,
-        size: 18,
+    final authBloc = context.watch<AuthenticationBloc>();
+    final journeyBloc = context.read<JourneyBloc>();
+    final usersLikedPosts = authBloc.state.user.likedPostsIds;
+    final currentPostId = journeyBloc.state.currentlyLookedUpJourney!.id;
+    var isThisPostLiked = false;
+
+    for (final id in usersLikedPosts) {
+      if (id == currentPostId) {
+        isThisPostLiked = true;
+      }
+    }
+
+    return InkWell(
+      onTap: () => authBloc
+          .add(AuthenticationEvent.addJourneyToFavorites(currentPostId)),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.015, vertical: height * 0.015),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: primaryColor,
+        ),
+        child: Icon(
+          isThisPostLiked ? Icons.favorite : Icons.favorite_border,
+          color: Colors.red,
+          size: 18,
+        ),
       ),
     );
   }

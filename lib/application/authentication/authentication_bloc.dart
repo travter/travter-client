@@ -57,6 +57,13 @@ class AuthenticationBloc
         });
       });
     });
+
+    on<AddJourneyToFavorites>((event, emit) async {
+      final signedUser = await _authRepo.getSignedInUser();
+      await signedUser.fold(() => null, (user) async {
+        await _dataRepository.addJourneyToFavorites(user.uid, event.journeyId);
+      });
+    });
   }
 
   final AuthenticationRepositoryInterface _authRepo;

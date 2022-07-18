@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../application/journey/journey_bloc.dart';
 import '../../router/router.gr.dart';
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
@@ -45,7 +47,8 @@ class TravelCard extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: width * 0.01),
                     child: const Text('•', style: _topTravelInfoStyle),
                   ),
-                  Text(DateFormat.yMd().format(journey.startDate), style: _topTravelInfoStyle),
+                  Text(DateFormat.yMd().format(journey.startDate),
+                      style: _topTravelInfoStyle),
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
@@ -89,7 +92,11 @@ class TravelCard extends StatelessWidget {
                     vertical: height * 0.015,
                   ),
                   child: InkWell(
-                    onTap: () => context.router.push(const JourneyRoute()),
+                    onTap: () {
+                      context.read<JourneyBloc>().add(
+                          JourneyEvent.currentlyLookedUpJourneySet(journey));
+                      context.router.push(const JourneyRoute());
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -112,6 +119,7 @@ class TravelCard extends StatelessWidget {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

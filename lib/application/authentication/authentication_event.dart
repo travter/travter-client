@@ -7,4 +7,5 @@ class AuthenticationEvent with _$AuthenticationEvent {
   const factory AuthenticationEvent.signedOut() = SignedOut;
   const factory AuthenticationEvent.userStateUpdated(User user) = UserStateUpdated;
   const factory AuthenticationEvent.fetchUserDataRequested() = FetchUserDataRequested;
+  const factory AuthenticationEvent.addJourneyToFavorites(String journeyId)  = AddJourneyToFavorites;
 }

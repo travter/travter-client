@@ -37,6 +37,12 @@ class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
         });
       });
     });
+
+    on<CurrentlyLookedUpJourneySet>((event, emit) async {
+      emit(state.copyWith(
+        currentlyLookedUpJourney: event.journey,
+      ));
+    });
   }
 
   final DataRepositoryInterface _dataRepository;
