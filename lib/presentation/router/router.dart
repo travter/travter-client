@@ -29,6 +29,7 @@ import '../pages/pages.dart';
     MaterialRoute<AddCollaborativeJourneyPage>(
         page: AddCollaborativeJourneyPage),
     MaterialRoute<PeoplePage>(page: PeoplePage),
+    MaterialRoute<PersonPage>(page: PersonPage),
   ],
 )
 

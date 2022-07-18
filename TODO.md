@@ -1,5 +1,4 @@
 1. code refactor
-2. search functionality 
 3. functionality of adding users to friends
 4. add friends to collaborative journey
    
