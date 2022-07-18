@@ -56,7 +56,7 @@ abstract class DataRepositoryInterface {
 
   Future<RequestResult<SearchResult>> performSearch(String query);
 
-  Future<RequestResult<Unit>> toggleFollowingUser(String userId);
+  Future<RequestResult<Unit>> toggleFollowingUser(String toggledUserId, String userId);
 
   Future<RequestResult<Unit>> addUserToFriends(String userId);
 }

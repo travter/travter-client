@@ -341,7 +341,6 @@ class DataRepository implements DataRepositoryInterface {
       await userRef.update({
         'likedPostsIds': <String>[...currentArray, journeyId],
       });
-      print('XD2');
 
       return right(unit);
     } on FirestoreException catch (_) {
@@ -417,8 +416,37 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> toggleFollowingUser(String userId) {
-    // TODO: implement toggleFollowingUser
-    throw UnimplementedError();
+  Future<RequestResult<Unit>> toggleFollowingUser(String toggledUserId, String userId) async {
+    try {
+      final _followedUser = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: toggledUserId)
+          .get();
+      final followedUser = _followedUser.docs.first;
+      final currentFollowers = User.fromJson(followedUser.data()).followers;
+
+      final followedUserRef = _firestore.collection('users').doc(followedUser.id);
+      await followedUserRef.update({
+        'followers': <String>[...currentFollowers, userId],
+      });
+
+      final _user = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+      final user = _user.docs.first;
+      final currentlyFollowing = User.fromJson(user.data()).following;
+
+      final userRef = _firestore.collection('users').doc(user.id);
+      await userRef.update({
+        'following': <String>[...currentlyFollowing, toggledUserId],
+      });
+
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+
+    return left(const RequestFailure.serverError());
   }
 }

@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.8),
+              constraints: BoxConstraints(maxHeight: height * 0.8, minHeight: height * 0.8),
               child: SingleChildScrollView(
                 child: Column(children: const [
                   WelcomeWidget(),
