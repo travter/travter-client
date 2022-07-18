@@ -308,4 +308,21 @@ class DataRepository implements DataRepositoryInterface {
     }
     return right(unit);
   }
+
+  @override
+  Future<RequestResult<User>> getUserData(String userId) async {
+    try {
+      final user = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+
+      final _user = user.docs.first;
+      // final userRef = _firestore.collection('users').doc(_user.id);
+
+      return right(User.fromJson(_user.data()));
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
 }

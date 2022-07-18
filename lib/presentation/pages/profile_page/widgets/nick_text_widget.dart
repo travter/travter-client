@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/authentication/authentication_bloc.dart';
 import '../../../core/extensions.dart';
 import '../../../router/router.gr.dart';
 
@@ -64,12 +66,16 @@ class _UserNickWidget extends StatelessWidget {
     return Container(
       width: context.dims.width * (1 / 3),
       child: Center(
-        child: Text(
-          'Creatix',
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.9),
-            letterSpacing: 0.5,
-          ),
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+            return Text(
+              state.user.username,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.9),
+                letterSpacing: 0.5,
+              ),
+            );
+          },
         ),
       ),
     );

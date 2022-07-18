@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/authentication/authentication_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -23,8 +25,8 @@ class WelcomeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Hello, ',
                     style: TextStyle(
                       color: lightBlueColor,
@@ -32,20 +34,24 @@ class WelcomeWidget extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    'Creatix!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      letterSpacing: 0.5,
-                      fontSize: 20,
-                    ),
+                  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      return Text(
+                        state.user.username,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 0.5,
+                          fontSize: 20,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
               const CircleAvatar(
                 radius: 15,
                 backgroundImage:
-                    AssetImage('assets/images/profile_picture.jpeg'),
+                AssetImage('assets/images/profile_picture.jpeg'),
               )
             ],
           ),

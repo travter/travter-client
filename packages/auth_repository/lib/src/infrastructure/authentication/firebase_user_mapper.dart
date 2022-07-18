@@ -10,10 +10,10 @@ extension FirebaseUserDomainX on firebase.User {
       username: '',
       bio: '',
       profilePicture: '',
-      followers: List.empty(growable: true),
-      following: List.empty(growable: true),
-      posts: List.empty(growable: true),
-      expensesTrackers: List.empty(growable: true),
+      followers: const [],
+      following: const [],
+      posts: const [],
+      expensesTrackers:  const [],
     );
   }
 }

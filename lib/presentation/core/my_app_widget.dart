@@ -41,9 +41,12 @@ class _AppView extends StatelessWidget {
         BlocProvider(
           create: (_) => AuthenticationBloc(
             context.read<AuthenticationRepository>(),
-          )..add(
+            context.read<DataRepository>(),
+          )
+            ..add(
               const AuthenticationEvent.authCheckRequested(),
-            ),
+            )
+            ..add(const AuthenticationEvent.fetchUserDataRequested()),
         ),
         BlocProvider(
           create: (_) => ExpensesTrackerBloc(

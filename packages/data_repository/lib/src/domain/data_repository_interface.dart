@@ -45,5 +45,7 @@ abstract class DataRepositoryInterface {
 
   Future<RequestResult<User>> saveAndRetrieveUser(User user);
 
+  Future<RequestResult<User>> getUserData(String userId);
+
   Future<RequestResult<Unit>> updateUser(Map<String, Object?> fieldsToUpdate, String userId);
 }

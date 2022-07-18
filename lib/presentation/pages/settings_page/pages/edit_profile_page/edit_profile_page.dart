@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:functionalities_repository/functionalities_repository.dart';
 
+import '../../../../../application/authentication/authentication_bloc.dart';
 import '../../../../../application/edit_profile/edit_profile_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
@@ -46,7 +47,23 @@ class _EditProfileView extends StatelessWidget {
           () => null,
           (result) => result.fold(
             (l) => null,
-            (_) => context.router.popUntilRouteWithName(const HomeRoute().routeName),
+            (_) {
+              final authBloc = context.read<AuthenticationBloc>();
+              final userState = authBloc.state.user;
+              final updatedUser = User(
+                userState.friends,
+                uid: userState.uid,
+                username: state.username,
+                bio: state.bio,
+                profilePicture: state.photoReference,
+                followers: userState.followers,
+                following: userState.following,
+                posts: userState.posts,
+                expensesTrackers: userState.expensesTrackers,
+              );
+              authBloc.add(AuthenticationEvent.userStateUpdated(updatedUser));
+              context.router.popUntilRouteWithName(const HomeRoute().routeName);
+            },
           ),
         );
       },
