@@ -37,6 +37,12 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     on<BioChanged>((event, emit) {
       emit(state.copyWith(bio: event.bio));
     });
+    on<FirstNameChanged>((event, emit) {
+      emit(state.copyWith(firstName: event.firstName));
+    });
+    on<LastNameChanged>((event, emit) {
+      emit(state.copyWith(lastName: event.lastName));
+    });
     on<SubmitFormPressed>((event, emit) async {
       final paths = [state.photoReference];
       final currentUser = await _authRepository.getSignedInUser();

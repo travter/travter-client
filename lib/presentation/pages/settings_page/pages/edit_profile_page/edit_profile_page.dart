@@ -136,7 +136,7 @@ class _EditProfileView extends StatelessWidget {
                     hintText: 'First Name',
                   ),
                   onChanged: (value) => context.read<EditProfileBloc>().add(
-                    EditProfileEvent.bioChanged(value),
+                    EditProfileEvent.firstNameChanged(value),
                   ),
                 ),
                 TextFormField(
@@ -156,7 +156,7 @@ class _EditProfileView extends StatelessWidget {
                     hintText: 'Last Name',
                   ),
                   onChanged: (value) => context.read<EditProfileBloc>().add(
-                    EditProfileEvent.bioChanged(value),
+                    EditProfileEvent.lastNameChanged(value),
                   ),
                 ),
                 InkWell(

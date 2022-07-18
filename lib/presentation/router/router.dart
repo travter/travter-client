@@ -28,6 +28,7 @@ import '../pages/pages.dart';
     MaterialRoute<PopularPlacePage>(page: PopularPlacePage),
     MaterialRoute<AddCollaborativeJourneyPage>(
         page: AddCollaborativeJourneyPage),
+    MaterialRoute<PeoplePage>(page: PeoplePage),
   ],
 )
 
