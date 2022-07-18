@@ -5,13 +5,15 @@ import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'journey_event.dart';
-part 'journey_state.dart';
-
 part 'journey_bloc.freezed.dart';
 
+part 'journey_event.dart';
+
+part 'journey_state.dart';
+
 class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
-  JourneyBloc(this._dataRepository, this._authRepository) : super(JourneyState.initial()) {
+  JourneyBloc(this._dataRepository, this._authRepository)
+      : super(JourneyState.initial()) {
     on<FetchJourneysRequested>((event, emit) async {
       emit(state.copyWith(status: JourneysFeedStatus.fetching));
 
@@ -21,8 +23,7 @@ class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
           status: JourneysFeedStatus.failure,
         ));
       }, (user) async {
-        final journeys =
-            await _dataRepository.getAllUsersJourneys(user.uid);
+        final journeys = await _dataRepository.getAllUsersJourneys(user.uid);
         await journeys.fold((_) => null, (stream) async {
           await emit.forEach(
             stream,
@@ -41,6 +42,18 @@ class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
     on<CurrentlyLookedUpJourneySet>((event, emit) async {
       emit(state.copyWith(
         currentlyLookedUpJourney: event.journey,
+      ));
+    });
+
+    on<LikedJourneysRequested>((event, emit) async {
+      var likedJourneys = <Journey>[];
+      for (final journey in state.journeys) {
+        if (event.journeyIds.contains(journey.id)) {
+          likedJourneys.add(journey);
+        }
+      }
+      emit(state.copyWith(
+        likedJourneys: likedJourneys,
       ));
     });
   }

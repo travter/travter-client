@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../application/journey/journey_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/extensions.dart';
 import '../../../../core/widgets/bottom_navbar_widget.dart';
@@ -16,16 +18,25 @@ class FavoritePostsPage extends StatelessWidget {
         backgroundColor: lightPrimaryColor,
         body: Column(
           children: [
-             Container(
-                height: context.dims.height * 0.8,
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: context.dims.height * 0.05),
-                    child: Column(
-                      children: const [
-                      ],
-                ),
+            Container(
+              height: context.dims.height * 0.8,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: context.dims.height * 0.05),
+                  child: BlocBuilder<JourneyBloc, JourneyState>(
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          for(final journey in state.likedJourneys)
+                            TravelCard(
+                              journey: journey,
+                            ),
+                        ],
+                      );
+                    },
                   ),
+                ),
               ),
             ),
             BottomNavbarWidget(children: loadChildren(context)),

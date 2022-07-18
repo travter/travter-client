@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/authentication/authentication_bloc.dart';
+import '../../../application/journey/journey_bloc.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
@@ -22,15 +25,13 @@ class HomePage extends StatelessWidget {
             ConstrainedBox(
               constraints: BoxConstraints(maxHeight: height * 0.8),
               child: SingleChildScrollView(
-                child: Column(
-                  children: const [
-                    WelcomeWidget(),
-                    // ResultsOptionsWidget(),
-                    // PopularPlacesWidget(text:'Popular Places'),
-                    // PopularPeopleWidget(),
-                    FeedSectionWidget(text: ''),
-                  ]
-                ),
+                child: Column(children: const [
+                  WelcomeWidget(),
+                  // ResultsOptionsWidget(),
+                  // PopularPlacesWidget(text:'Popular Places'),
+                  // PopularPeopleWidget(),
+                  FeedSectionWidget(text: ''),
+                ]),
               ),
             ),
             BottomNavbarWidget(children: _loadChildren(context)),
@@ -52,9 +53,14 @@ List<Widget> _loadChildren(BuildContext context) {
       child: const Icon(Icons.calculate_outlined, color: Colors.white),
     ),
     InkWell(
-      onTap: () => context.router.push(
-        const FavoriteEntriesRoute(),
-      ),
+      onTap: () {
+        context.read<JourneyBloc>().add(JourneyEvent.likedJourneysRequested(
+          context.read<AuthenticationBloc>().state.user.likedPostsIds,
+        ));
+        context.router.push(
+          const FavoriteEntriesRoute(),
+        );
+      },
       child: const Icon(Icons.favorite_border, color: Colors.white),
     ),
     InkWell(
