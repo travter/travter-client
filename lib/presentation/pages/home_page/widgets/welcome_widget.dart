@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/authentication/authentication_bloc.dart';
+import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -34,7 +34,7 @@ class WelcomeWidget extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  BlocBuilder<UserBloc, UserState>(
                     builder: (context, state) {
                       return Text(
                         state.user.username,

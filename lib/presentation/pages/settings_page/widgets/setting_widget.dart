@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/authentication/authentication_bloc.dart';
+import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
 
@@ -62,8 +62,8 @@ class SettingWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (_logout) {
-                      context.read<AuthenticationBloc>().add(
-                            const AuthenticationEvent.signedOut(),
+                      context.read<UserBloc>().add(
+                            const UserEvent.signedOut(),
                           );
                       context.router.popAndPush(redirectRoute);
                       return;

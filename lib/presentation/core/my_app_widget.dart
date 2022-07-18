@@ -6,11 +6,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:functionalities_repository/functionalities_repository.dart';
 
-import '../../application/authentication/authentication_bloc.dart';
 import '../../application/collaborative_journey/collaborative_journey_bloc.dart';
 import '../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../application/journey/journey_bloc.dart';
 import '../../application/search/search_bloc.dart';
+import '../../application/user/user_bloc.dart';
 import '../router/router.gr.dart';
 
 /// Main application that is on the top of widget tree,
@@ -40,14 +40,14 @@ class _AppView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthenticationBloc(
+          create: (_) => UserBloc(
             context.read<AuthenticationRepository>(),
             context.read<DataRepository>(),
           )
             ..add(
-              const AuthenticationEvent.authCheckRequested(),
+              const UserEvent.authCheckRequested(),
             )
-            ..add(const AuthenticationEvent.fetchUserDataRequested()),
+            ..add(const UserEvent.fetchUserDataRequested()),
         ),
         BlocProvider(
           create: (_) => ExpensesTrackerBloc(

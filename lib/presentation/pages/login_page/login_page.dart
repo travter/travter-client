@@ -4,8 +4,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/authentication/authentication_bloc.dart';
-import '../../../application/authentication/sign_in_form/sign_in_form_bloc.dart';
+import '../../../application/user/sign_in_form/sign_in_form_bloc.dart';
+import '../../../application/user/user_bloc.dart';
 import '../../router/router.gr.dart';
 import 'widgets/login_with_email_form.dart';
 import 'widgets/login_with_facebook_button.dart';
@@ -28,8 +28,8 @@ class LoginPage extends StatelessWidget {
               (_) => () => null,
               (_) {
                 context.router.popAndPush(const HomeRoute());
-                context.read<AuthenticationBloc>().add(
-                      AuthenticationEvent.userSignedIn(state.signedUser),
+                context.read<UserBloc>().add(
+                      UserEvent.userSignedIn(state.signedUser),
                     );
               },
             ),

@@ -3,15 +3,15 @@ import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'authentication_bloc.freezed.dart';
+part 'user_bloc.freezed.dart';
 
-part 'authentication_event.dart';
+part 'user_event.dart';
 
-part 'authentication_state.dart';
+part 'user_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc(this._authRepo, this._dataRepository) : super(AuthenticationState.initial()) {
+class UserBloc
+    extends Bloc<UserEvent, UserState> {
+  UserBloc(this._authRepo, this._dataRepository) : super(UserState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
       final userOption = await _authRepo.getSignedInUser();
       userOption.fold(

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:functionalities_repository/functionalities_repository.dart';
 
-import '../../../../../application/authentication/authentication_bloc.dart';
 import '../../../../../application/edit_profile/edit_profile_bloc.dart';
+import '../../../../../application/user/user_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
@@ -48,7 +48,7 @@ class _EditProfileView extends StatelessWidget {
           (result) => result.fold(
             (l) => null,
             (_) {
-              final authBloc = context.read<AuthenticationBloc>();
+              final authBloc = context.read<UserBloc>();
               final userState = authBloc.state.user;
               // wtf is that plox refactor someday
               final updatedUser = User(
@@ -65,7 +65,7 @@ class _EditProfileView extends StatelessWidget {
                 expensesTrackers: userState.expensesTrackers,
                 likedPostsIds: userState.likedPostsIds,
               );
-              authBloc.add(AuthenticationEvent.userStateUpdated(updatedUser));
+              authBloc.add(UserEvent.userStateUpdated(updatedUser));
               context.router.popUntilRouteWithName(const HomeRoute().routeName);
             },
           ),

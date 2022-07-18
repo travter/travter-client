@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../application/authentication/authentication_bloc.dart';
 import '../../../../../application/journey/journey_bloc.dart';
+import '../../../../../application/user/user_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
@@ -129,7 +129,7 @@ class _FavoriteIconWidget extends StatelessWidget {
     final width = context.dims.width;
     final height = context.dims.height;
 
-    final authBloc = context.watch<AuthenticationBloc>();
+    final authBloc = context.watch<UserBloc>();
     final journeyBloc = context.read<JourneyBloc>();
     final usersLikedPosts = authBloc.state.user.likedPostsIds;
     final currentPostId = journeyBloc.state.currentlyLookedUpJourney!.id;
@@ -143,7 +143,7 @@ class _FavoriteIconWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () => authBloc
-          .add(AuthenticationEvent.toggleJourneyLike(currentPostId)),
+          .add(UserEvent.toggleJourneyLike(currentPostId)),
       child: Container(
         padding: EdgeInsets.symmetric(
             horizontal: width * 0.015, vertical: height * 0.015),

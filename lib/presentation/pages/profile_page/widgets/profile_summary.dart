@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/authentication/authentication_bloc.dart';
+import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
 
@@ -13,7 +13,7 @@ class ProfileSummary extends StatelessWidget {
     final width = context.dims.width;
     final height = context.dims.height;
 
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+    return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         return Container(
           width: double.infinity,

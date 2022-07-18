@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/authentication/sign_in_form/sign_in_form_bloc.dart';
+import '../../../../application/user/sign_in_form/sign_in_form_bloc.dart';
 import '../../../../infrastructure/core/constants/enums.dart';
 import '../../../core/extensions.dart';
 import 'authenticate_with_email_button.dart';

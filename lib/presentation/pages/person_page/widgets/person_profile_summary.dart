@@ -2,7 +2,6 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/authentication/authentication_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
 

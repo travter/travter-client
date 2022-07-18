@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/authentication/authentication_bloc.dart';
+import '../../../application/user/user_bloc.dart';
 import '../../router/router.gr.dart';
 
 /// Widget that is displayed during any loading action,
@@ -10,7 +10,7 @@ import '../../router/router.gr.dart';
 class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthenticationBloc, AuthenticationState>(
+    return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         switch (state.authStatus) {
           case AuthenticationStatus.authenticated:
