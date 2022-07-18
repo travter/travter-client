@@ -10,6 +10,7 @@ import '../../application/authentication/authentication_bloc.dart';
 import '../../application/collaborative_journey/collaborative_journey_bloc.dart';
 import '../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../application/journey/journey_bloc.dart';
+import '../../application/search/search_bloc.dart';
 import '../router/router.gr.dart';
 
 /// Main application that is on the top of widget tree,
@@ -65,6 +66,11 @@ class _AppView extends StatelessWidget {
             context.read<DataRepository>(),
             context.read<AuthenticationRepository>(),
           )..add(const CollaborativeJourneyEvent.fetchJourneysRequested()),
+        ),
+        BlocProvider(
+          create: (_) => SearchBloc(
+            context.read<DataRepository>(),
+          ),
         ),
       ],
       child: MaterialApp.router(

@@ -14,6 +14,7 @@ import '../domain/data_repository_interface.dart';
 import '../domain/expenses_tracker/expense.dart';
 import '../domain/expenses_tracker/expenses_tracker.dart';
 import '../domain/journey/journey.dart';
+import '../domain/search/search_result.dart';
 
 class DataRepository implements DataRepositoryInterface {
   DataRepository({
@@ -372,5 +373,11 @@ class DataRepository implements DataRepositoryInterface {
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
+  }
+
+  @override
+  Future<RequestResult<SearchResult>> performSearch(String query) {
+    // TODO: implement performSearch
+    throw UnimplementedError();
   }
 }
