@@ -358,7 +358,8 @@ class DataRepository implements DataRepositoryInterface {
           .where('uid', isEqualTo: userId)
           .get();
       final _user = user.docs.first;
-      final currentArray = List<String>.from(User.fromJson(_user.data()).likedPostsIds);
+      final currentArray =
+          List<String>.from(User.fromJson(_user.data()).likedPostsIds);
 
       final userRef = _firestore.collection('users').doc(_user.id);
       currentArray.remove(journeyId);
@@ -367,8 +368,6 @@ class DataRepository implements DataRepositoryInterface {
         'likedPostsIds': currentArray,
       });
 
-      print('XD');
-
       return right(unit);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
@@ -376,8 +375,38 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<SearchResult>> performSearch(String query) {
-    // TODO: implement performSearch
-    throw UnimplementedError();
+  Future<RequestResult<SearchResult>> performSearch(String query) async {
+    try {
+      final userQueryResult = await _firestore
+          .collection('users')
+          .where('username', isEqualTo: query)
+          .get();
+
+      final foundUsers = userQueryResult.docs
+          .map(
+            (el) => User.fromJson(el.data()),
+          )
+          .toList();
+
+      final journeyQueryResult = await _firestore
+          .collection('users')
+          .where('name', isEqualTo: query)
+          .get();
+
+      final foundJourneys = journeyQueryResult.docs
+          .map(
+            (el) => Journey.fromJson(el.data()),
+          )
+          .toList();
+
+      final searchResult = SearchResult(
+        foundJourneys: foundJourneys,
+        foundUsers: foundUsers,
+      );
+
+      return right(searchResult);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
   }
 }

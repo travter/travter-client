@@ -19,11 +19,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     on<SearchPressed>((event, emit) async {
       final searchResult = await _dataRepository.performSearch(state.query);
-      searchResult.fold((l){
+      searchResult.fold((l) {
+        print("wyjebalo sie");
         emit(state.copyWith(
-         // cos kiedys trza zrobic jakies error state
-        ));
+            // cos kiedys trza zrobic jakies error state
+            ));
       }, (result) {
+        print(result);
         emit(state.copyWith(
           searchResult: result,
         ));
