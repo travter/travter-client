@@ -12,4 +12,9 @@ class SearchResult with _$SearchResult {
     // required List<CollaborativeJourney> foundCollaborativeJourneys // TODO in later versions
     required List<User> foundUsers,
   }) = _SearchResult;
+
+  factory SearchResult.empty() => const SearchResult(
+        foundJourneys: [],
+        foundUsers: [],
+      );
 }

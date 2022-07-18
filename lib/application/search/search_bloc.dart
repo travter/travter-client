@@ -1,15 +1,13 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
-part 'search_event.dart';
-part 'search_state.dart';
-
 part 'search_bloc.freezed.dart';
+
+part 'search_event.dart';
+
+part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc(this._dataRepository) : super(SearchState.initial()) {
@@ -20,7 +18,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
 
     on<SearchPressed>((event, emit) async {
-       // TODO: implement searchPressed
+      final searchResult = await _dataRepository.performSearch(state.query);
+      searchResult.fold((l){
+        emit(state.copyWith(
+         // cos kiedys trza zrobic jakies error state
+        ));
+      }, (result) {
+        emit(state.copyWith(
+          searchResult: result,
+        ));
+      });
     });
   }
 
