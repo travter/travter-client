@@ -336,12 +336,37 @@ class DataRepository implements DataRepositoryInterface {
       final _user = user.docs.first;
       final currentArray = User.fromJson(_user.data()).likedPostsIds;
 
-
       final userRef = _firestore.collection('users').doc(_user.id);
       await userRef.update({
         'likedPostsIds': <String>[...currentArray, journeyId],
       });
+      print('XD2');
 
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> removeJourneyFromFavorites(
+      String userId, String journeyId) async {
+    try {
+      final user = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+      final _user = user.docs.first;
+      final currentArray = List<String>.from(User.fromJson(_user.data()).likedPostsIds);
+
+      final userRef = _firestore.collection('users').doc(_user.id);
+      currentArray.remove(journeyId);
+
+      await userRef.update({
+        'likedPostsIds': currentArray,
+      });
+
+      print('XD');
 
       return right(unit);
     } on FirestoreException catch (_) {

@@ -50,4 +50,6 @@ abstract class DataRepositoryInterface {
   Future<RequestResult<Unit>> updateUser(Map<String, Object?> fieldsToUpdate, String userId);
 
   Future<RequestResult<Unit>> addJourneyToFavorites(String userId, String journeyId);
+
+  Future<RequestResult<Unit>> removeJourneyFromFavorites(String userId, String journeyId);
 }

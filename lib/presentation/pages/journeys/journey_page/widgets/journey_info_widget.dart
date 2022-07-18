@@ -143,7 +143,7 @@ class _FavoriteIconWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () => authBloc
-          .add(AuthenticationEvent.addJourneyToFavorites(currentPostId)),
+          .add(AuthenticationEvent.toggleJourneyLike(currentPostId)),
       child: Container(
         padding: EdgeInsets.symmetric(
             horizontal: width * 0.015, vertical: height * 0.015),

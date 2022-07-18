@@ -58,10 +58,43 @@ class AuthenticationBloc
       });
     });
 
-    on<AddJourneyToFavorites>((event, emit) async {
+    on<ToggleJourneyLike>((event, emit) async {
       final signedUser = await _authRepo.getSignedInUser();
       await signedUser.fold(() => null, (user) async {
-        await _dataRepository.addJourneyToFavorites(user.uid, event.journeyId);
+        var isLiked = false;
+        for(final id in state.user.likedPostsIds){
+          if(id == event.journeyId){
+            isLiked = true;
+            break;
+          }
+        }
+        var newLikedPostsIds = <String>[];
+        if(!isLiked) {
+          await _dataRepository.addJourneyToFavorites(user.uid, event.journeyId);
+          newLikedPostsIds = [...state.user.likedPostsIds, event.journeyId];
+        } else {
+          await _dataRepository.removeJourneyFromFavorites(user.uid, event.journeyId);
+          final currentLikedPostsIds = List<String>.from(state.user.likedPostsIds);
+          currentLikedPostsIds.remove(event.journeyId);
+          newLikedPostsIds = currentLikedPostsIds;
+        }
+
+        emit(state.copyWith(
+          user: User(
+            state.user.friends,
+            username: state.user.username,
+            likedPostsIds: newLikedPostsIds,
+            bio: state.user.bio,
+            uid: state.user.uid,
+            expensesTrackers: state.user.expensesTrackers,
+            firstName: state.user.firstName,
+            lastName: state.user.lastName,
+            followers: state.user.followers,
+            following: state.user.following,
+            posts: state.user.posts,
+            profilePicture: state.user.profilePicture
+          ),
+        ));
       });
     });
   }
