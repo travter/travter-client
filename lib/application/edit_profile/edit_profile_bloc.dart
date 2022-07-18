@@ -51,6 +51,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             'username': state.username,
             'profilePicture': state.photoReference.split('/').last,
             'bio': state.bio,
+            'firstName': state.firstName,
+            'lastName': state.lastName,
           };
 
           final updateResult = await _dataRepository.updateUser(fieldsToUpdate, user.uid);

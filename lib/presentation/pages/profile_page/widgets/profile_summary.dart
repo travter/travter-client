@@ -40,18 +40,18 @@ class ProfileSummary extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.01),
-                  child: const Text(
-                    'Wiktor Zając',
-                    style: TextStyle(
+                  child: Text(
+                    '${state.user.firstName} ${state.user.lastName}',
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.02),
-                  child: const Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac mi vitae turpis maximus consequat sit amet et libero. In sollicitudin, elit eu pretium egestas, mauris dui aliquet ante ',
-                    style: TextStyle(
+                  child: Text(
+                    state.user.bio,
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12,
                       wordSpacing: 2,

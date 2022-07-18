@@ -10,28 +10,33 @@ part 'user.g.dart';
 class User with _$User {
   @JsonSerializable(explicitToJson: true)
   const factory User(
-    @JsonKey(name:'friends') List<Friend> friends, {
+    @JsonKey(name: 'friends') List<Friend> friends, {
     required String uid,
     required String username,
     required String bio,
     required String profilePicture, // reference to storage?
+    required String firstName,
+    required String lastName,
     required List<String> followers,
     required List<String> following,
     required List<String> posts,
     required List<String> expensesTrackers,
+    required List<String> likedPostsIds,
   }) = _User;
 
-  factory User.empty() => User(
-        const [],
+  factory User.empty() => const User(
+        [],
         uid: '',
         username: '',
         bio: '',
         profilePicture: '',
-        // wtf is that empty list? refactor needed someday
-        followers: List.empty(growable: true),
-        following: List.empty(growable: true),
-        posts: List.empty(growable: true),
-        expensesTrackers: List.empty(growable: true),
+        firstName: '',
+        lastName: '',
+        followers: [],
+        following: [],
+        posts: [],
+        expensesTrackers: [],
+        likedPostsIds: [],
       );
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

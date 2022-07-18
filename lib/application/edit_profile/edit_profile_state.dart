@@ -6,6 +6,8 @@ class EditProfileState with _$EditProfileState{
     required String username, // value object todo plox
     required String photoReference,
     required String bio,
+    required String firstName,
+    required String lastName,
     required Option<Either<EditionFailure, Unit>> editionResult,
   }) = _EditProfileState;
 
@@ -13,6 +15,8 @@ class EditProfileState with _$EditProfileState{
     username: '',
     photoReference: '',
     bio: '',
+    firstName: '',
+    lastName: '',
     editionResult: none(),
   );
 }

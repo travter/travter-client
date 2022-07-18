@@ -50,16 +50,20 @@ class _EditProfileView extends StatelessWidget {
             (_) {
               final authBloc = context.read<AuthenticationBloc>();
               final userState = authBloc.state.user;
+              // wtf is that plox refactor someday
               final updatedUser = User(
                 userState.friends,
                 uid: userState.uid,
                 username: state.username,
                 bio: state.bio,
                 profilePicture: state.photoReference,
+                firstName: state.firstName,
+                lastName: state.lastName,
                 followers: userState.followers,
                 following: userState.following,
                 posts: userState.posts,
                 expensesTrackers: userState.expensesTrackers,
+                likedPostsIds: userState.likedPostsIds,
               );
               authBloc.add(AuthenticationEvent.userStateUpdated(updatedUser));
               context.router.popUntilRouteWithName(const HomeRoute().routeName);
@@ -114,6 +118,46 @@ class _EditProfileView extends StatelessWidget {
                   onChanged: (value) => context.read<EditProfileBloc>().add(
                         EditProfileEvent.bioChanged(value),
                       ),
+                ),
+                TextFormField(
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.amber),
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintText: 'First Name',
+                  ),
+                  onChanged: (value) => context.read<EditProfileBloc>().add(
+                    EditProfileEvent.bioChanged(value),
+                  ),
+                ),
+                TextFormField(
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.amber),
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintText: 'Last Name',
+                  ),
+                  onChanged: (value) => context.read<EditProfileBloc>().add(
+                    EditProfileEvent.bioChanged(value),
+                  ),
                 ),
                 InkWell(
                   onTap: () {

@@ -14,12 +14,17 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       username: json['username'] as String,
       bio: json['bio'] as String,
       profilePicture: json['profilePicture'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
       followers:
           (json['followers'] as List<dynamic>).map((e) => e as String).toList(),
       following:
           (json['following'] as List<dynamic>).map((e) => e as String).toList(),
       posts: (json['posts'] as List<dynamic>).map((e) => e as String).toList(),
       expensesTrackers: (json['expensesTrackers'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      likedPostsIds: (json['likedPostsIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );
@@ -30,8 +35,11 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'username': instance.username,
       'bio': instance.bio,
       'profilePicture': instance.profilePicture,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
       'followers': instance.followers,
       'following': instance.following,
       'posts': instance.posts,
       'expensesTrackers': instance.expensesTrackers,
+      'likedPostsIds': instance.likedPostsIds,
     };
