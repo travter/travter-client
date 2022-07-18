@@ -55,4 +55,8 @@ abstract class DataRepositoryInterface {
   Future<RequestResult<Unit>> removeJourneyFromFavorites(String userId, String journeyId);
 
   Future<RequestResult<SearchResult>> performSearch(String query);
+
+  Future<RequestResult<Unit>> toggleFollowingUser(String userId);
+
+  Future<RequestResult<Unit>> addUserToFriends(String userId);
 }

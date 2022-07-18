@@ -409,4 +409,16 @@ class DataRepository implements DataRepositoryInterface {
       return left(const RequestFailure.serverError());
     }
   }
+
+  @override
+  Future<RequestResult<Unit>> addUserToFriends(String userId) {
+    // TODO: implement addUserToFriends
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<RequestResult<Unit>> toggleFollowingUser(String userId) {
+    // TODO: implement toggleFollowingUser
+    throw UnimplementedError();
+  }
 }
