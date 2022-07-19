@@ -258,7 +258,7 @@ class DataRepository implements DataRepositoryInterface {
       final imageRef = storageRef.child('images/${file.path.split('/').last}');
       try {
         await imageRef.putFile(file);
-      } on FirebaseException catch (err) {
+      } on FirebaseException catch (_) {
         return left(const RequestFailure.serverError());
       }
     }
@@ -416,7 +416,7 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> toggleFollowingUser(String toggledUserId, String userId) async {
+  Future<RequestResult<Unit>> followUser(String toggledUserId, String userId) async {
     try {
       final _followedUser = await _firestore
           .collection('users')
@@ -446,7 +446,39 @@ class DataRepository implements DataRepositoryInterface {
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
+  }
 
-    return left(const RequestFailure.serverError());
+  @override
+  Future<RequestResult<Unit>> unFollowUser(String toggledUserId, String userId) async {
+    try {
+      final _followedUser = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: toggledUserId)
+          .get();
+      final followedUser = _followedUser.docs.first;
+      final currentFollowers = List<String>.from(User.fromJson(followedUser.data()).followers);
+
+      final followedUserRef = _firestore.collection('users').doc(followedUser.id);
+      currentFollowers.remove(userId);
+      await followedUserRef.update({
+        'followers': currentFollowers,
+      });
+
+      final _user = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+      final user = _user.docs.first;
+      final currentlyFollowing = List<String>.from(User.fromJson(user.data()).following);
+      final userRef = _firestore.collection('users').doc(user.id);
+      currentlyFollowing.remove(toggledUserId);
+      await userRef.update({
+        'following': currentlyFollowing,
+      });
+
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
   }
 }

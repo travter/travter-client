@@ -1,5 +1,4 @@
 import 'package:auth_repository/auth_repository.dart';
-import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,12 +24,9 @@ class PersonPage extends StatelessWidget {
                 children: [
                   PersonProfileSummary(person),
                   ElevatedButton(
-                      onPressed: () {
-                        final currentUserId = context.read<UserBloc>().state.user.uid;
-                        context
-                            .read<DataRepository>()
-                            .toggleFollowingUser(person.uid, currentUserId);
-                      },
+                      onPressed: () => context
+                          .read<UserBloc>()
+                          .add(UserEvent.userFollowToggled(person.uid)),
                       child: const Text('Follow')),
                   ElevatedButton(
                       onPressed: () {}, child: const Text('Add to friends')),
