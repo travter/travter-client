@@ -29,7 +29,10 @@ class PersonPage extends StatelessWidget {
                           .add(UserEvent.userFollowToggled(person.uid)),
                       child: const Text('Follow')),
                   ElevatedButton(
-                      onPressed: () {}, child: const Text('Add to friends')),
+                      onPressed: () => context
+                          .read<UserBloc>()
+                          .add(UserEvent.addToFriendsPressed(person.uid)),
+                      child: const Text('Add to friends')),
                 ],
               ),
             )

@@ -5,7 +5,6 @@ import '../../domain/user/user.dart';
 extension FirebaseUserDomainX on firebase.User {
   User toDomain() {
     return User(
-      const [],
       uid: uid,
       username: '',
       bio: '',
@@ -17,6 +16,7 @@ extension FirebaseUserDomainX on firebase.User {
       posts: const [],
       expensesTrackers:  const [],
       likedPostsIds: const [],
+      friends: const [],
     );
   }
 }

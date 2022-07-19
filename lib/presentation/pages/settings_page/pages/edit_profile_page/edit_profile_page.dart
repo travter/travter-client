@@ -48,11 +48,10 @@ class _EditProfileView extends StatelessWidget {
           (result) => result.fold(
             (l) => null,
             (_) {
-              final authBloc = context.read<UserBloc>();
-              final userState = authBloc.state.user;
+              final userBloc = context.read<UserBloc>();
+              final userState = userBloc.state.user;
               // wtf is that plox refactor someday
               final updatedUser = User(
-                userState.friends,
                 uid: userState.uid,
                 username: state.username,
                 bio: state.bio,
@@ -64,8 +63,9 @@ class _EditProfileView extends StatelessWidget {
                 posts: userState.posts,
                 expensesTrackers: userState.expensesTrackers,
                 likedPostsIds: userState.likedPostsIds,
+                friends: userState.friends,
               );
-              authBloc.add(UserEvent.userStateUpdated(updatedUser));
+              userBloc.add(UserEvent.userStateUpdated(updatedUser));
               context.router.popUntilRouteWithName(const HomeRoute().routeName);
             },
           ),

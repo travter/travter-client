@@ -7,9 +7,6 @@ part of 'user.dart';
 // **************************************************************************
 
 _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
-      (json['friends'] as List<dynamic>)
-          .map((e) => Friend.fromJson(e as Map<String, dynamic>))
-          .toList(),
       uid: json['uid'] as String,
       username: json['username'] as String,
       bio: json['bio'] as String,
@@ -27,10 +24,11 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       likedPostsIds: (json['likedPostsIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      friends:
+          (json['friends'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
-      'friends': instance.friends.map((e) => e.toJson()).toList(),
       'uid': instance.uid,
       'username': instance.username,
       'bio': instance.bio,
@@ -42,4 +40,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'posts': instance.posts,
       'expensesTrackers': instance.expensesTrackers,
       'likedPostsIds': instance.likedPostsIds,
+      'friends': instance.friends,
     };

@@ -410,13 +410,47 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> addUserToFriends(String userId) {
-    // TODO: implement addUserToFriends
-    throw UnimplementedError();
+  Future<RequestResult<Unit>> addUserToFriends(
+      String friendId, String userId) async {
+    try {
+      final _friendData = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: friendId)
+          .get();
+      final friendData = _friendData.docs.first;
+      final _userData = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+      final userData = _userData.docs.first;
+      final friend = User.fromJson(friendData.data());
+      final user = User.fromJson(userData.data());
+
+      final friendRef = _firestore.collection('users').doc(friendData.id);
+      await friendRef.update({
+        'friends': <String>[
+          ...friend.friends,
+          user.uid,
+        ],
+      });
+
+      final userRef = _firestore.collection('users').doc(userData.id);
+      await userRef.update({
+        'friends': <String>[
+          ...user.friends,
+          friend.uid,
+        ],
+      });
+
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
   }
 
   @override
-  Future<RequestResult<Unit>> followUser(String toggledUserId, String userId) async {
+  Future<RequestResult<Unit>> followUser(
+      String toggledUserId, String userId) async {
     try {
       final _followedUser = await _firestore
           .collection('users')
@@ -425,7 +459,8 @@ class DataRepository implements DataRepositoryInterface {
       final followedUser = _followedUser.docs.first;
       final currentFollowers = User.fromJson(followedUser.data()).followers;
 
-      final followedUserRef = _firestore.collection('users').doc(followedUser.id);
+      final followedUserRef =
+          _firestore.collection('users').doc(followedUser.id);
       await followedUserRef.update({
         'followers': <String>[...currentFollowers, userId],
       });
@@ -449,16 +484,19 @@ class DataRepository implements DataRepositoryInterface {
   }
 
   @override
-  Future<RequestResult<Unit>> unFollowUser(String toggledUserId, String userId) async {
+  Future<RequestResult<Unit>> unFollowUser(
+      String toggledUserId, String userId) async {
     try {
       final _followedUser = await _firestore
           .collection('users')
           .where('uid', isEqualTo: toggledUserId)
           .get();
       final followedUser = _followedUser.docs.first;
-      final currentFollowers = List<String>.from(User.fromJson(followedUser.data()).followers);
+      final currentFollowers =
+          List<String>.from(User.fromJson(followedUser.data()).followers);
 
-      final followedUserRef = _firestore.collection('users').doc(followedUser.id);
+      final followedUserRef =
+          _firestore.collection('users').doc(followedUser.id);
       currentFollowers.remove(userId);
       await followedUserRef.update({
         'followers': currentFollowers,
@@ -469,7 +507,8 @@ class DataRepository implements DataRepositoryInterface {
           .where('uid', isEqualTo: userId)
           .get();
       final user = _user.docs.first;
-      final currentlyFollowing = List<String>.from(User.fromJson(user.data()).following);
+      final currentlyFollowing =
+          List<String>.from(User.fromJson(user.data()).following);
       final userRef = _firestore.collection('users').doc(user.id);
       currentlyFollowing.remove(toggledUserId);
       await userRef.update({

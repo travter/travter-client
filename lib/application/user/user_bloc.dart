@@ -82,7 +82,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         }
 
         emit(state.copyWith(
-          user: User(state.user.friends,
+          user: User(friends: state.user.friends,
               username: state.user.username,
               likedPostsIds: newLikedPostsIds,
               bio: state.user.bio,
@@ -111,7 +111,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         if (!isFollowing) {
           await _dataRepository.followUser(event.userId, user.uid);
           emit(state.copyWith(
-            user: User(state.user.friends,
+            user: User(friends: state.user.friends,
                 username: state.user.username,
                 likedPostsIds: state.user.likedPostsIds,
                 bio: state.user.bio,
@@ -130,7 +130,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ..remove(event.userId);
           emit(state.copyWith(
             user: User(
-              state.user.friends,
+              friends: state.user.friends,
               username: state.user.username,
               likedPostsIds: state.user.likedPostsIds,
               bio: state.user.bio,
@@ -145,6 +145,31 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ),
           ));
         }
+      });
+    });
+
+    on<AddToFriendsPressed>((event, emit) async {
+      final signedUser = await _authRepo.getSignedInUser();
+      signedUser.fold(() => null, (user) {
+        _dataRepository.addUserToFriends(event.userId, user.uid);
+        emit(
+          state.copyWith(
+            user: User(
+              friends: [...state.user.friends, event.userId],
+              username: state.user.username,
+              likedPostsIds: state.user.likedPostsIds,
+              bio: state.user.bio,
+              uid: state.user.uid,
+              expensesTrackers: state.user.expensesTrackers,
+              firstName: state.user.firstName,
+              lastName: state.user.lastName,
+              followers: state.user.followers,
+              following: state.user.following,
+              posts: state.user.posts,
+              profilePicture: state.user.profilePicture,
+            ),
+          ),
+        );
       });
     });
   }

@@ -9,8 +9,8 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   @JsonSerializable(explicitToJson: true)
-  const factory User(
-    @JsonKey(name: 'friends') List<Friend> friends, {
+  const factory User( // @JsonKey(name: 'friends') List<Friend> friends,
+      {
     required String uid,
     required String username,
     required String bio,
@@ -22,10 +22,10 @@ class User with _$User {
     required List<String> posts,
     required List<String> expensesTrackers,
     required List<String> likedPostsIds,
+    required List<String> friends,
   }) = _User;
 
   factory User.empty() => const User(
-        [],
         uid: '',
         username: '',
         bio: '',
@@ -37,6 +37,7 @@ class User with _$User {
         posts: [],
         expensesTrackers: [],
         likedPostsIds: [],
+        friends: [],
       );
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
