@@ -6,6 +6,6 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       coverage_excludes: "*.g.dart *.freezed.dart"
-#      flutter_channel: stable
-#      flutter_version: 3.1.0
+      flutter_channel: stable
+      flutter_version: 3.1.0
       working_directory: packages/auth_repository
