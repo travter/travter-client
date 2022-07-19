@@ -1,5 +1,6 @@
 **/*.freezed.dart
 *.gr.dart
+*.g.dart
 *.config.dart
 **/AndroidManifest.xml
 **/pubspec.lock

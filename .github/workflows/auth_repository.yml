@@ -1,0 +1,25 @@
+name: auth_repository
+
+on:
+  pull_request:
+    paths:
+      - "packages/auth_repository/**"
+      - ".github/workflows/auth_repository.yml"
+  push:
+    paths:
+      - "packages/auth_repository/**"
+      - ".github/workflows/auth_repository.yml"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./packages/auth_repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+        with:
+          coverage_excludes: "*.g.dart *.freezed.dart"
+          flutter_channel: stable
+          flutter_version: 3.1.0
+          min_coverage: 0
