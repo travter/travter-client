@@ -10,16 +10,17 @@ class ResultsOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = context.dims.width;
-    final height = context.dims.height;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
+      padding:
+          EdgeInsets.symmetric(horizontal: width * homePageHorizontalPadding),
       child: Container(
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
-            ResultsOptionCardWidget(iconData: Icons.people_outline, text: 'People'),
+            ResultsOptionCardWidget(
+                iconData: Icons.people_outline, text: 'People'),
             ResultsOptionCardWidget(iconData: Icons.public, text: 'Places'),
           ],
         ),

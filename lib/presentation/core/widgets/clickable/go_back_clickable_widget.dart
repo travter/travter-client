@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../extensions.dart';
-
-class GoBackWidget extends StatelessWidget {
-  const GoBackWidget({Key? key}) : super(key: key);
+class GoBackClickableWidget extends StatelessWidget {
+  const GoBackClickableWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

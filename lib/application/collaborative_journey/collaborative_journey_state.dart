@@ -10,7 +10,6 @@ class CollaborativeJourneyState with _$CollaborativeJourneyState {
     required List<CollaborativeJourney> journeys,
   }) = _CollaborativeJourneyState;
 
-
   factory CollaborativeJourneyState.initial() =>
       const CollaborativeJourneyState(
         status: CollaborativeJourneyFeedStatus.initial,

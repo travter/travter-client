@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/extensions.dart';
 import '../../../../router/router.gr.dart';
 import 'section_button_widget.dart';
 import 'section_header_widget.dart';
@@ -11,8 +10,6 @@ class AddJourneyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = context.dims.height;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [

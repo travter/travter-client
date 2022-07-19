@@ -10,8 +10,6 @@ import 'authenticate_with_email_button.dart';
 class LoginWithEmailForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
-
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
         state.authResult.fold(

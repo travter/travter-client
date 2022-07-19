@@ -10,8 +10,8 @@ import '../../router/router.gr.dart';
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
 
-class TravelCard extends StatelessWidget {
-  const TravelCard({required this.journey, Key? key}) : super(key: key);
+class TravelCardWidget extends StatelessWidget {
+  const TravelCardWidget({required this.journey, Key? key}) : super(key: key);
 
   final Journey journey;
 

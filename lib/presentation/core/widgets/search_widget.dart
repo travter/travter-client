@@ -24,7 +24,6 @@ class _SearchWidgetState extends State<SearchWidget> {
   }
 }
 
-
 class SearchWidgetView extends StatelessWidget {
   const SearchWidgetView({Key? key}) : super(key: key);
 
@@ -64,12 +63,11 @@ class SearchWidgetView extends StatelessWidget {
           ),
           onFieldSubmitted: (_) {
             context.read<SearchBloc>().add(
-              const SearchEvent.searchPressed(),
-            );
+                  const SearchEvent.searchPressed(),
+                );
             context.router.push(const SearchRoute());
           },
-          onChanged: (query) =>
-              context.read<SearchBloc>().add(
+          onChanged: (query) => context.read<SearchBloc>().add(
                 SearchEvent.queryChanged(query),
               ),
         ),

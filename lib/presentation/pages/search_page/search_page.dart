@@ -5,7 +5,7 @@ import '../../../application/search/search_bloc.dart';
 import '../../../injection.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/widgets/person_card_widget.dart';
-import '../../core/widgets/travel_card.dart';
+import '../../core/widgets/travel_card_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class SearchPageView extends StatelessWidget {
                   return Column(
                     children: [
                       for (final journey in state.searchResult.foundJourneys)
-                        TravelCard(journey: journey),
+                        TravelCardWidget(journey: journey),
                       for (final user in state.searchResult.foundUsers)
                         PersonCardWidget(user),
                     ],

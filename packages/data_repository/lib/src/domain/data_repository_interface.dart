@@ -1,6 +1,5 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:data_repository/src/domain/search/search_result.dart';
 
 import '../../data_repository.dart';
 
@@ -48,11 +47,14 @@ abstract class DataRepositoryInterface {
 
   Future<RequestResult<User>> getUserData(String userId);
 
-  Future<RequestResult<Unit>> updateUser(Map<String, Object?> fieldsToUpdate, String userId);
+  Future<RequestResult<Unit>> updateUser(
+      Map<String, Object?> fieldsToUpdate, String userId);
 
-  Future<RequestResult<Unit>> addJourneyToFavorites(String userId, String journeyId);
+  Future<RequestResult<Unit>> addJourneyToFavorites(
+      String userId, String journeyId);
 
-  Future<RequestResult<Unit>> removeJourneyFromFavorites(String userId, String journeyId);
+  Future<RequestResult<Unit>> removeJourneyFromFavorites(
+      String userId, String journeyId);
 
   Future<RequestResult<SearchResult>> performSearch(String query);
 

@@ -54,8 +54,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '923667026926',
     projectId: 'traveler-26793',
     storageBucket: 'traveler-26793.appspot.com',
-    androidClientId: '923667026926-8i8b9prkgl62q23afp7lpgbptdtagbnn.apps.googleusercontent.com',
-    iosClientId: '923667026926-kncp943lspa5k6njlb6hseqvj7d08hfo.apps.googleusercontent.com',
+    androidClientId:
+        '923667026926-8i8b9prkgl62q23afp7lpgbptdtagbnn.apps.googleusercontent.com',
+    iosClientId:
+        '923667026926-kncp943lspa5k6njlb6hseqvj7d08hfo.apps.googleusercontent.com',
     iosBundleId: 'com.traveler.app',
   );
 }

@@ -5,7 +5,7 @@ import '../../../../../application/journey/journey_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/extensions.dart';
 import '../../../../core/widgets/bottom_navbar_widget.dart';
-import '../../../../core/widgets/travel_card.dart';
+import '../../../../core/widgets/travel_card_widget.dart';
 import '../../load_navbar_children.dart';
 
 class FavoritePostsPage extends StatelessWidget {
@@ -28,8 +28,8 @@ class FavoritePostsPage extends StatelessWidget {
                     builder: (context, state) {
                       return Column(
                         children: [
-                          for(final journey in state.likedJourneys)
-                            TravelCard(
+                          for (final journey in state.likedJourneys)
+                            TravelCardWidget(
                               journey: journey,
                             ),
                         ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/go_back_widget.dart';
+import '../../../core/widgets/clickable/go_back_clickable_widget.dart';
 import 'widgets/widgets.dart';
 
 class AddJourneyInfoPage extends StatelessWidget {
@@ -27,7 +27,7 @@ class AddJourneyInfoPage extends StatelessWidget {
                 color: lightPrimaryColor,
                 height: height * 0.05,
               ),
-              const GoBackWidget(),
+              const GoBackClickableWidget(),
               Divider(
                 color: lightPrimaryColor,
                 height: height * 0.025,

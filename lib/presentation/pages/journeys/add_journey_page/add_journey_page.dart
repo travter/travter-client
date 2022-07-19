@@ -9,7 +9,7 @@ import '../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/go_back_widget.dart';
+import '../../../core/widgets/clickable/go_back_clickable_widget.dart';
 import '../../../router/router.gr.dart';
 import '../widgets/pick_date_widget.dart';
 import '../widgets/widgets.dart';
@@ -61,7 +61,7 @@ class _AddJourneyView extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: width * homePageHorizontalPadding),
-              child: const GoBackWidget(),
+              child: const GoBackClickableWidget(),
             ),
             ConstrainedBox(
               constraints: BoxConstraints(

@@ -14,7 +14,7 @@ extension FirebaseUserDomainX on firebase.User {
       followers: const [],
       following: const [],
       posts: const [],
-      expensesTrackers:  const [],
+      expensesTrackers: const [],
       likedPostsIds: const [],
       friends: const [],
     );

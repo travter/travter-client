@@ -12,7 +12,6 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this._authRepo, this._dataRepository) : super(UserState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
-      print('EXECIUTED AUTCH CHECK');
       final userOption = await _authRepo.getSignedInUser();
       userOption.fold(
         () {
@@ -83,7 +82,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         }
 
         emit(state.copyWith(
-          user: User(friends: state.user.friends,
+          user: User(
+              friends: state.user.friends,
               username: state.user.username,
               likedPostsIds: newLikedPostsIds,
               bio: state.user.bio,
@@ -112,7 +112,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         if (!isFollowing) {
           await _dataRepository.followUser(event.userId, user.uid);
           emit(state.copyWith(
-            user: User(friends: state.user.friends,
+            user: User(
+                friends: state.user.friends,
                 username: state.user.username,
                 likedPostsIds: state.user.likedPostsIds,
                 bio: state.user.bio,

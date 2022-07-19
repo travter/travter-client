@@ -1,6 +1,5 @@
 part of 'expenses_tracker_bloc.dart';
 
-
 @freezed
 class ExpensesTrackerState with _$ExpensesTrackerState {
   const factory ExpensesTrackerState({

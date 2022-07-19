@@ -6,7 +6,6 @@ import '../../../../../core/extensions.dart';
 import '../../../../journeys/journey_page/widgets/section_header_text_widget.dart';
 import '../../../../journeys/journey_page/widgets/visited_places_widget.dart';
 
-
 class PlaceInfoWidget extends StatelessWidget {
   const PlaceInfoWidget({Key? key}) : super(key: key);
 

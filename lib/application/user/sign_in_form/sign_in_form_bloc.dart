@@ -13,9 +13,6 @@ part 'sign_in_form_state.dart';
 
 @injectable
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  final AuthenticationRepositoryInterface _authFacade;
-  final DataRepositoryInterface _dataRepository;
-
   SignInFormBloc(this._authFacade, this._dataRepository)
       : super(SignInFormState.initial()) {
     on<EmailChanged>((event, emit) {
@@ -56,7 +53,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       ));
     });
     on<SignInWithEmailAndPasswordPressed>((event, emit) async {
-      AuthResult failureOrSuccess = left(AuthFailure.invalidEmailOrPassword());
+      AuthResult failureOrSuccess =
+          left(const AuthFailure.invalidEmailOrPassword());
 
       final isEmailValid = state.email.isValid();
       final isPasswordValid = state.password.isValid();
@@ -118,4 +116,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       });
     });
   }
+  final AuthenticationRepositoryInterface _authFacade;
+  final DataRepositoryInterface _dataRepository;
 }

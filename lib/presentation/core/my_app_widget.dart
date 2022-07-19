@@ -9,7 +9,6 @@ import 'package:functionalities_repository/functionalities_repository.dart';
 import '../../application/collaborative_journey/collaborative_journey_bloc.dart';
 import '../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../application/journey/journey_bloc.dart';
-import '../../application/search/search_bloc.dart';
 import '../../application/user/user_bloc.dart';
 import '../router/router.gr.dart';
 

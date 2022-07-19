@@ -1,18 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
-import '../extensions.dart';
+import '../../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
+import '../../extensions.dart';
 
-class SelectPeopleWidget extends StatefulWidget {
-  const SelectPeopleWidget({Key? key}) : super(key: key);
+class SelectPeopleClickableWidget extends StatefulWidget {
+  const SelectPeopleClickableWidget({Key? key}) : super(key: key);
 
   @override
-  State<SelectPeopleWidget> createState() => _SelectPeopleWidgetState();
+  State<SelectPeopleClickableWidget> createState() =>
+      _SelectPeopleClickableWidgetState();
 }
 
-class _SelectPeopleWidgetState extends State<SelectPeopleWidget>
-    with TickerProviderStateMixin {
+class _SelectPeopleClickableWidgetState
+    extends State<SelectPeopleClickableWidget> with TickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -20,8 +22,7 @@ class _SelectPeopleWidgetState extends State<SelectPeopleWidget>
   void didChangeDependencies() {
     controller = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
-    animation = Tween<double>(begin: 0, end: 1)
-        .animate(controller);
+    animation = Tween<double>(begin: 0, end: 1).animate(controller);
     controller.forward();
     super.didChangeDependencies();
   }
@@ -43,11 +44,18 @@ class _SelectPeopleWidgetState extends State<SelectPeopleWidget>
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<Animation<double>>('animation', animation))
+      ..add(DiagnosticsProperty<AnimationController>('controller', controller));
+  }
 }
 
 class _SelectPeopleWidgetView extends AnimatedWidget {
-  const _SelectPeopleWidgetView(
-      {super.key, required Animation<double> animation})
+  const _SelectPeopleWidgetView({required Animation<double> animation})
       : super(listenable: animation);
 
   @override
@@ -58,9 +66,9 @@ class _SelectPeopleWidgetView extends AnimatedWidget {
     final animation = listenable as Animation<double>;
 
     return Container(
-        height: height * animation.value,
-        width: width * animation.value,
-        color: Colors.green,
+      height: height * animation.value,
+      width: width * animation.value,
+      color: Colors.green,
     );
   }
 }

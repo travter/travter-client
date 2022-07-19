@@ -51,7 +51,7 @@ class WelcomeWidget extends StatelessWidget {
               const CircleAvatar(
                 radius: 15,
                 backgroundImage:
-                AssetImage('assets/images/profile_picture.jpeg'),
+                    AssetImage('assets/images/profile_picture.jpeg'),
               )
             ],
           ),

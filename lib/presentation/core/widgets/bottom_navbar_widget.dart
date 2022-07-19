@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:traveler/presentation/core/widgets/search_widget.dart';
 
 import '../constants/constant_colors.dart';
 import '../extensions.dart';
+import 'search_widget.dart';
 
 class BottomNavbarWidget extends StatelessWidget {
   const BottomNavbarWidget({
@@ -52,5 +52,3 @@ class BottomNavbarWidget extends StatelessWidget {
     );
   }
 }
-
-

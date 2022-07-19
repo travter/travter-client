@@ -1,6 +1,6 @@
 part of 'user_bloc.dart';
 
-enum AuthenticationStatus {initial, authenticated, unauthenticated}
+enum AuthenticationStatus { initial, authenticated, unauthenticated }
 
 @freezed
 class UserState with _$UserState {
@@ -10,12 +10,11 @@ class UserState with _$UserState {
   }) = _UserState;
 
   factory UserState.initial() => UserState(
-    user: User.empty(),
-    authStatus: AuthenticationStatus.initial,
-  );
+        user: User.empty(),
+        authStatus: AuthenticationStatus.initial,
+      );
 
   // const factory AuthenticationState.authenticated() = Authenticated;
 
   // const factory AuthenticationState.unauthenticated() = Unauthenticated;
 }
-

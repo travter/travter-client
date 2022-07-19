@@ -9,8 +9,8 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
-import '../../../core/widgets/go_back_widget.dart';
-import '../../../core/widgets/select_people_widget.dart';
+import '../../../core/widgets/clickable/go_back_clickable_widget.dart';
+import '../../../core/widgets/clickable/select_people_clickable_widget.dart';
 import '../../../router/router.gr.dart';
 import '../widgets/widgets.dart';
 import 'widgets/add_collaborative_journey_button.dart';
@@ -53,7 +53,7 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(
                                 left: width * homePageHorizontalPadding),
-                            child: const GoBackWidget(),
+                            child: const GoBackClickableWidget(),
                           ),
                           // const AddJourneyFormWidget(),
                           const _JourneyNameFieldWidget(),
@@ -72,9 +72,9 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                               onTap: () => context
                                   .read<CollaborativeJourneyFormBloc>()
                                   .add(
-                                const CollaborativeJourneyFormEvent
-                                    .addPeopleStarted(),
-                              ),
+                                    const CollaborativeJourneyFormEvent
+                                        .addPeopleStarted(),
+                                  ),
                               child: const AddPeopleClickableWidget(
                                   'Add people to your journey'),
                             ),
@@ -88,7 +88,7 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                         ],
                       ),
                       if (state.addPeopleStatus == AddPeopleStatus.started)
-                        const SelectPeopleWidget()
+                        const SelectPeopleClickableWidget()
                       else
                         const SizedBox(),
                     ],
@@ -170,7 +170,6 @@ class _MemoryNameFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = context.dims.width;
-    final height = context.dims.height;
 
     return Padding(
       padding: EdgeInsets.symmetric(

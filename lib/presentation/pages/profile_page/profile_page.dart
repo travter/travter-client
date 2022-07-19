@@ -6,6 +6,7 @@ import '../../../application/collaborative_journey/collaborative_journey_bloc.da
 import '../../../application/journey/journey_bloc.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
+import '../../core/widgets/travel_card_widget.dart';
 import 'widgets/widgets.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -42,7 +43,7 @@ class _JourneysListWidget extends StatelessWidget {
         return Column(
           children: [
             for (final journey in state.journeys)
-              TravelCard(
+              TravelCardWidget(
                 journey: journey,
               )
           ],
@@ -61,8 +62,8 @@ class _CollaborativeJourneysListWidget extends StatelessWidget {
       builder: (context, state) {
         return Column(
           children: [
-            for (final journey in state.journeys)
-              TravelCard(
+            for (var _ = 0; _ < state.journeys.length; _++)
+              TravelCardWidget(
                 journey: Journey.empty(),
               )
           ],

@@ -19,7 +19,11 @@ class CalculationNameWidget extends StatelessWidget {
         ),
       ),
       child: Text(
-        context.read<ExpensesTrackerBloc>().state.currentlyLookedUpTracker!.name,
+        context
+            .read<ExpensesTrackerBloc>()
+            .state
+            .currentlyLookedUpTracker!
+            .name,
         style: const TextStyle(
           fontSize: 18,
           color: Colors.white,

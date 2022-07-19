@@ -7,12 +7,12 @@ class MockDataRepository extends Mock implements DataRepository {}
 
 void main() {
   group('SearchBloc', () {
-    late SearchBloc searchBloc;
+    late SearchBloc _;
     late DataRepository dataRepository;
 
     setUp(() {
       dataRepository = MockDataRepository();
-      searchBloc = SearchBloc(dataRepository);
+      _ = SearchBloc(dataRepository);
     });
 
     test('yes', () {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
-import '../../../../../application/journey/journey_form/journey_form_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
@@ -23,8 +22,8 @@ class AddCollaborativeJourneyButtonWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => context.read<CollaborativeJourneyFormBloc>().add(
-          const CollaborativeJourneyFormEvent.submitFormPressed(),
-        ),
+              const CollaborativeJourneyFormEvent.submitFormPressed(),
+            ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

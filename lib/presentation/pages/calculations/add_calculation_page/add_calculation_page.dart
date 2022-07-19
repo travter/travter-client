@@ -8,7 +8,7 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
-import '../../../core/widgets/close_page_widget.dart';
+import '../../../core/widgets/clickable/close_page_clickable_widget.dart';
 
 class AddCalculationPage extends StatelessWidget {
   const AddCalculationPage({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class AddCalculationPage extends StatelessWidget {
               builder: (context, state) {
                 return Column(
                   children: [
-                    const ClosePageWidget(),
+                    const ClosePageClickableWidget(),
                     SizedBox(
                       height: height * 0.025,
                     ),
