@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'application/bloc_observer.dart';
 import 'firebase_options.dart';
+import 'injection.dart' as di;
 import 'presentation/core/my_app_widget.dart';
 
 Future<void> main() async {
@@ -14,6 +15,8 @@ Future<void> main() async {
   );
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  di.setup();
+
   BlocOverrides.runZoned(
     () {
       runApp(MyAppWidget());

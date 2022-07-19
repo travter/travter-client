@@ -12,6 +12,7 @@ part 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this._authRepo, this._dataRepository) : super(UserState.initial()) {
     on<AuthCheckRequested>((event, emit) async {
+      print('EXECIUTED AUTCH CHECK');
       final userOption = await _authRepo.getSignedInUser();
       userOption.fold(
         () {

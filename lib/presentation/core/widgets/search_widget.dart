@@ -3,11 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/search/search_bloc.dart';
+import '../../../injection.dart';
 import '../../router/router.gr.dart';
 import '../extensions.dart';
 
-class SearchWidget extends StatelessWidget {
+class SearchWidget extends StatefulWidget {
   const SearchWidget({Key? key}) : super(key: key);
+
+  @override
+  State<SearchWidget> createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<SearchBloc>(),
+      child: const SearchWidgetView(),
+    );
+  }
+}
+
+
+class SearchWidgetView extends StatelessWidget {
+  const SearchWidgetView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +68,8 @@ class SearchWidget extends StatelessWidget {
             );
             context.router.push(const SearchRoute());
           },
-          onChanged: (query) => context.read<SearchBloc>().add(
+          onChanged: (query) =>
+              context.read<SearchBloc>().add(
                 SearchEvent.queryChanged(query),
               ),
         ),

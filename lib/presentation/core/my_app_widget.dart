@@ -67,11 +67,6 @@ class _AppView extends StatelessWidget {
             context.read<AuthenticationRepository>(),
           )..add(const CollaborativeJourneyEvent.fetchJourneysRequested()),
         ),
-        BlocProvider(
-          create: (_) => SearchBloc(
-            context.read<DataRepository>(),
-          ),
-        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

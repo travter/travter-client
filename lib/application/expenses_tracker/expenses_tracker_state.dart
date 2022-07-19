@@ -1,6 +1,5 @@
 part of 'expenses_tracker_bloc.dart';
 
-enum TrackersOverviewStatus { initial, fetching, success, failure }
 
 @freezed
 class ExpensesTrackerState with _$ExpensesTrackerState {

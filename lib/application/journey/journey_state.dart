@@ -1,6 +1,5 @@
 part of 'journey_bloc.dart';
 
-enum JourneysFeedStatus { initial, fetching, success, failure }
 
 @freezed
 class JourneyState with _$JourneyState{

@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../infrastructure/core/constants/enums.dart';
+
 part 'journey_bloc.freezed.dart';
 
 part 'journey_event.dart';

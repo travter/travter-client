@@ -14,12 +14,12 @@ class LoadingPage extends StatelessWidget {
       listener: (context, state) {
         switch (state.authStatus) {
           case AuthenticationStatus.authenticated:
+            context.router.removeLast();
             context.router.push(const HomeRoute());
-            context.router.popUntilRouteWithName('HomeRoute');
             break;
           case AuthenticationStatus.unauthenticated:
-            context.router.popAndPush(const LoginRoute());
-            context.router.popUntilRouteWithName('LoginRoute');
+            context.router.removeLast();
+            context.router.push(const LoginRoute());
             break;
           case AuthenticationStatus.initial:
             break;

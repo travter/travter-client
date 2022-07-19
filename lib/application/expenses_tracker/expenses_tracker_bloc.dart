@@ -4,6 +4,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
+import '../../infrastructure/core/constants/enums.dart';
+
 part 'expenses_tracker_bloc.freezed.dart';
 
 part 'expenses_tracker_event.dart';
