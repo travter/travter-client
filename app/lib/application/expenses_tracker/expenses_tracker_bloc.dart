@@ -2,7 +2,6 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../infrastructure/core/constants/enums.dart';
 
@@ -30,7 +29,7 @@ class ExpensesTrackerBloc
         await trackers.fold((_) => null, (stream) async {
           await emit.forEach(
             stream,
-            onData: (data) => state.copyWith(
+            onData: (List<ExpensesTracker> data) => state.copyWith(
               status: TrackersOverviewStatus.success,
               trackers: data,
             ),

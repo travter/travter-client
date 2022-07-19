@@ -34,7 +34,7 @@ class CollaborativeJourneyBloc
         }, (stream) async {
           await emit.forEach(
             stream,
-            onData: (data) => state.copyWith(
+            onData: (List<CollaborativeJourney> data) => state.copyWith(
               status: CollaborativeJourneyFeedStatus.success,
               journeys: data,
             ),

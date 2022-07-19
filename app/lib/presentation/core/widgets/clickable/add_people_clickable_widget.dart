@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../extensions.dart';
+import '../../extensions.dart';
 
-class AddPeopleWidget extends StatelessWidget {
-  const AddPeopleWidget(this._text, {Key? key}) : super(key: key);
+class AddPeopleClickableWidget extends StatelessWidget {
+  const AddPeopleClickableWidget(this._text, {Key? key}) : super(key: key);
 
   final String _text;
 
   @override
   Widget build(BuildContext context) {
-    final width = context.dims.width;
+    final screenWidth = context.dims.width;
 
     return InkWell(
+      onTap: () {},
       child: Row(
         children: [
           const Icon(
@@ -20,7 +21,7 @@ class AddPeopleWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: width * 0.015,
+              left: screenWidth * 0.015,
             ),
             child: Text(
               _text,

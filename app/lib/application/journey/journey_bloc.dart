@@ -29,7 +29,7 @@ class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
         await journeys.fold((_) => null, (stream) async {
           await emit.forEach(
             stream,
-            onData: (data) => state.copyWith(
+            onData: (List<Journey> data) => state.copyWith(
               status: JourneysFeedStatus.success,
               journeys: data,
             ),

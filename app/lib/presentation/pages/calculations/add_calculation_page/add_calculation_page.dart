@@ -7,7 +7,7 @@ import '../../../../application/expenses_tracker/expenses_tracker_form/expenses_
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/add_people_widget.dart';
+import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
 import '../../../core/widgets/close_page_widget.dart';
 
 class AddCalculationPage extends StatelessWidget {
@@ -50,7 +50,7 @@ class AddCalculationPage extends StatelessWidget {
                     SizedBox(
                       height: height * 0.025,
                     ),
-                    const AddPeopleWidget(
+                    const AddPeopleClickableWidget(
                         'Add people to this expenses tracker'),
                     const _AddCalculationButtonWidget(),
                   ],

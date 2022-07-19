@@ -8,6 +8,7 @@ import '../../../../application/collaborative_journey/collaborative_journey_form
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
 import '../../../core/widgets/go_back_widget.dart';
 import '../../../core/widgets/select_people_widget.dart';
 import '../../../router/router.gr.dart';
@@ -74,7 +75,7 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                                 const CollaborativeJourneyFormEvent
                                     .addPeopleStarted(),
                               ),
-                              child: const AddPeopleWidget(
+                              child: const AddPeopleClickableWidget(
                                   'Add people to your journey'),
                             ),
                           ),
