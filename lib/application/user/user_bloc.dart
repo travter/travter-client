@@ -110,7 +110,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           }
         }
         if (!isFollowing) {
-          await _dataRepository.followUser(event.userId, user.uid);
+          await _dataRepository.followUser(state.currentlyLookedUpUser.uid, state.user.uid);
           emit(state.copyWith(
             user: User(
                 friends: state.user.friends,
@@ -126,10 +126,27 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 posts: state.user.posts,
                 profilePicture: state.user.profilePicture),
           ));
+          emit(state.copyWith(
+            currentlyLookedUpUser: User(
+                friends: state.currentlyLookedUpUser.friends,
+                username: state.currentlyLookedUpUser.username,
+                likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
+                bio: state.currentlyLookedUpUser.bio,
+                uid: state.currentlyLookedUpUser.uid,
+                expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
+                firstName: state.currentlyLookedUpUser.firstName,
+                lastName: state.currentlyLookedUpUser.lastName,
+                followers: [...state.currentlyLookedUpUser.followers, user.uid],
+                following: state.currentlyLookedUpUser.following,
+                posts: state.currentlyLookedUpUser.posts,
+                profilePicture: state.currentlyLookedUpUser.profilePicture),
+          ));
         } else {
           await _dataRepository.unFollowUser(event.userId, user.uid);
           final followingList = List<String>.from(state.user.following)
             ..remove(event.userId);
+          final followersList = List<String>.from(state.currentlyLookedUpUser.followers)
+            ..remove(user.uid);
           emit(state.copyWith(
             user: User(
               friends: state.user.friends,
@@ -145,6 +162,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               posts: state.user.posts,
               profilePicture: state.user.profilePicture,
             ),
+            currentlyLookedUpUser: User(
+              friends: state.currentlyLookedUpUser.friends,
+              username: state.currentlyLookedUpUser.username,
+              likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
+              bio: state.currentlyLookedUpUser.bio,
+              uid: state.currentlyLookedUpUser.uid,
+              expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
+              firstName: state.currentlyLookedUpUser.firstName,
+              lastName: state.currentlyLookedUpUser.lastName,
+              followers: followersList,
+              following: state.currentlyLookedUpUser.following,
+              posts: state.currentlyLookedUpUser.posts,
+              profilePicture: state.currentlyLookedUpUser.profilePicture,
+            )
           ));
         }
       });
@@ -172,7 +203,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ),
           ),
         );
+        emit(state.copyWith(
+          currentlyLookedUpUser: User(
+              friends: [...state.currentlyLookedUpUser.friends, user.uid],
+              username: state.currentlyLookedUpUser.username,
+              likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
+              bio: state.currentlyLookedUpUser.bio,
+              uid: state.currentlyLookedUpUser.uid,
+              expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
+              firstName: state.currentlyLookedUpUser.firstName,
+              lastName: state.currentlyLookedUpUser.lastName,
+              followers: state.currentlyLookedUpUser.followers,
+              following: state.currentlyLookedUpUser.following,
+              posts: state.currentlyLookedUpUser.posts,
+              profilePicture: state.currentlyLookedUpUser.profilePicture,
+            ),
+        ));
       });
+    });
+
+    on<CurrentlyLookedUpUserSet>((event, emit) {
+      emit(state.copyWith(
+        currentlyLookedUpUser: event.user,
+      ));
     });
   }
 

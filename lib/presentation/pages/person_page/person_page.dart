@@ -1,5 +1,3 @@
-import 'package:auth_repository/auth_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,12 +6,13 @@ import '../../core/constants/constant_colors.dart';
 import 'widgets/person_profile_summary.dart';
 
 class PersonPage extends StatelessWidget {
-  const PersonPage({required this.person, Key? key}) : super(key: key);
+  const PersonPage({Key? key}) : super(key: key);
 
-  final User person;
 
   @override
   Widget build(BuildContext context) {
+    final person = context.read<UserBloc>().state.currentlyLookedUpUser;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
@@ -22,7 +21,7 @@ class PersonPage extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  PersonProfileSummary(person),
+                  PersonProfileSummary(),
                   ElevatedButton(
                       onPressed: () => context
                           .read<UserBloc>()
@@ -40,11 +39,5 @@ class PersonPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<User>('person', person));
   }
 }
