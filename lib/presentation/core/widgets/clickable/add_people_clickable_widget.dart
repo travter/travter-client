@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
 import '../../extensions.dart';
 
 class AddPeopleClickableWidget extends StatelessWidget {
@@ -12,7 +14,9 @@ class AddPeopleClickableWidget extends StatelessWidget {
     final screenWidth = context.dims.width;
 
     return InkWell(
-      onTap: () {},
+      onTap: () => context.read<CollaborativeJourneyFormBloc>().add(
+            const CollaborativeJourneyFormEvent.addPeopleStarted(),
+          ),
       child: Row(
         children: [
           const Icon(

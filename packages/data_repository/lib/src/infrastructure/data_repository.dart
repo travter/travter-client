@@ -520,4 +520,34 @@ class DataRepository implements DataRepositoryInterface {
       return left(const RequestFailure.serverError());
     }
   }
+
+  @override
+  Future<RequestResult<Unit>> removeUserFromFriends(
+      String friendId, String userId) {
+    // TODO: implement removeUserFromFriends
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<RequestResult<List<User>>> fetchUsersFriends(
+      List<String> friendsIds) async {
+    try {
+      final emptyFriends = <User>[];
+      if (friendsIds.isEmpty) {
+        return right(emptyFriends);
+      }
+      final _friendData = await _firestore
+          .collection('users')
+          .where('uid', whereIn: friendsIds)
+          .get();
+
+      final friends = _friendData.docs.map(
+        (el) => User.fromJson(el.data()),
+      ).toList();
+
+      return right(friends);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
 }

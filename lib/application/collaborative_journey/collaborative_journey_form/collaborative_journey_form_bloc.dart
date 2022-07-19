@@ -25,6 +25,7 @@ class CollaborativeJourneyFormBloc
       emit(state.copyWith(memoryDescription: event.description));
     });
     on<AddPeopleStarted>((event, emit) {
+      print('XD');
       emit(state.copyWith(addPeopleStatus: AddPeopleStatus.started));
     });
     on<AddPeopleFinished>((event, emit) {

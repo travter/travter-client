@@ -68,16 +68,8 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                               horizontal: width * homePageHorizontalPadding,
                             ),
-                            child: InkWell(
-                              onTap: () => context
-                                  .read<CollaborativeJourneyFormBloc>()
-                                  .add(
-                                    const CollaborativeJourneyFormEvent
-                                        .addPeopleStarted(),
-                                  ),
-                              child: const AddPeopleClickableWidget(
-                                  'Add people to your journey'),
-                            ),
+                            child: const AddPeopleClickableWidget(
+                                'Add people to your journey'),
                           ),
                           const UploadPhotosWidget(),
                           const AddCollaborativeJourneyButtonWidget(),
