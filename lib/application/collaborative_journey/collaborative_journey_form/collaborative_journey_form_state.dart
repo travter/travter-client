@@ -1,6 +1,5 @@
 part of 'collaborative_journey_form_bloc.dart';
 
-enum AddPeopleStatus { started, added, initial }
 
 @freezed
 class CollaborativeJourneyFormState with _$CollaborativeJourneyFormState {

@@ -5,6 +5,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../infrastructure/core/constants/enums.dart';
+
 part 'collaborative_journey_form_bloc.freezed.dart';
 
 part 'collaborative_journey_form_event.dart';
@@ -25,11 +27,10 @@ class CollaborativeJourneyFormBloc
       emit(state.copyWith(memoryDescription: event.description));
     });
     on<AddPeopleStarted>((event, emit) {
-      print('XD');
       emit(state.copyWith(addPeopleStatus: AddPeopleStatus.started));
     });
     on<AddPeopleFinished>((event, emit) {
-      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.added));
+      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.finished));
     });
     on<UploadPhotosStarted>((event, emit) {});
     on<SubmitFormPressed>((event, emit) async {

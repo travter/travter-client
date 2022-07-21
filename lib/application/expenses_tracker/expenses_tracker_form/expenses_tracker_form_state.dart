@@ -6,15 +6,17 @@ class ExpensesTrackerFormState with _$ExpensesTrackerFormState {
     required String trackerName,
     required String expenseName,
     required double expenseAmount,
-    required List<String> addedPeople,
+    required AddPeopleStatus addPeopleStatus,
+    required List<String> selectedUsers,
     required String payerId,
   }) = _ExpensesTrackerFormState;
 
-  factory ExpensesTrackerFormState.initial() => ExpensesTrackerFormState(
+  factory ExpensesTrackerFormState.initial() => const ExpensesTrackerFormState(
         trackerName: '',
         expenseName: '',
         expenseAmount: 0,
-        addedPeople: List.empty(growable: true),
+        addPeopleStatus: AddPeopleStatus.initial,
+        selectedUsers: [],
         payerId: '',
       );
 }

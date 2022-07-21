@@ -4,6 +4,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../infrastructure/core/constants/enums.dart';
+
 part 'expenses_tracker_form_bloc.freezed.dart';
 
 part 'expenses_tracker_form_event.dart';
@@ -16,6 +18,32 @@ class ExpensesTrackerFormBloc
       : super(ExpensesTrackerFormState.initial()) {
     on<TrackerNameChanged>((event, emit) {
       emit(state.copyWith(trackerName: event.name));
+    });
+
+    on<AddPeopleStarted>((event, emit) {
+      emit(state.copyWith(
+        addPeopleStatus: AddPeopleStatus.started,
+      ));
+    });
+
+    on<AddPeopleFinished>((event, emit) {
+      emit(state.copyWith(
+        addPeopleStatus: AddPeopleStatus.finished,
+      ));
+    });
+
+    on<TogglePersonSelection>((event, emit) {
+      if (state.selectedUsers.contains(event.userId)) {
+        final currentlySelectedUsers = List<String>.from(state.selectedUsers)
+          ..remove(event.userId);
+        emit(state.copyWith(
+          selectedUsers: currentlySelectedUsers,
+        ));
+      } else {
+        emit(state.copyWith(
+          selectedUsers: [...state.selectedUsers, event.userId],
+        ));
+      }
     });
 
     on<ExpenseNameChanged>((event, emit) {
@@ -42,7 +70,7 @@ class ExpensesTrackerFormBloc
         final expenseTracker = ExpensesTracker(
           List.empty(growable: true)..add(expense),
           name: state.trackerName,
-          authorizedUsers: state.addedPeople,
+          authorizedUsers: state.selectedUsers,
           createdAt: DateTime.now(),
           currency: 'USD',
           ownerId: user.uid,
