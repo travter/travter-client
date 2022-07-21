@@ -61,6 +61,7 @@ class _EditProfileView extends StatelessWidget {
                 following: userState.following,
                 posts: userState.posts,
                 expensesTrackers: userState.expensesTrackers,
+                authorizedExpenseTrackers: userState.authorizedExpenseTrackers,
                 likedPostsIds: userState.likedPostsIds,
                 friends: userState.friends,
               );

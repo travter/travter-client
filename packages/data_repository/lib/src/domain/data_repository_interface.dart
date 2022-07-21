@@ -67,4 +67,6 @@ abstract class DataRepositoryInterface {
   Future<RequestResult<Unit>> removeUserFromFriends(String friendId, String userId);
 
   Future<RequestResult<List<User>>> fetchUsersFriends(List<String> friendsIds);
+
+  Future<RequestResult<Unit>> authorizeUserToExpense(String userId, String expenseId);
 }

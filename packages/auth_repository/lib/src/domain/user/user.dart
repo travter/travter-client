@@ -18,6 +18,7 @@ class User with _$User {
     required List<String> following,
     required List<String> posts,
     required List<String> expensesTrackers,
+    required List<String> authorizedExpenseTrackers,
     required List<String> likedPostsIds,
     required List<String> friends,
   }) = _User;
@@ -29,6 +30,7 @@ class User with _$User {
         profilePicture: '',
         firstName: '',
         lastName: '',
+        authorizedExpenseTrackers: [],
         followers: [],
         following: [],
         posts: [],

@@ -68,7 +68,7 @@ class ExpensesTrackerFormBloc
             id: uuid.v1());
 
         final expenseTracker = ExpensesTracker(
-          List.empty(growable: true)..add(expense),
+          List.empty(growable:true)..add(expense),
           name: state.trackerName,
           authorizedUsers: state.selectedUsers,
           createdAt: DateTime.now(),
@@ -79,6 +79,10 @@ class ExpensesTrackerFormBloc
         );
 
         await _dataRepository.createExpenseTracker(expenseTracker);
+
+        for(final userId in state.selectedUsers) {
+          await _dataRepository.authorizeUserToExpense(userId, expenseTracker.id);
+        }
       });
     });
   }

@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/expenses_tracker/expenses_tracker_bloc.dart';
+import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
@@ -43,7 +46,46 @@ class CalculationsPage extends StatelessWidget {
                         left: width * 0.015,
                         right: width * 0.015,
                       ),
-                      child: Column(
+                      child: FutureBuilder<
+                          Either<RequestFailure,
+                              Stream<List<ExpensesTracker>>>>(
+                        future: context
+                            .read<DataRepository>()
+                            .getAllUsersExpenseTrackers(
+                          context
+                              .read<UserBloc>()
+                              .state
+                              .user
+                              .uid,
+                        ),
+                        builder: (context, snapshot) {
+                          var children = <Widget>[];
+                          snapshot.data?.fold((_) {}, (trackers) {
+                            children = [
+                              StreamBuilder<List<ExpensesTracker>>(
+                                stream: trackers,
+                                builder: (context, snapshot) {
+                                  print('======');
+                                  print('xd');
+                                  print('======');
+                                  if (snapshot.data != null) {
+                                    for(final tracker in snapshot.data!) {
+                                      // return CalculationCardWidget(tracker: tracker);
+                                    }
+                                  }
+                                  return Container();
+                                },
+                              ),
+                            ];
+                          });
+
+                          return Column(
+                            children: children,
+                          );
+                        },
+                      ),
+                      /*
+                      Column(
                         children: [
                           for (final tracker in state.trackers)
                             CalculationCardWidget(
@@ -51,6 +93,8 @@ class CalculationsPage extends StatelessWidget {
                             ),
                         ],
                       ),
+
+                           */
                     ),
                   ),
                 ),

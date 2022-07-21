@@ -1,4 +1,5 @@
 import 'package:auth_repository/auth_repository.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -235,9 +236,12 @@ class _AddCalculationButtonWidget extends StatelessWidget {
         top: height * 0.1,
       ),
       child: InkWell(
-        onTap: () => context.read<ExpensesTrackerFormBloc>().add(
-              const ExpensesTrackerFormEvent.submitFormPressed(),
-            ),
+        onTap: () {
+          context.read<ExpensesTrackerFormBloc>().add(
+            const ExpensesTrackerFormEvent.submitFormPressed(),
+          );
+          context.router.pop();
+        },
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

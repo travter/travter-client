@@ -541,11 +541,40 @@ class DataRepository implements DataRepositoryInterface {
           .where('uid', whereIn: friendsIds)
           .get();
 
-      final friends = _friendData.docs.map(
-        (el) => User.fromJson(el.data()),
-      ).toList();
+      final friends = _friendData.docs
+          .map(
+            (el) => User.fromJson(el.data()),
+          )
+          .toList();
 
       return right(friends);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> authorizeUserToExpense(
+      String userId, String expenseId) async {
+    try {
+      final authorizedUserData = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+
+      final userDoc = authorizedUserData.docs.first;
+      final currentlyAuthorizedTrackers = List<String>.from(
+          User.fromJson(userDoc.data()).authorizedExpenseTrackers);
+
+      final userRef = _firestore.collection('users').doc(userDoc.id);
+      await userRef.update({
+        'authorizedExpenseTrackers': [
+          ...currentlyAuthorizedTrackers,
+          expenseId
+        ],
+      });
+
+      return right(unit);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }
