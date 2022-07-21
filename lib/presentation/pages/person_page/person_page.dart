@@ -8,7 +8,6 @@ import 'widgets/person_profile_summary.dart';
 class PersonPage extends StatelessWidget {
   const PersonPage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final person = context.read<UserBloc>().state.currentlyLookedUpUser;
@@ -26,12 +25,27 @@ class PersonPage extends StatelessWidget {
                       onPressed: () => context
                           .read<UserBloc>()
                           .add(UserEvent.userFollowToggled(person.uid)),
-                      child: const Text('Follow')),
-                  ElevatedButton(
-                      onPressed: () => context
-                          .read<UserBloc>()
-                          .add(UserEvent.addToFriendsPressed(person.uid)),
-                      child: const Text('Add to friends')),
+                      child: context
+                              .watch<UserBloc>()
+                              .state
+                              .user
+                              .following
+                              .contains(person.uid)
+                          ? const Text('Unfollow')
+                          : const Text('Follow')),
+                  if (context
+                      .watch<UserBloc>()
+                      .state
+                      .user
+                      .friends
+                      .contains(person.uid))
+                    Container()
+                  else
+                    ElevatedButton(
+                        onPressed: () => context
+                            .read<UserBloc>()
+                            .add(UserEvent.addToFriendsPressed(person.uid)),
+                        child: const Text('Add to friends')),
                 ],
               ),
             )
