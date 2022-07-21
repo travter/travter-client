@@ -11,13 +11,28 @@ import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
 import '../../../core/widgets/clickable/go_back_clickable_widget.dart';
-import '../../../core/widgets/clickable/select_people_clickable_widget.dart';
+import '../../../core/widgets/friends_list_widget.dart';
 import '../../../router/router.gr.dart';
 import '../widgets/widgets.dart';
 import 'widgets/add_collaborative_journey_button.dart';
 
 class AddCollaborativeJourneyPage extends StatelessWidget {
   const AddCollaborativeJourneyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CollaborativeJourneyFormBloc(
+        context.read<AuthenticationRepository>(),
+        context.read<DataRepository>(),
+      ),
+      child: const _AddCollaborativeJourneyView(),
+    );
+  }
+}
+
+class _AddCollaborativeJourneyView extends StatelessWidget {
+  const _AddCollaborativeJourneyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,66 +44,65 @@ class AddCollaborativeJourneyPage extends StatelessWidget {
         backgroundColor: lightPrimaryColor,
         body: Padding(
           padding: EdgeInsets.only(top: height * 0.05),
-          child: SingleChildScrollView(
-            child: BlocProvider(
-              create: (context) => CollaborativeJourneyFormBloc(
-                context.read<AuthenticationRepository>(),
-                context.read<DataRepository>(),
-              ),
-              child: BlocConsumer<CollaborativeJourneyFormBloc,
-                  CollaborativeJourneyFormState>(
-                listener: (context, state) {
-                  state.requestResult.fold(
-                    () => null,
-                    (result) => result.fold((_) => () => null, (_) {
-                      context.router.popAndPush(const JourneyRoute());
-                    }),
-                  );
-                },
-                builder: (context, state) {
-                  return Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: width * homePageHorizontalPadding),
-                            child: const GoBackClickableWidget(),
+          child: BlocConsumer<CollaborativeJourneyFormBloc,
+              CollaborativeJourneyFormState>(
+            listener: (context, state) {
+              state.requestResult.fold(
+                () => null,
+                (result) => result.fold((_) => () => null, (_) {
+                  context.router.popAndPush(const JourneyRoute());
+                }),
+              );
+            },
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: width * homePageHorizontalPadding),
+                          child: const GoBackClickableWidget(),
+                        ),
+                        // const AddJourneyFormWidget(),
+                        const _JourneyNameFieldWidget(),
+                        const _MemoryExplanationWidget(),
+                        Divider(
+                          height: height * 0.01,
+                          color: lightPrimaryColor,
+                        ),
+                        const _MemoryNameFieldWidget(),
+                        const _MemoryDescriptionFieldWidget(),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: width * homePageHorizontalPadding,
                           ),
-                          // const AddJourneyFormWidget(),
-                          const _JourneyNameFieldWidget(),
-                          const _MemoryExplanationWidget(),
-                          Divider(
-                            height: height * 0.01,
-                            color: lightPrimaryColor,
-                          ),
-                          const _MemoryNameFieldWidget(),
-                          const _MemoryDescriptionFieldWidget(),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: width * homePageHorizontalPadding,
-                            ),
-                            child: const AddPeopleClickableWidget(
-                                'Add people to your journey'),
-                          ),
-                          const UploadPhotosWidget(),
-                          const AddCollaborativeJourneyButtonWidget(),
-                          Divider(
-                            height: height * 0.05,
-                            color: lightPrimaryColor,
-                          ),
-                        ],
-                      ),
-                      if (state.addPeopleStatus == AddPeopleStatus.started)
-                        const SelectPeopleClickableWidget()
-                      else
-                        const SizedBox(),
-                    ],
-                  );
-                },
-              ),
-            ),
+                          child: const AddPeopleClickableWidget(
+                              'Add people to your journey'),
+                        ),
+                        const UploadPhotosWidget(),
+                        const AddCollaborativeJourneyButtonWidget(),
+                        Divider(
+                          height: height * 0.05,
+                          color: lightPrimaryColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (state.addPeopleStatus == AddPeopleStatus.started)
+                    FriendsListWidget(
+                      entryType: CollaborativeEntryType.journey,
+                      onListClosed: () =>
+                          context.read<CollaborativeJourneyFormBloc>().add(
+                                const CollaborativeJourneyFormEvent
+                                    .addPeopleFinished(),
+                              ),
+                    )
+                ],
+              );
+            },
           ),
         ),
       ),

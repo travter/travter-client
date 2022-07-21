@@ -9,7 +9,7 @@ import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/close_page_clickable_widget.dart';
-import 'widgets/friends_list_widget.dart';
+import '../../../core/widgets/friends_list_widget.dart';
 
 class AddCalculationPage extends StatelessWidget {
   const AddCalculationPage({Key? key}) : super(key: key);
@@ -69,7 +69,12 @@ class AddCalculationView extends StatelessWidget {
                 ],
               ),
               if (state.addPeopleStatus == AddPeopleStatus.started)
-                const FriendsListWidget(),
+                FriendsListWidget(
+                  entryType: CollaborativeEntryType.tracker,
+                  onListClosed: () => context.read<ExpensesTrackerFormBloc>().add(
+                        const ExpensesTrackerFormEvent.addPeopleFinished(),
+                      ),
+                ),
             ],
           ),
         );

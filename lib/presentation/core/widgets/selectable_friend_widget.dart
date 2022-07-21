@@ -3,16 +3,40 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
-import '../../../../core/constants/constant_colors.dart';
+import '../../../application/collaborative_journey/collaborative_journey_form/collaborative_journey_form_bloc.dart';
+import '../../../application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
+import '../../../infrastructure/core/constants/enums.dart';
+import '../constants/constant_colors.dart';
 
 class SelectableFriendWidget extends StatelessWidget {
-  const SelectableFriendWidget(this.user, {Key? key}) : super(key: key);
+  const SelectableFriendWidget(this.user, {required this.entryType, Key? key})
+      : super(key: key);
 
   final User user;
+  final CollaborativeEntryType entryType;
 
   @override
   Widget build(BuildContext context) {
+    Color getRadioColor() {
+      if (entryType == CollaborativeEntryType.tracker) {
+        return context
+                .watch<ExpensesTrackerFormBloc>()
+                .state
+                .selectedUsers
+                .contains(user.uid)
+            ? lightGreenColor
+            : lightPrimaryColor;
+      } else {
+        return context
+                .watch<CollaborativeJourneyFormBloc>()
+                .state
+                .selectedUsers
+                .contains(user.uid)
+            ? lightGreenColor
+            : lightPrimaryColor;
+      }
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -34,19 +58,18 @@ class SelectableFriendWidget extends StatelessWidget {
           ],
         ),
         InkWell(
-          onTap: () => context.read<ExpensesTrackerFormBloc>().add(
-                ExpensesTrackerFormEvent.togglePersonSelection(user.uid),
-              ),
+          onTap: () => entryType == CollaborativeEntryType.tracker
+              ? context.read<ExpensesTrackerFormBloc>().add(
+                    ExpensesTrackerFormEvent.togglePersonSelection(user.uid),
+                  )
+              : context.read<CollaborativeJourneyFormBloc>().add(
+                    CollaborativeJourneyFormEvent.togglePersonSelection(
+                        user.uid),
+                  ),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: context
-                      .watch<ExpensesTrackerFormBloc>()
-                      .state
-                      .selectedUsers
-                      .contains(user.uid)
-                  ? lightGreenColor
-                  : lightPrimaryColor,
+              color: getRadioColor(),
               border: Border.all(color: Colors.white),
             ),
             width: 25,
