@@ -7,6 +7,7 @@ import '../../../application/journey/journey_bloc.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/travel_card_widget.dart';
+import 'widgets/friends_lookup_widget.dart';
 import 'widgets/widgets.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -23,6 +24,7 @@ class ProfilePage extends StatelessWidget {
             child: Column(children: const [
               NickTextWidget(),
               ProfileSummary(),
+              FriendsLookupWidget(),
               _JourneysListWidget(),
               _CollaborativeJourneysListWidget(),
             ]),
