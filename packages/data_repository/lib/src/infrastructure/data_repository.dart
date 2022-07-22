@@ -196,7 +196,7 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersExpenseTrackers(String userId) async {
     try {
       final collection = _firestore.collection('expense_trackers');
-      final query = await collection.where('authorizedUsers', arrayContainsAny: [userId]).get();
+      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
       final trackers = query.docs
           .map(
             (el) => ExpensesTracker.fromJson(el.data()),
@@ -234,7 +234,7 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersCollaborativeJourneys(String userId) async {
     try {
       final collection = _firestore.collection('collaborative_journeys');
-      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
       final collaborativeJourneys = query.docs
           .map(
             (el) => CollaborativeJourney.fromJson(el.data()),

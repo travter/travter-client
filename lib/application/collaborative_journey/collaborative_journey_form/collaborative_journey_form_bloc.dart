@@ -63,7 +63,7 @@ class CollaborativeJourneyFormBloc
         final collaborativeJourney = CollaborativeJourney(
           List.empty(growable: true)..add(memory),
           name: state.journeyName,
-          authorizedUsers: state.selectedUsers,
+          authorizedUsers: [...state.selectedUsers, user.uid],
           ownerId: user.uid,
           id: uuid.v1(),
         );
