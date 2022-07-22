@@ -21,9 +21,10 @@ class FavoritePlacesPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    for(var i = 0; i < 10; i++)
+                    for (var i = 0; i < 10; i++)
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: context.dims.height * 0.025),
+                        padding: EdgeInsets.symmetric(
+                            vertical: context.dims.height * 0.025),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: const [

@@ -10,14 +10,14 @@ class Expense with _$Expense {
     required double moneyAmount,
     required String payerId,
     required String id,
-}) = _Expense;
+  }) = _Expense;
 
   factory Expense.empty() => const Expense(
-    name: '',
-    moneyAmount: 0,
-    payerId: '',
-    id: '',
-  );
+        name: '',
+        moneyAmount: 0,
+        payerId: '',
+        id: '',
+      );
 
   factory Expense.fromJson(Map<String, Object?> json) =>
       _$ExpenseFromJson(json);

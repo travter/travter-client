@@ -196,7 +196,7 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersExpenseTrackers(String userId) async {
     try {
       final collection = _firestore.collection('expense_trackers');
-      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
       final trackers = query.docs
           .map(
             (el) => ExpensesTracker.fromJson(el.data()),
@@ -234,7 +234,7 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersCollaborativeJourneys(String userId) async {
     try {
       final collection = _firestore.collection('collaborative_journeys');
-      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
       final collaborativeJourneys = query.docs
           .map(
             (el) => CollaborativeJourney.fromJson(el.data()),
@@ -515,6 +515,79 @@ class DataRepository implements DataRepositoryInterface {
         'following': currentlyFollowing,
       });
 
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> removeUserFromFriends(
+      String friendId, String userId) {
+    // TODO: implement removeUserFromFriends
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<RequestResult<List<User>>> fetchUsersFriends(
+      List<String> friendsIds) async {
+    try {
+      final emptyFriends = <User>[];
+      if (friendsIds.isEmpty) {
+        return right(emptyFriends);
+      }
+      final _friendData = await _firestore
+          .collection('users')
+          .where('uid', whereIn: friendsIds)
+          .get();
+
+      final friends = _friendData.docs
+          .map(
+            (el) => User.fromJson(el.data()),
+          )
+          .toList();
+
+      return right(friends);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> authorizeUserToExpense(
+      String userId, String expenseId) async {
+    try {
+      final authorizedUserData = await _firestore
+          .collection('users')
+          .where('uid', isEqualTo: userId)
+          .get();
+
+      final userDoc = authorizedUserData.docs.first;
+      final currentlyAuthorizedTrackers = List<String>.from(
+          User.fromJson(userDoc.data()).authorizedExpenseTrackers);
+
+      final userRef = _firestore.collection('users').doc(userDoc.id);
+      await userRef.update({
+        'authorizedExpenseTrackers': [
+          ...currentlyAuthorizedTrackers,
+          expenseId
+        ],
+      });
+
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> getUsersAuthorizedTrackers(String userId) async {
+    try {
+      final userData = await _firestore.collection('users').where('uid').get();
+      final userDoc = userData.docs.first;
+      final currentlyAuthorizedTrackers = List<String>.from(
+          User.fromJson(userDoc.data()).authorizedExpenseTrackers);
+      // for(final trackerId in currentlyAuthorizedTrackers) {}
       return right(unit);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());

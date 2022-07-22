@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import '../../../core/widgets/popular_section_text_widget.dart';
 import '../../../router/router.gr.dart';
 import '../../home_page/widgets/popular_place_card_widget.dart';
-import '../../../core/widgets/popular_section_text_widget.dart';
 
 class FavoritePlacesWidget extends StatelessWidget {
   const FavoritePlacesWidget({Key? key}) : super(key: key);
@@ -52,5 +51,4 @@ class FavoritePlacesWidget extends StatelessWidget {
       ),
     );
   }
-
 }

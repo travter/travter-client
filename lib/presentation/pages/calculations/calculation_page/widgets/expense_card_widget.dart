@@ -1,9 +1,9 @@
 import 'package:data_repository/data_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/extensions.dart';
-
 
 class ExpenseCardWidget extends StatelessWidget {
   const ExpenseCardWidget({required this.expense, Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class ExpenseCardWidget extends StatelessWidget {
                   const CircleAvatar(
                     radius: 12,
                     backgroundImage:
-                    AssetImage('assets/images/profile_picture.jpeg'),
+                        AssetImage('assets/images/profile_picture.jpeg'),
                   ),
                   Text(
                     'Marek Kowalski',
@@ -80,5 +80,11 @@ class ExpenseCardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Expense>('expense', expense));
   }
 }

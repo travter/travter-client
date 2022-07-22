@@ -1,65 +1,85 @@
 import 'package:auth_repository/auth_repository.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/expenses_tracker/expenses_tracker_form/expenses_tracker_form_bloc.dart';
+import '../../../../infrastructure/core/constants/enums.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/clickable/add_people_clickable_widget.dart';
-import '../../../core/widgets/close_page_widget.dart';
+import '../../../core/widgets/clickable/close_page_clickable_widget.dart';
+import '../../../core/widgets/friends_list_widget.dart';
 
 class AddCalculationPage extends StatelessWidget {
   const AddCalculationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final height = context.dims.height;
-    final width = context.dims.width;
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
-        body: Padding(
+        body: BlocProvider(
+          create: (context) => ExpensesTrackerFormBloc(
+            context.read<DataRepository>(),
+            context.read<AuthenticationRepository>(),
+          ),
+          child: const AddCalculationView(),
+        ),
+      ),
+    );
+  }
+}
+
+class AddCalculationView extends StatelessWidget {
+  const AddCalculationView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final height = context.dims.height;
+    final width = context.dims.width;
+
+    return BlocConsumer<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Padding(
           padding: EdgeInsets.symmetric(
             vertical: height * 0.025,
             horizontal: width * homePageHorizontalPadding,
           ),
-          child: BlocProvider(
-            create: (context) => ExpensesTrackerFormBloc(
-              context.read<DataRepository>(),
-              context.read<AuthenticationRepository>(),
-            ),
-            child:
-                BlocConsumer<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    const ClosePageWidget(),
-                    SizedBox(
-                      height: height * 0.025,
-                    ),
-                    const _TextFieldWidget(
-                      textFormField: _TrackerNameFieldWidget('Tracker Name'),
-                    ),
-                    const _AddExpenseWidget(),
-                    SizedBox(
-                      height: height * 0.025,
-                    ),
-                    const AddPeopleClickableWidget(
-                        'Add people to this expenses tracker'),
-                    const _AddCalculationButtonWidget(),
-                  ],
-                );
-              },
-            ),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  const ClosePageClickableWidget(),
+                  SizedBox(
+                    height: height * 0.025,
+                  ),
+                  const _TextFieldWidget(
+                    textFormField: _TrackerNameFieldWidget('Tracker Name'),
+                  ),
+                  const _AddExpenseWidget(),
+                  SizedBox(
+                    height: height * 0.025,
+                  ),
+                  const _AddPeopleClickableWidget(),
+                  const _AddCalculationButtonWidget(),
+                ],
+              ),
+              if (state.addPeopleStatus == AddPeopleStatus.started)
+                FriendsListWidget(
+                  entryType: CollaborativeEntryType.tracker,
+                  onListClosed: () => context.read<ExpensesTrackerFormBloc>().add(
+                        const ExpensesTrackerFormEvent.addPeopleFinished(),
+                      ),
+                ),
+            ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -216,9 +236,12 @@ class _AddCalculationButtonWidget extends StatelessWidget {
         top: height * 0.1,
       ),
       child: InkWell(
-        onTap: () => context.read<ExpensesTrackerFormBloc>().add(
-              const ExpensesTrackerFormEvent.submitFormPressed(),
-            ),
+        onTap: () {
+          context.read<ExpensesTrackerFormBloc>().add(
+            const ExpensesTrackerFormEvent.submitFormPressed(),
+          );
+          context.router.pop();
+        },
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -260,4 +283,38 @@ InputDecoration _getInputDecoration(String hintText) {
       fontSize: 14,
     ),
   );
+}
+
+class _AddPeopleClickableWidget extends StatelessWidget {
+  const _AddPeopleClickableWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = context.dims.width;
+
+    return InkWell(
+      onTap: () => context.read<ExpensesTrackerFormBloc>().add(
+            const ExpensesTrackerFormEvent.addPeopleStarted(),
+          ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.add_circle_outline,
+            color: Colors.white,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: screenWidth * 0.015,
+            ),
+            child: const Text(
+              'Add people to this expenses tracker',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

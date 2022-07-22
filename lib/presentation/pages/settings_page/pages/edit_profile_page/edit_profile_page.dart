@@ -39,7 +39,6 @@ class _EditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = context.dims.width;
-    final height = context.dims.height;
 
     return BlocConsumer<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
@@ -62,6 +61,7 @@ class _EditProfileView extends StatelessWidget {
                 following: userState.following,
                 posts: userState.posts,
                 expensesTrackers: userState.expensesTrackers,
+                authorizedExpenseTrackers: userState.authorizedExpenseTrackers,
                 likedPostsIds: userState.likedPostsIds,
                 friends: userState.friends,
               );
@@ -136,8 +136,8 @@ class _EditProfileView extends StatelessWidget {
                     hintText: 'First Name',
                   ),
                   onChanged: (value) => context.read<EditProfileBloc>().add(
-                    EditProfileEvent.firstNameChanged(value),
-                  ),
+                        EditProfileEvent.firstNameChanged(value),
+                      ),
                 ),
                 TextFormField(
                   style: const TextStyle(
@@ -156,8 +156,8 @@ class _EditProfileView extends StatelessWidget {
                     hintText: 'Last Name',
                   ),
                   onChanged: (value) => context.read<EditProfileBloc>().add(
-                    EditProfileEvent.lastNameChanged(value),
-                  ),
+                        EditProfileEvent.lastNameChanged(value),
+                      ),
                 ),
                 InkWell(
                   onTap: () {

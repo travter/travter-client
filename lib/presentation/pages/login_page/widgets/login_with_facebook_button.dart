@@ -4,20 +4,17 @@ import 'package:sign_button/sign_button.dart';
 
 import '../../../../application/user/sign_in_form/sign_in_form_bloc.dart';
 
-
 class LoginWithFacebookButton extends StatelessWidget {
   const LoginWithFacebookButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
-
     return SignInButton.mini(
       buttonType: ButtonType.facebook,
       onPressed: () {
         context.read<SignInFormBloc>().add(
-          const SignInFormEvent.signInWithFacebookPressed(),
-        );
+              const SignInFormEvent.signInWithFacebookPressed(),
+            );
       },
     );
   }

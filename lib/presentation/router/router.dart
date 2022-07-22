@@ -32,5 +32,4 @@ import '../pages/pages.dart';
     MaterialRoute<PersonPage>(page: PersonPage),
   ],
 )
-
 class $AppRouter {}

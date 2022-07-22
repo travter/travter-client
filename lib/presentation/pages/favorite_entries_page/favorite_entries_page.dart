@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:traveler/presentation/pages/favorite_entries_page/widgets/favorite_posts_widget.dart';
 
 import '../../core/constants/constant_colors.dart';
 import '../../core/extensions.dart';
 import '../../core/widgets/bottom_navbar_widget.dart';
 import 'load_navbar_children.dart';
+import 'widgets/favorite_posts_widget.dart';
 
 class FavoriteEntriesPage extends StatelessWidget {
   const FavoriteEntriesPage({Key? key}) : super(key: key);

@@ -14,7 +14,8 @@ part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  EditProfileBloc(this._functionalitiesRepository, this._dataRepository, this._authRepository)
+  EditProfileBloc(this._functionalitiesRepository, this._dataRepository,
+      this._authRepository)
       : super(EditProfileState.initial()) {
     on<UsernameChanged>((event, emit) {
       emit(state.copyWith(username: event.username));
@@ -61,7 +62,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             'lastName': state.lastName,
           };
 
-          final updateResult = await _dataRepository.updateUser(fieldsToUpdate, user.uid);
+          final updateResult =
+              await _dataRepository.updateUser(fieldsToUpdate, user.uid);
           updateResult.fold((_) {
             emit(state.copyWith(
               editionResult: some(left(const EditionFailure.unknownError())),

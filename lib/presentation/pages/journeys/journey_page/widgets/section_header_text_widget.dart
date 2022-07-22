@@ -14,16 +14,15 @@ class SectionHeaderTextWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return Padding(
-      padding:EdgeInsets.symmetric(vertical: height * 0.015),
+      padding: EdgeInsets.symmetric(vertical: height * 0.015),
       child: Container(
         decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: lightBlueColor,
-              width: 2,
-            ),
-          )
-        ),
+            border: Border(
+          bottom: BorderSide(
+            color: lightBlueColor,
+            width: 2,
+          ),
+        )),
         child: Text(
           text,
           style: const TextStyle(

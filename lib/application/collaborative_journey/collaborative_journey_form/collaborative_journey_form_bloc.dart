@@ -5,6 +5,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../infrastructure/core/constants/enums.dart';
+
 part 'collaborative_journey_form_bloc.freezed.dart';
 
 part 'collaborative_journey_form_event.dart';
@@ -28,8 +30,22 @@ class CollaborativeJourneyFormBloc
       emit(state.copyWith(addPeopleStatus: AddPeopleStatus.started));
     });
     on<AddPeopleFinished>((event, emit) {
-      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.added));
+      emit(state.copyWith(addPeopleStatus: AddPeopleStatus.finished));
     });
+    on<TogglePersonSelection>((event, emit) {
+      if (state.selectedUsers.contains(event.userId)) {
+        final currentlySelectedUsers = List<String>.from(state.selectedUsers)
+          ..remove(event.userId);
+        emit(state.copyWith(
+          selectedUsers: currentlySelectedUsers,
+        ));
+      } else {
+        emit(state.copyWith(
+          selectedUsers: [...state.selectedUsers, event.userId],
+        ));
+      }
+    });
+
     on<UploadPhotosStarted>((event, emit) {});
     on<SubmitFormPressed>((event, emit) async {
       final currentUser = await _authRepository.getSignedInUser();
@@ -47,7 +63,7 @@ class CollaborativeJourneyFormBloc
         final collaborativeJourney = CollaborativeJourney(
           List.empty(growable: true)..add(memory),
           name: state.journeyName,
-          authorizedUsers: state.addedPeople,
+          authorizedUsers: [...state.selectedUsers, user.uid],
           ownerId: user.uid,
           id: uuid.v1(),
         );

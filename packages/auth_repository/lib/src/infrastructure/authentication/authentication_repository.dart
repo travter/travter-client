@@ -21,7 +21,6 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _facebookAuth = facebookAuth ?? FacebookAuth.instance;
 
-
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;

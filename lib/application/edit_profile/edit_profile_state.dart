@@ -1,7 +1,7 @@
 part of 'edit_profile_bloc.dart';
 
 @freezed
-class EditProfileState with _$EditProfileState{
+class EditProfileState with _$EditProfileState {
   const factory EditProfileState({
     required String username, // value object todo plox
     required String photoReference,
@@ -12,12 +12,11 @@ class EditProfileState with _$EditProfileState{
   }) = _EditProfileState;
 
   factory EditProfileState.initial() => EditProfileState(
-    username: '',
-    photoReference: '',
-    bio: '',
-    firstName: '',
-    lastName: '',
-    editionResult: none(),
-  );
+        username: '',
+        photoReference: '',
+        bio: '',
+        firstName: '',
+        lastName: '',
+        editionResult: none(),
+      );
 }
-

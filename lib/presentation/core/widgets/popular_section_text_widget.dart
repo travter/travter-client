@@ -39,15 +39,18 @@ class PopularSectionTextWidget extends StatelessWidget {
             ),
           ),
         ),
-        if (redirectRoute != null) InkWell(
-          onTap: () => context.router.push(redirectRoute!),
-          child: const Text(
-            'View all',
-            style: TextStyle(
-              color: lightBlueColor,
+        if (redirectRoute != null)
+          InkWell(
+            onTap: () => context.router.push(redirectRoute!),
+            child: const Text(
+              'View all',
+              style: TextStyle(
+                color: lightBlueColor,
+              ),
             ),
-          ),
-        ) else Container(),
+          )
+        else
+          Container(),
       ],
     );
   }
@@ -55,6 +58,9 @@ class PopularSectionTextWidget extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
+    properties
+      ..add(StringProperty('text', text))
+      ..add(
+          DiagnosticsProperty<PageRouteInfo?>('redirectRoute', redirectRoute));
   }
 }

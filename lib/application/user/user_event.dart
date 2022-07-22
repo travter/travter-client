@@ -15,6 +15,10 @@ class UserEvent with _$UserEvent {
   const factory UserEvent.journeyLikeToggled(String journeyId) =
       JourneyLikeToggled;
 
+  const factory UserEvent.currentlyLookedUpUserSet(User user) =
+      CurrentlyLookedUpUserSet;
+
   const factory UserEvent.userFollowToggled(String userId) = UserFollowToggled;
-  const factory UserEvent.addToFriendsPressed(String userId) = AddToFriendsPressed;
+  const factory UserEvent.addToFriendsPressed(String userId) =
+      AddToFriendsPressed;
 }

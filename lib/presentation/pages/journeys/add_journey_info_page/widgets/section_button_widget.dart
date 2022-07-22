@@ -32,14 +32,13 @@ class SectionButtonWidget extends StatelessWidget {
               vertical: height * 0.015,
             ),
             decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 4,
-                )
-              ]
-            ),
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 4,
+                  )
+                ]),
             child: Text(
               text,
               style: const TextStyle(

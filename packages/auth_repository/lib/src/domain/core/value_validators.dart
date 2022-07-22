@@ -41,9 +41,10 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 Either<ValueFailure<String>, String> validateUsername(String input) {
-    const regExp = r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$';
-    final isValid = RegExp(regExp).hasMatch(input);
-    final valueFailure = ValueFailure<String>.invalidUsername(incorrectValue: input);
+  const regExp = r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$';
+  final isValid = RegExp(regExp).hasMatch(input);
+  final valueFailure =
+      ValueFailure<String>.invalidUsername(incorrectValue: input);
 
-    return isValid ? right(input) : left(valueFailure);
+  return isValid ? right(input) : left(valueFailure);
 }

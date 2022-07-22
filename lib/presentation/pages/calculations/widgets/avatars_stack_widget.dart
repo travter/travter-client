@@ -20,7 +20,8 @@ class AvatarsStackWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: width * 0.075),
-            child: const _CircleAvatarWidget('assets/images/julie_roberts.jpeg'),
+            child:
+                const _CircleAvatarWidget('assets/images/julie_roberts.jpeg'),
           ),
           const _CircleAvatarWidget('assets/images/profile_picture.jpeg')
         ],

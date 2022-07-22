@@ -1,14 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../friend/friend.dart';
-
 part 'user.freezed.dart';
 
 part 'user.g.dart';
 
 @freezed
 class User with _$User {
-  @JsonSerializable(explicitToJson: true)
   const factory User( // @JsonKey(name: 'friends') List<Friend> friends,
       {
     required String uid,
@@ -21,6 +18,7 @@ class User with _$User {
     required List<String> following,
     required List<String> posts,
     required List<String> expensesTrackers,
+    required List<String> authorizedExpenseTrackers,
     required List<String> likedPostsIds,
     required List<String> friends,
   }) = _User;
@@ -32,6 +30,7 @@ class User with _$User {
         profilePicture: '',
         firstName: '',
         lastName: '',
+        authorizedExpenseTrackers: [],
         followers: [],
         following: [],
         posts: [],

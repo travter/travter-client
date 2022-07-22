@@ -18,5 +18,5 @@ class JourneyFormState with _$JourneyFormState {
         uploadedPhotos: List.empty(growable: true),
         requestResult: none(),
         startDate: DateTime.now().toString(),
-  );
+      );
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
@@ -48,7 +46,7 @@ class JourneyBloc extends Bloc<JourneyEvent, JourneyState> {
     });
 
     on<LikedJourneysRequested>((event, emit) async {
-      var likedJourneys = <Journey>[];
+      final likedJourneys = <Journey>[];
       for (final journey in state.journeys) {
         if (event.journeyIds.contains(journey.id)) {
           likedJourneys.add(journey);

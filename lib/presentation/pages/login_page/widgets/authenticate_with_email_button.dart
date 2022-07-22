@@ -41,7 +41,7 @@ class AuthenticateWithEmailButton extends StatelessWidget {
         width: context.dims.width * 0.4,
         height: context.dims.height * loginButtonsHeight,
         decoration: BoxDecoration(
-            color: isLogin ? Colors.amber: Colors.transparent,
+            color: isLogin ? Colors.amber : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: !isLogin ? Colors.amber : Colors.transparent,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
-import '../../../core/widgets/go_back_widget.dart';
+import '../../../core/widgets/clickable/go_back_clickable_widget.dart';
 
 class InfoPageWidget extends StatelessWidget {
   const InfoPageWidget({
@@ -33,10 +33,10 @@ class InfoPageWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const GoBackWidget(),
+                const GoBackClickableWidget(),
                 Padding(
-                  padding:
-                      EdgeInsets.only(bottom: height * 0.025, top: height * 0.05),
+                  padding: EdgeInsets.only(
+                      bottom: height * 0.025, top: height * 0.05),
                   child: Container(
                     decoration: const BoxDecoration(
                       border: Border(
@@ -75,4 +75,3 @@ class InfoPageWidget extends StatelessWidget {
       ..add(StringProperty('header', header));
   }
 }
-

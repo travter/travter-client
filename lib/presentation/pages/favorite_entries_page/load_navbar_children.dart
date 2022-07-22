@@ -29,4 +29,3 @@ List<Widget> loadChildren(BuildContext context) {
 
   return _children;
 }
-

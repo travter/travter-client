@@ -4,5 +4,5 @@ part 'request_failure.freezed.dart';
 
 @freezed
 class RequestFailure with _$RequestFailure {
-    const factory RequestFailure.serverError() = ServerError;
+  const factory RequestFailure.serverError() = ServerError;
 }

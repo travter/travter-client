@@ -7,5 +7,6 @@ class JourneyEvent with _$JourneyEvent {
   const factory JourneyEvent.currentlyLookedUpJourneySet(Journey journey) =
       CurrentlyLookedUpJourneySet;
 
-  const factory JourneyEvent.likedJourneysRequested(List<String> journeyIds) = LikedJourneysRequested;
+  const factory JourneyEvent.likedJourneysRequested(List<String> journeyIds) =
+      LikedJourneysRequested;
 }

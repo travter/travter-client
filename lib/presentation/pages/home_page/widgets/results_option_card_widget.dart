@@ -32,7 +32,8 @@ class ResultsOptionCardWidget extends StatelessWidget {
       ),
       width: width * 0.425,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: height * 0.02, horizontal: width * 0.05),
+        padding: EdgeInsets.symmetric(
+            vertical: height * 0.02, horizontal: width * 0.05),
         child: Row(
           children: [
             Icon(

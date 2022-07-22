@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/extensions.dart';
 
 class SectionTextWidget extends StatelessWidget {
-  const SectionTextWidget(this.text,{Key? key}) : super(key: key);
+  const SectionTextWidget(this.text, {Key? key}) : super(key: key);
 
   final String text;
 
@@ -13,7 +13,7 @@ class SectionTextWidget extends StatelessWidget {
     final height = context.dims.height;
 
     return Text(
-     text,
+      text,
       style: TextStyle(
         color: Colors.grey,
         fontSize: 13.5,
@@ -22,6 +22,7 @@ class SectionTextWidget extends StatelessWidget {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

@@ -14,5 +14,5 @@ class Username extends ValueObject<String> {
   const Username._(this.value);
 
   @override
-  final Either<ValueFailure<String>, String>  value;
+  final Either<ValueFailure<String>, String> value;
 }

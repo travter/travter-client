@@ -23,7 +23,8 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: height * 0.8, minHeight: height * 0.8),
+              constraints: BoxConstraints(
+                  maxHeight: height * 0.8, minHeight: height * 0.8),
               child: SingleChildScrollView(
                 child: Column(children: const [
                   WelcomeWidget(),
@@ -55,8 +56,8 @@ List<Widget> _loadChildren(BuildContext context) {
     InkWell(
       onTap: () {
         context.read<JourneyBloc>().add(JourneyEvent.likedJourneysRequested(
-          context.read<UserBloc>().state.user.likedPostsIds,
-        ));
+              context.read<UserBloc>().state.user.likedPostsIds,
+            ));
         context.router.push(
           const FavoriteEntriesRoute(),
         );

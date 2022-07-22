@@ -1,5 +1,3 @@
-import 'package:auth_repository/auth_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,12 +6,12 @@ import '../../core/constants/constant_colors.dart';
 import 'widgets/person_profile_summary.dart';
 
 class PersonPage extends StatelessWidget {
-  const PersonPage({required this.person, Key? key}) : super(key: key);
-
-  final User person;
+  const PersonPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final person = context.read<UserBloc>().state.currentlyLookedUpUser;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
@@ -22,17 +20,32 @@ class PersonPage extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  PersonProfileSummary(person),
+                  PersonProfileSummary(),
                   ElevatedButton(
                       onPressed: () => context
                           .read<UserBloc>()
                           .add(UserEvent.userFollowToggled(person.uid)),
-                      child: const Text('Follow')),
-                  ElevatedButton(
-                      onPressed: () => context
-                          .read<UserBloc>()
-                          .add(UserEvent.addToFriendsPressed(person.uid)),
-                      child: const Text('Add to friends')),
+                      child: context
+                              .watch<UserBloc>()
+                              .state
+                              .user
+                              .following
+                              .contains(person.uid)
+                          ? const Text('Unfollow')
+                          : const Text('Follow')),
+                  if (context
+                      .watch<UserBloc>()
+                      .state
+                      .user
+                      .friends
+                      .contains(person.uid))
+                    Container()
+                  else
+                    ElevatedButton(
+                        onPressed: () => context
+                            .read<UserBloc>()
+                            .add(UserEvent.addToFriendsPressed(person.uid)),
+                        child: const Text('Add to friends')),
                 ],
               ),
             )
@@ -40,11 +53,5 @@ class PersonPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<User>('person', person));
   }
 }
