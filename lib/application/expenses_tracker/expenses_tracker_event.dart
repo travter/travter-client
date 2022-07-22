@@ -6,4 +6,5 @@ class ExpensesTrackerEvent with _$ExpensesTrackerEvent {
       FetchTrackersRequested;
   const factory ExpensesTrackerEvent.currentlyLookedUpTrackerSet(
       ExpensesTracker tracker) = CurrentlyLookedUpTrackerSet;
+
 }

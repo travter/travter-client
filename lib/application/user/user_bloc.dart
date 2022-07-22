@@ -30,6 +30,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await _authRepo.signOut();
       emit(state.copyWith(
         authStatus: AuthenticationStatus.unauthenticated,
+        user: User.empty(),
       ));
     });
 

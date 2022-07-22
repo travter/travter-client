@@ -196,7 +196,7 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersExpenseTrackers(String userId) async {
     try {
       final collection = _firestore.collection('expense_trackers');
-      final query = await collection.where('ownerId', isEqualTo: userId).get();
+      final query = await collection.where('authorizedUsers', arrayContainsAny: [userId]).get();
       final trackers = query.docs
           .map(
             (el) => ExpensesTracker.fromJson(el.data()),
@@ -574,6 +574,20 @@ class DataRepository implements DataRepositoryInterface {
         ],
       });
 
+      return right(unit);
+    } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<Unit>> getUsersAuthorizedTrackers(String userId) async {
+    try {
+      final userData = await _firestore.collection('users').where('uid').get();
+      final userDoc = userData.docs.first;
+      final currentlyAuthorizedTrackers = List<String>.from(
+          User.fromJson(userDoc.data()).authorizedExpenseTrackers);
+      // for(final trackerId in currentlyAuthorizedTrackers) {}
       return right(unit);
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
