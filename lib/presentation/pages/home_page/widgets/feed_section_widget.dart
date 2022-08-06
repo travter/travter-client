@@ -6,6 +6,7 @@ import '../../../../application/journey/journey_bloc.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/travel_card_widget.dart';
+import 'lack_of_new_posts_widget.dart';
 
 class FeedSectionWidget extends StatelessWidget {
   const FeedSectionWidget({required this.text, Key? key}) : super(key: key);
@@ -28,6 +29,8 @@ class FeedSectionWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // _FeedTextWidget(text: text),
+                if(state.journeys.isEmpty)
+                  const LackOfNewPostsWidget(),
                 for (final journey in state.journeys)
                   TravelCardWidget(journey: journey),
               ],
@@ -44,3 +47,5 @@ class FeedSectionWidget extends StatelessWidget {
     properties.add(StringProperty('text', text));
   }
 }
+
+

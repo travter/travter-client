@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +15,7 @@ class WelcomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.dims.width;
     final height = context.dims.height;
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: width * homePageHorizontalPadding,
@@ -48,11 +51,37 @@ class WelcomeWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const CircleAvatar(
-                radius: 15,
-                backgroundImage:
-                    AssetImage('assets/images/profile_picture.jpeg'),
-              )
+              BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+                if (state.user.profilePicture.isNotEmpty) {
+                  return FutureBuilder(
+                    future: context
+                        .read<DataRepository>()
+                        .getUserProfilePictureUrl(
+                          context.read<UserBloc>().state.user.profilePicture,
+                        ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final result = snapshot.data as RequestResult<String>;
+                        var url = '';
+                        result.fold(
+                          (_) => const Text('dupa'),
+                          (r) => url = r,
+                        );
+                        return CachedNetworkImage(
+                          imageUrl: url,
+                          fit: BoxFit.cover,
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
+                            backgroundImage: imageProvider,
+                          ),
+                        );
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  );
+                }
+                return const Text('DUPA');
+              }),
             ],
           ),
           Padding(

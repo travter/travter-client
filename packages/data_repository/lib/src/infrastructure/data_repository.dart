@@ -17,11 +17,12 @@ import '../domain/journey/journey.dart';
 import '../domain/search/search_result.dart';
 
 class DataRepository implements DataRepositoryInterface {
-  DataRepository({
-    FirebaseFirestore? firestore,
-  }) : _firestore = firestore ?? FirebaseFirestore.instance;
+  DataRepository({FirebaseFirestore? firestore, FirebaseStorage? storage})
+      : _firestore = firestore ?? FirebaseFirestore.instance,
+        _storage = storage ?? FirebaseStorage.instance;
 
   final FirebaseFirestore _firestore;
+  final FirebaseStorage _storage;
 
   final _expensesStreamController =
       BehaviorSubject<List<ExpensesTracker>>.seeded(const []);
@@ -196,7 +197,9 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersExpenseTrackers(String userId) async {
     try {
       final collection = _firestore.collection('expense_trackers');
-      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
+      final query = await collection
+          .where('authorizedUsers', arrayContains: userId)
+          .get();
       final trackers = query.docs
           .map(
             (el) => ExpensesTracker.fromJson(el.data()),
@@ -234,7 +237,9 @@ class DataRepository implements DataRepositoryInterface {
       getAllUsersCollaborativeJourneys(String userId) async {
     try {
       final collection = _firestore.collection('collaborative_journeys');
-      final query = await collection.where('authorizedUsers', arrayContains: userId).get();
+      final query = await collection
+          .where('authorizedUsers', arrayContains: userId)
+          .get();
       final collaborativeJourneys = query.docs
           .map(
             (el) => CollaborativeJourney.fromJson(el.data()),
@@ -590,6 +595,18 @@ class DataRepository implements DataRepositoryInterface {
       // for(final trackerId in currentlyAuthorizedTrackers) {}
       return right(unit);
     } on FirestoreException catch (_) {
+      return left(const RequestFailure.serverError());
+    }
+  }
+
+  @override
+  Future<RequestResult<String>> getUserProfilePictureUrl(
+      String imageRefString) async {
+    final imageRef = _storage.ref().child('images/$imageRefString');
+    try {
+      final url = await imageRef.getDownloadURL();
+      return right(url);
+    } on FirebaseException catch (_) {
       return left(const RequestFailure.serverError());
     }
   }

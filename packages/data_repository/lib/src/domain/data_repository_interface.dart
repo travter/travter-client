@@ -71,4 +71,6 @@ abstract class DataRepositoryInterface {
   Future<RequestResult<Unit>> authorizeUserToExpense(String userId, String expenseId);
 
   Future<RequestResult<Unit>> getUsersAuthorizedTrackers(String userId);
+
+  Future<RequestResult<String>> getUserProfilePictureUrl(String userId);
 }

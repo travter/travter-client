@@ -6,3 +6,5 @@ const darkPrimaryColor = Color(0xff201625);
 const lightGreenColor = Color(0xff97eca8);
 const lightBlueColor = Color(0xff90dcf4);
 const lightGreyColor = Color(0xfff1f1f1);
+const failureColor = Color(0xffD21F3C);
+const middleBlueGreenColor = Color(0xff84DCC6);
