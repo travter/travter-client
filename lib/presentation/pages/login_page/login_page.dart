@@ -27,7 +27,11 @@ class LoginPage extends StatelessWidget {
             (result) => result.fold(
               (_) => () => null,
               (_) {
-                context.router.popAndPush(const HomeRoute());
+                if(state.signedUser.firstName.isNotEmpty) {
+                  context.router.popAndPush(const HomeRoute());
+                } else {
+                  context.router.popAndPush(const NameAndUsernameRoute());
+                }
                 context.read<UserBloc>().add(
                       UserEvent.userSignedIn(state.signedUser),
                     );

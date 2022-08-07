@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 
+import '../pages/complete_profile/complete_profile.dart';
 import '../pages/pages.dart';
 
 @MaterialAutoRouter(
@@ -30,6 +31,8 @@ import '../pages/pages.dart';
         page: AddCollaborativeJourneyPage),
     MaterialRoute<PeoplePage>(page: PeoplePage),
     MaterialRoute<PersonPage>(page: PersonPage),
+    MaterialRoute<ImageAndBioPage>(page: ImageAndBioPage),
+    MaterialRoute<NameAndUsernamePage>(page: NameAndUsernamePage),
   ],
 )
 class $AppRouter {}

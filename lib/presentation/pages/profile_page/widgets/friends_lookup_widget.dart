@@ -27,18 +27,24 @@ class FriendsLookupWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Friends',
-                style: TextStyle(
-                  color: Colors.white,
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  'Friends',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
               FutureBuilder<Either<RequestFailure, List<User>>>(
-                  future: context.read<DataRepository>().fetchUsersFriends(
-                      context.read<UserBloc>().state.user.friends),
-                  builder: (context, snapshot) {
-                    var children = <Widget>[];
-                    snapshot.data?.fold((_) {}, (users) {
+                future: context.read<DataRepository>().fetchUsersFriends(
+                      context.read<UserBloc>().state.user.friends,
+                    ),
+                builder: (context, snapshot) {
+                  var children = <Widget>[];
+                  snapshot.data?.fold(
+                    (_) {},
+                    (users) {
                       children = [
                         Column(
                           children: [
@@ -47,11 +53,13 @@ class FriendsLookupWidget extends StatelessWidget {
                           ],
                         ),
                       ];
-                    });
-                    return Column(
-                      children: children,
-                    );
-                  }),
+                    },
+                  );
+                  return Column(
+                    children: children,
+                  );
+                },
+              ),
             ],
           ),
         ),
