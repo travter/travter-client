@@ -8,6 +8,7 @@ analyzer:
     - "**/*.gr.dart"
     - "**/*.mocks.dart"
     - "**/firebase_options.dart"
+    - "lib/generated_plugin_registrant.dart"
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false

@@ -10,6 +10,9 @@ import '../../../../../application/user/user_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
+import '../../../../core/widgets/edit_profile/edit_first_name_field_widget.dart';
+import '../../../../core/widgets/edit_profile/edit_last_name_field_widget.dart';
+import '../../../../core/widgets/edit_profile/edit_username_field_widget.dart';
 import '../../../../router/router.gr.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -79,26 +82,7 @@ class _EditProfileView extends StatelessWidget {
             ),
             child: Column(
               children: [
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber),
-                    ),
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    hintText: 'Username',
-                  ),
-                  onChanged: (value) => context.read<EditProfileBloc>().add(
-                        EditProfileEvent.usernameChanged(value),
-                      ),
-                ),
+                const EditUsernameFieldWidget(),
                 TextFormField(
                   style: const TextStyle(
                     color: Colors.white,
@@ -119,52 +103,12 @@ class _EditProfileView extends StatelessWidget {
                         EditProfileEvent.bioChanged(value),
                       ),
                 ),
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber),
-                    ),
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    hintText: 'First Name',
-                  ),
-                  onChanged: (value) => context.read<EditProfileBloc>().add(
-                        EditProfileEvent.firstNameChanged(value),
-                      ),
-                ),
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber),
-                    ),
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    hintText: 'Last Name',
-                  ),
-                  onChanged: (value) => context.read<EditProfileBloc>().add(
-                        EditProfileEvent.lastNameChanged(value),
-                      ),
-                ),
+                const EditFirstNameFieldWidget(),
+                const EditLastNameFieldWidget(),
                 InkWell(
-                  onTap: () {
-                    context.read<EditProfileBloc>().add(
-                          const EditProfileEvent.profilePhotoSelectionStarted(),
-                        );
-                  },
+                  onTap: () => context.read<EditProfileBloc>().add(
+                        const EditProfileEvent.profilePhotoSelectionStarted(),
+                      ),
                   child: const Text(
                     'Pick profile picture',
                     style: TextStyle(
