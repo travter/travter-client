@@ -64,11 +64,13 @@ abstract class DataRepositoryInterface {
 
   Future<RequestResult<Unit>> addUserToFriends(String friendId, String userId);
 
-  Future<RequestResult<Unit>> removeUserFromFriends(String friendId, String userId);
+  Future<RequestResult<Unit>> removeUserFromFriends(
+      String friendId, String userId);
 
   Future<RequestResult<List<User>>> fetchUsersFriends(List<String> friendsIds);
 
-  Future<RequestResult<Unit>> authorizeUserToExpense(String userId, String expenseId);
+  Future<RequestResult<Unit>> authorizeUserToExpense(
+      String userId, String expenseId);
 
   Future<RequestResult<Unit>> getUsersAuthorizedTrackers(String userId);
 

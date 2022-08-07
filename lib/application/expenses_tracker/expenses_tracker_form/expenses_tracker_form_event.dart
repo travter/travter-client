@@ -13,9 +13,11 @@ class ExpensesTrackerFormEvent with _$ExpensesTrackerFormEvent {
 
   const factory ExpensesTrackerFormEvent.addPeopleStarted() = AddPeopleStarted;
 
-  const factory ExpensesTrackerFormEvent.addPeopleFinished() = AddPeopleFinished;
+  const factory ExpensesTrackerFormEvent.addPeopleFinished() =
+      AddPeopleFinished;
 
-  const factory ExpensesTrackerFormEvent.togglePersonSelection(String userId) = TogglePersonSelection;
+  const factory ExpensesTrackerFormEvent.togglePersonSelection(String userId) =
+      TogglePersonSelection;
 
   const factory ExpensesTrackerFormEvent.submitFormPressed() =
       SubmitFormPressed;

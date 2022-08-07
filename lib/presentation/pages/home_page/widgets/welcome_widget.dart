@@ -1,10 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/user/user_bloc.dart';
-import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import 'are_you_ready_text_widget.dart';
@@ -31,7 +26,9 @@ class WelcomeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               HelloTextWidget(),
-              UserAvatarWidget(radius: 20,),
+              UserAvatarWidget(
+                radius: 20,
+              ),
             ],
           ),
           const AreYouReadyTextWidget(),

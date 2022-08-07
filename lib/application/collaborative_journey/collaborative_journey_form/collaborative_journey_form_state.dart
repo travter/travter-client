@@ -1,6 +1,5 @@
 part of 'collaborative_journey_form_bloc.dart';
 
-
 @freezed
 class CollaborativeJourneyFormState with _$CollaborativeJourneyFormState {
   const factory CollaborativeJourneyFormState({

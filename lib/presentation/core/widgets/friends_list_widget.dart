@@ -83,31 +83,31 @@ class _FriendsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder<Either<RequestFailure, List<User>>>(
-        future: context.read<DataRepository>().fetchUsersFriends(
-              context.read<UserBloc>().state.user.friends,
+    return FutureBuilder<Either<RequestFailure, List<User>>>(
+      future: context.read<DataRepository>().fetchUsersFriends(
+            context.read<UserBloc>().state.user.friends,
+          ),
+      builder: (context, snapshot) {
+        var children = <Widget>[];
+        snapshot.data?.fold((_) {}, (users) {
+          children = [
+            Column(
+              children: [
+                for (final user in users)
+                  SelectableFriendWidget(
+                    user,
+                    entryType: entryType,
+                  ),
+              ],
             ),
-        builder: (context, snapshot) {
-          var children = <Widget>[];
-          snapshot.data?.fold((_) {}, (users) {
-            children = [
-              Column(
-                children: [
-                  for (final user in users)
-                    SelectableFriendWidget(
-                      user,
-                      entryType: entryType,
-                    ),
-                ],
-              ),
-            ];
-          });
-          return SingleChildScrollView(
-            child: Column(
-              children: children,
-            ),
-          );
-        },
+          ];
+        });
+        return SingleChildScrollView(
+          child: Column(
+            children: children,
+          ),
+        );
+      },
     );
   }
 }

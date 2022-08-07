@@ -24,8 +24,9 @@ class PersonCardClickableWidget extends StatelessWidget {
       padding: EdgeInsets.only(right: width * 0.05),
       child: InkWell(
         onTap: () {
-          context.read<UserBloc>().add(
-              UserEvent.currentlyLookedUpUserSet(_user));
+          context
+              .read<UserBloc>()
+              .add(UserEvent.currentlyLookedUpUserSet(_user));
           context.router.push(const PersonRoute());
         },
         child: Container(

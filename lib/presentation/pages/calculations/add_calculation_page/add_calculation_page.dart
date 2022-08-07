@@ -72,9 +72,10 @@ class AddCalculationView extends StatelessWidget {
               if (state.addPeopleStatus == AddPeopleStatus.started)
                 FriendsListWidget(
                   entryType: CollaborativeEntryType.tracker,
-                  onListClosed: () => context.read<ExpensesTrackerFormBloc>().add(
-                        const ExpensesTrackerFormEvent.addPeopleFinished(),
-                      ),
+                  onListClosed: () =>
+                      context.read<ExpensesTrackerFormBloc>().add(
+                            const ExpensesTrackerFormEvent.addPeopleFinished(),
+                          ),
                 ),
             ],
           ),
@@ -238,8 +239,8 @@ class _AddCalculationButtonWidget extends StatelessWidget {
       child: InkWell(
         onTap: () {
           context.read<ExpensesTrackerFormBloc>().add(
-            const ExpensesTrackerFormEvent.submitFormPressed(),
-          );
+                const ExpensesTrackerFormEvent.submitFormPressed(),
+              );
           context.router.pop();
         },
         child: Container(

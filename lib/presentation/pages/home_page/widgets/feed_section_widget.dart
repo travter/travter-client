@@ -29,8 +29,7 @@ class FeedSectionWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // _FeedTextWidget(text: text),
-                if(state.journeys.isEmpty)
-                  const LackOfNewPostsWidget(),
+                if (state.journeys.isEmpty) const LackOfNewPostsWidget(),
                 for (final journey in state.journeys)
                   TravelCardWidget(journey: journey),
               ],
@@ -47,5 +46,3 @@ class FeedSectionWidget extends StatelessWidget {
     properties.add(StringProperty('text', text));
   }
 }
-
-
