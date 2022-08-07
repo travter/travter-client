@@ -13,12 +13,12 @@ dependencies:
   auth_repository:
     path: packages/auth_repository
   auto_route: ^4.0.1
-  cloud_firestore: ^3.1.14
+  cloud_firestore: ^3.4.3
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   data_repository:
     path: packages/data_repository
-  firebase_core: ^1.16.0
+  firebase_core: ^1.20.0
   functionalities_repository:
     path: packages/functionalities_repository
   flutter:
@@ -31,7 +31,7 @@ dependencies:
   injectable: ^1.5.3
   intl: ^0.17.0
   sign_button: ^2.0.2
-  firebase_storage: ^10.2.18
+  # firebase_storage: ^10.3.4
   uuid: ^3.0.6
   rxdart: ^0.27.4
   image_picker: ^0.8.5+3
@@ -50,8 +50,7 @@ dev_dependencies:
   freezed: ^2.0.3+1
   flutter_test:
     sdk: flutter
-  flutter_gen: ^4.3.0
-  flutter_launcher_icons: ^0.9.2
+  flutter_launcher_icons: ^0.10.0
   injectable_generator: ^1.4.1
   test: ^1.16.8
 

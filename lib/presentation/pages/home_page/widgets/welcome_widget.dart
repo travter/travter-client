@@ -31,7 +31,7 @@ class WelcomeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               HelloTextWidget(),
-              UserAvatarWidget(),
+              UserAvatarWidget(radius: 20,),
             ],
           ),
           const AreYouReadyTextWidget(),

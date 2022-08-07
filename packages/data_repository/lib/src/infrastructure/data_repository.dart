@@ -323,9 +323,13 @@ class DataRepository implements DataRepositoryInterface {
           .where('uid', isEqualTo: userId)
           .get();
 
-      final _user = user.docs.first;
+      if (user.docs.isNotEmpty) {
+        final _user = user.docs.first;
 
-      return right(User.fromJson(_user.data()));
+        return right(User.fromJson(_user.data()));
+      }
+      // to refactor;
+      return left(const RequestFailure.serverError());
     } on FirestoreException catch (_) {
       return left(const RequestFailure.serverError());
     }

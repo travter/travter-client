@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/extensions.dart';
+import '../../home_page/widgets/user_avatar_widget.dart';
 
 class ProfileSummary extends StatelessWidget {
   const ProfileSummary({Key? key}) : super(key: key);
@@ -28,15 +29,8 @@ class ProfileSummary extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const CircleAvatar(
-                  radius: 32,
-                  backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage(
-                      'assets/images/profile_picture.jpeg',
-                    ),
-                  ),
+                const UserAvatarWidget(
+                  radius: 40,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.01),
