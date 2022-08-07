@@ -7,6 +7,9 @@ import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
 import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
+import 'are_you_ready_text_widget.dart';
+import 'hello_text_widget.dart';
+import 'user_avatar_widget.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({Key? key}) : super(key: key);
@@ -26,74 +29,12 @@ class WelcomeWidget extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Text(
-                    'Hello, ',
-                    style: TextStyle(
-                      color: lightBlueColor,
-                      letterSpacing: 0.5,
-                      fontSize: 20,
-                    ),
-                  ),
-                  BlocBuilder<UserBloc, UserState>(
-                    builder: (context, state) {
-                      return Text(
-                        state.user.username,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 0.5,
-                          fontSize: 20,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-                if (state.user.profilePicture.isNotEmpty) {
-                  return FutureBuilder(
-                    future: context
-                        .read<DataRepository>()
-                        .getUserProfilePictureUrl(
-                          context.read<UserBloc>().state.user.profilePicture,
-                        ),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final result = snapshot.data as RequestResult<String>;
-                        var url = '';
-                        result.fold(
-                          (_) => const Text('dupa'),
-                          (r) => url = r,
-                        );
-                        return CachedNetworkImage(
-                          imageUrl: url,
-                          fit: BoxFit.cover,
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                            backgroundImage: imageProvider,
-                          ),
-                        );
-                      }
-                      return const CircularProgressIndicator();
-                    },
-                  );
-                }
-                return const Text('DUPA');
-              }),
+            children: const [
+              HelloTextWidget(),
+              UserAvatarWidget(),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(top: height * 0.01),
-            child: Text(
-              'Are you ready to explore?',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.85),
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          )
+          const AreYouReadyTextWidget(),
         ],
       ),
     );

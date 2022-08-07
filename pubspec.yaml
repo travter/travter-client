@@ -50,6 +50,7 @@ dev_dependencies:
   freezed: ^2.0.3+1
   flutter_test:
     sdk: flutter
+  flutter_gen: ^4.3.0
   flutter_launcher_icons: ^0.9.2
   injectable_generator: ^1.4.1
   test: ^1.16.8
