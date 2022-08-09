@@ -10,6 +10,7 @@ import '../../../../../application/user/user_bloc.dart';
 import '../../../../core/constants/constant_colors.dart';
 import '../../../../core/constants/constant_dimensions.dart';
 import '../../../../core/extensions.dart';
+import '../../../../core/widgets/edit_profile/edit_bio_field_widget.dart';
 import '../../../../core/widgets/edit_profile/edit_first_name_field_widget.dart';
 import '../../../../core/widgets/edit_profile/edit_last_name_field_widget.dart';
 import '../../../../core/widgets/edit_profile/edit_username_field_widget.dart';
@@ -83,26 +84,7 @@ class _EditProfileView extends StatelessWidget {
             child: Column(
               children: [
                 const EditUsernameFieldWidget(),
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  decoration: const InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber),
-                    ),
-                    hintStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    hintText: 'Bio',
-                  ),
-                  onChanged: (value) => context.read<EditProfileBloc>().add(
-                        EditProfileEvent.bioChanged(value),
-                      ),
-                ),
+                const EditBioFieldWidget(),
                 const EditFirstNameFieldWidget(),
                 const EditLastNameFieldWidget(),
                 InkWell(
