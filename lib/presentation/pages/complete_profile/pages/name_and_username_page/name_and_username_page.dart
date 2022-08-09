@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/widgets/edit_profile/edit_first_name_field_widget.dart';
 import '../../../../core/widgets/edit_profile/edit_last_name_field_widget.dart';
 import '../../../../core/widgets/edit_profile/edit_username_field_widget.dart';
+import 'widgets/continue_button_widget.dart';
 
 class NameAndUsernamePage extends StatelessWidget {
   const NameAndUsernamePage({Key? key}) : super(key: key);
@@ -20,10 +21,10 @@ class NameAndUsernamePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Text('KURWAAAAAA'),
         EditUsernameFieldWidget(),
         EditFirstNameFieldWidget(),
         EditLastNameFieldWidget(),
+        ContinueButtonWidget(),
       ],
     );
   }
