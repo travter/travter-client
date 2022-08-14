@@ -44,38 +44,56 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     on<LastNameChanged>((event, emit) {
       emit(state.copyWith(lastName: event.lastName));
     });
-    on<SubmitFormPressed>((event, emit) async {
-      final paths = [state.photoReference];
-      final currentUser = await _authRepository.getSignedInUser();
-      await currentUser.fold(() => null, (user) async {
-        final result = await _dataRepository.saveImagesToStorage(paths);
-        await result.fold((_) {
-          emit(state.copyWith(
-            editionResult: some(left(const EditionFailure.failedToSaveImage())),
-          ));
-        }, (_) async {
-          final fieldsToUpdate = {
-            'username': state.username,
-            'profilePicture': state.photoReference.split('/').last,
-            'bio': state.bio,
-            'firstName': state.firstName,
-            'lastName': state.lastName,
-          };
+    on<SubmitFormPressed>(
+      (event, emit) async {
+        final paths = [state.photoReference];
+        final currentUser = await _authRepository.getSignedInUser();
+        await currentUser.fold(
+          () => null,
+          (user) async {
+            if (state.photoReference.isNotEmpty) {
+              final result = await _dataRepository.saveImagesToStorage(paths);
+              result.fold((_) {
+                emit(
+                  state.copyWith(
+                    editionResult:
+                        some(left(const EditionFailure.failedToSaveImage())),
+                  ),
+                );
+              }, (_) {});
+            }
 
-          final updateResult =
-              await _dataRepository.updateUser(fieldsToUpdate, user.uid);
-          updateResult.fold((_) {
-            emit(state.copyWith(
-              editionResult: some(left(const EditionFailure.unknownError())),
-            ));
-          }, (_) {
-            emit(state.copyWith(
-              editionResult: some(right(unit)),
-            ));
-          });
-        });
-      });
-    });
+            final fieldsToUpdate = {
+              'username': state.username,
+              'profilePicture': state.photoReference.split('/').last,
+              'bio': state.bio,
+              'firstName': state.firstName,
+              'lastName': state.lastName,
+            };
+
+            final updateResult =
+                await _dataRepository.updateUser(fieldsToUpdate, user.uid);
+            updateResult.fold(
+              (_) {
+                emit(
+                  state.copyWith(
+                    editionResult:
+                        some(left(const EditionFailure.unknownError())),
+                  ),
+                );
+              },
+              (_) {
+                emit(
+                  state.copyWith(
+                    editionResult: some(right(unit)),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
   }
 
   final FunctionalitiesRepositoryInterface _functionalitiesRepository;

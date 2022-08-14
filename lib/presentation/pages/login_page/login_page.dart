@@ -27,14 +27,15 @@ class LoginPage extends StatelessWidget {
             (result) => result.fold(
               (_) => () => null,
               (_) {
+                context.read<UserBloc>().add(
+                  UserEvent.userSignedIn(state.signedUser),
+                );
+                context.router.removeLast();
                 if(state.signedUser.firstName.isNotEmpty) {
                   context.router.popAndPush(const HomeRoute());
                 } else {
-                  context.router.popAndPush(const NameAndUsernameRoute());
+                  context.router.popAndPush(const CompleteProfileRoute());
                 }
-                context.read<UserBloc>().add(
-                      UserEvent.userSignedIn(state.signedUser),
-                    );
               },
             ),
           );
@@ -53,7 +54,7 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    LoginWithFacebookButton(),
+                   //  LoginWithFacebookButton(),
                     LoginWithGoogleButton(),
                   ],
                 ),
