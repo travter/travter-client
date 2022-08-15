@@ -82,7 +82,7 @@ class _AddCollaborativeJourneyView extends StatelessWidget {
                           child: const AddPeopleClickableWidget(
                               'Add people to your journey'),
                         ),
-                        const UploadPhotosWidget(),
+                        // const UploadPhotosWidget(),
                         const AddCollaborativeJourneyButtonWidget(),
                         Divider(
                           height: height * 0.05,

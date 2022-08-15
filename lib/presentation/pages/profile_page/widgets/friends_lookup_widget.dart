@@ -19,9 +19,7 @@ class FriendsLookupWidget extends StatelessWidget {
       padding: EdgeInsets.only(top: context.dims.height * 0.025),
       child: Container(
         decoration: BoxDecoration(
-          color: lightPrimaryColor,
-          borderRadius: BorderRadius.circular(10)
-        ),
+            color: lightPrimaryColor, borderRadius: BorderRadius.circular(10)),
         width: double.infinity,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -29,32 +27,44 @@ class FriendsLookupWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Friends',
-                style: TextStyle(
-                  color: Colors.white,
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  'Friends',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
               FutureBuilder<Either<RequestFailure, List<User>>>(
-                future: context
-                    .read<DataRepository>()
-                    .fetchUsersFriends(context.read<UserBloc>().state.user.friends),
+                future: context.read<DataRepository>().fetchUsersFriends(
+                      context.read<UserBloc>().state.user.friends,
+                    ),
                 builder: (context, snapshot) {
                   var children = <Widget>[];
-                  snapshot.data?.fold((_){}, (users) {
-                    children = [
-                      Column(
-                        children: [
-                          for(final user in users)
-                            PersonCardClickableWidget(user),
-                        ],
-                      ),
-                    ];
-                  });
-                  return Column(
-                    children: children,
+                  snapshot.data?.fold(
+                    (_) {},
+                    (users) {
+                      children = [
+                        Row(
+                          children: [
+                            for (final user in users)
+                              PersonCardClickableWidget(user),
+                          ],
+                        ),
+                      ];
+                    },
                   );
-                }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: children,
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),

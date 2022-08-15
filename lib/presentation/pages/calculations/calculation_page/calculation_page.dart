@@ -38,7 +38,7 @@ class CalculationPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
                         CalculationNameWidget(),
-                        Icon(Icons.more_vert, color: Colors.white),
+                        // Icon(Icons.more_vert, color: Colors.white),
                       ],
                     ),
                     SizedBox(

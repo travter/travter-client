@@ -1,35 +1,46 @@
 import 'package:auto_route/annotations.dart';
 
+import '../pages/complete_profile/complete_profile.dart';
+import '../pages/complete_profile/complete_profile_page.dart';
 import '../pages/pages.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    MaterialRoute<LoadingPage>(page: LoadingPage, initial: true),
-    MaterialRoute<LoginPage>(page: LoginPage),
-    MaterialRoute<HomePage>(page: HomePage),
-    MaterialRoute<ProfilePage>(page: ProfilePage),
-    MaterialRoute<SettingsPage>(page: SettingsPage),
-    MaterialRoute<CommunityGuidelinesPage>(page: CommunityGuidelinesPage),
-    MaterialRoute<PrivacyPolicyPage>(page: PrivacyPolicyPage),
-    MaterialRoute<TermsOfServicePage>(page: TermsOfServicePage),
-    MaterialRoute<EditProfilePage>(page: EditProfilePage),
-    MaterialRoute<AddJourneyPage>(page: AddJourneyPage),
-    MaterialRoute<SearchPage>(page: SearchPage),
-    MaterialRoute<AddCalculationPage>(page: AddCalculationPage),
-    MaterialRoute<CalculationPage>(page: CalculationPage),
-    MaterialRoute<CalculationsPage>(page: CalculationsPage),
-    MaterialRoute<FavoriteEntriesPage>(page: FavoriteEntriesPage),
-    MaterialRoute<FavoritePostsPage>(page: FavoritePostsPage),
-    MaterialRoute<FavoritePlacesPage>(page: FavoritePlacesPage),
-    MaterialRoute<EditJourneyPage>(page: EditJourneyPage),
-    MaterialRoute<JourneyPage>(page: JourneyPage),
-    MaterialRoute<AddJourneyInfoPage>(page: AddJourneyInfoPage),
-    MaterialRoute<PopularPlacePage>(page: PopularPlacePage),
-    MaterialRoute<AddCollaborativeJourneyPage>(
-        page: AddCollaborativeJourneyPage),
-    MaterialRoute<PeoplePage>(page: PeoplePage),
-    MaterialRoute<PersonPage>(page: PersonPage),
+    AutoRoute<LoadingPage>(page: LoadingPage, initial: true),
+    AutoRoute<LoginPage>(page: LoginPage),
+    AutoRoute<HomePage>(page: HomePage),
+    AutoRoute<ProfilePage>(page: ProfilePage),
+    AutoRoute<SettingsPage>(page: SettingsPage),
+    AutoRoute<CommunityGuidelinesPage>(page: CommunityGuidelinesPage),
+    AutoRoute<PrivacyPolicyPage>(page: PrivacyPolicyPage),
+    AutoRoute<TermsOfServicePage>(page: TermsOfServicePage),
+    AutoRoute<EditProfilePage>(page: EditProfilePage),
+    AutoRoute<AddJourneyPage>(page: AddJourneyPage),
+    AutoRoute<SearchPage>(page: SearchPage),
+    AutoRoute<AddCalculationPage>(page: AddCalculationPage),
+    AutoRoute<CalculationPage>(page: CalculationPage),
+    AutoRoute<CalculationsPage>(page: CalculationsPage),
+    AutoRoute<FavoriteEntriesPage>(page: FavoriteEntriesPage),
+    AutoRoute<FavoritePostsPage>(page: FavoritePostsPage),
+    AutoRoute<FavoritePlacesPage>(page: FavoritePlacesPage),
+    AutoRoute<EditJourneyPage>(page: EditJourneyPage),
+    AutoRoute<JourneyPage>(page: JourneyPage),
+    AutoRoute<AddJourneyInfoPage>(page: AddJourneyInfoPage),
+    AutoRoute<PopularPlacePage>(page: PopularPlacePage),
+    AutoRoute<AddCollaborativeJourneyPage>(page: AddCollaborativeJourneyPage),
+    AutoRoute<PeoplePage>(page: PeoplePage),
+    AutoRoute<PersonPage>(page: PersonPage),
+    AutoRoute<CompleteProfilePage>(
+      page: CompleteProfilePage,
+      children: [
+        AutoRoute<NameAndUsernamePage>(
+          page: NameAndUsernamePage,
+          initial: true,
+        ),
+        AutoRoute<ImageAndBioPage>(page: ImageAndBioPage),
+      ],
+    ),
   ],
 )
 class $AppRouter {}

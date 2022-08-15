@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/foundation.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../domain/authentication/auth_failure.dart';
@@ -16,14 +15,14 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
   AuthenticationRepository({
     FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
-    FacebookAuth? facebookAuth,
+    // FacebookAuth? facebookAuth,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
-        _facebookAuth = facebookAuth ?? FacebookAuth.instance;
+        _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
+      //   _facebookAuth = facebookAuth ?? FacebookAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final FacebookAuth _facebookAuth;
+  //final FacebookAuth _facebookAuth;
 
   @override
   Future<void> signOut() async {
@@ -61,13 +60,17 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface {
 
   @override
   Future<AuthResult> loginWithFacebook() async {
+    /*
     final loginResult = await _facebookAuth.login();
 
     final facebookAuthCredential = FacebookAuthProvider.credential(
       loginResult.accessToken!.token,
     );
+
+     */
     try {
-      await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+      debugPrint('Implement it someday....');
+      // await _firebaseAuth.signInWithCredential(facebookAuthCredential);
     } on FirebaseAuthException catch (err) {
       debugPrint(err.toString());
       return left(const AuthFailure.serverError());

@@ -44,9 +44,6 @@ class _AppView extends StatelessWidget {
             context.read<AuthenticationRepository>(),
             context.read<DataRepository>(),
           )
-            ..add(
-              const UserEvent.authCheckRequested(),
-            )
             ..add(const UserEvent.fetchUserDataRequested()),
         ),
         BlocProvider(

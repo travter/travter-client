@@ -61,11 +61,14 @@ class ExpenseCardWidget extends StatelessWidget {
               ),
               Row(
                 children: [
+                  /*
                   const CircleAvatar(
                     radius: 12,
                     backgroundImage:
                         AssetImage('assets/images/profile_picture.jpeg'),
                   ),
+
+                   */
                   Text(
                     'Marek Kowalski',
                     style: TextStyle(

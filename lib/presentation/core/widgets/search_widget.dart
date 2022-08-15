@@ -6,7 +6,7 @@ import '../../../application/search/search_bloc.dart';
 import '../../router/router.gr.dart';
 import '../extensions.dart';
 
-class SearchWidget extends StatelessWidget{
+class SearchWidget extends StatelessWidget {
   const SearchWidget({Key? key}) : super(key: key);
 
   @override

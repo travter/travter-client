@@ -58,7 +58,7 @@ class CalculationCardWidget extends StatelessWidget {
                     },
                     child: const _OpenCalculationWidget(),
                   ),
-                  const AvatarsStackWidget(),
+                  // const AvatarsStackWidget(),
                 ],
               ),
             ),

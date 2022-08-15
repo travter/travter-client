@@ -11,21 +11,6 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this._authRepo, this._dataRepository) : super(UserState.initial()) {
-    on<AuthCheckRequested>((event, emit) async {
-      final userOption = await _authRepo.getSignedInUser();
-      userOption.fold(
-        () {
-          emit(state.copyWith(
-            authStatus: AuthenticationStatus.unauthenticated,
-          ));
-        },
-        (_) {
-          emit(state.copyWith(
-            authStatus: AuthenticationStatus.authenticated,
-          ));
-        },
-      );
-    });
     on<SignedOut>((event, emit) async {
       await _authRepo.signOut();
       emit(state.copyWith(
@@ -48,11 +33,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<FetchUserDataRequested>((event, emit) async {
       final signedUser = await _authRepo.getSignedInUser();
-      await signedUser.fold(() => null, (user) async {
+      await signedUser.fold((){
+        emit(state.copyWith(
+          authStatus: AuthenticationStatus.unauthenticated,
+        ));
+      }, (user) async {
         final _user = await _dataRepository.getUserData(user.uid);
         _user.fold((l) => null, (user) {
           emit(state.copyWith(
             user: user,
+            authStatus: AuthenticationStatus.authenticated,
           ));
         });
       });
@@ -112,7 +102,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           }
         }
         if (!isFollowing) {
-          await _dataRepository.followUser(state.currentlyLookedUpUser.uid, state.user.uid);
+          await _dataRepository.followUser(
+              state.currentlyLookedUpUser.uid, state.user.uid);
           emit(state.copyWith(
             user: User(
                 friends: state.user.friends,
@@ -137,7 +128,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 bio: state.currentlyLookedUpUser.bio,
                 uid: state.currentlyLookedUpUser.uid,
                 expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
-                authorizedExpenseTrackers: state.currentlyLookedUpUser.authorizedExpenseTrackers,
+                authorizedExpenseTrackers:
+                    state.currentlyLookedUpUser.authorizedExpenseTrackers,
                 firstName: state.currentlyLookedUpUser.firstName,
                 lastName: state.currentlyLookedUpUser.lastName,
                 followers: [...state.currentlyLookedUpUser.followers, user.uid],
@@ -149,40 +141,41 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           await _dataRepository.unFollowUser(event.userId, user.uid);
           final followingList = List<String>.from(state.user.following)
             ..remove(event.userId);
-          final followersList = List<String>.from(state.currentlyLookedUpUser.followers)
-            ..remove(user.uid);
+          final followersList =
+              List<String>.from(state.currentlyLookedUpUser.followers)
+                ..remove(user.uid);
           emit(state.copyWith(
-            user: User(
-              friends: state.user.friends,
-              username: state.user.username,
-              likedPostsIds: state.user.likedPostsIds,
-              bio: state.user.bio,
-              uid: state.user.uid,
-              authorizedExpenseTrackers: state.user.authorizedExpenseTrackers,
-              expensesTrackers: state.user.expensesTrackers,
-              firstName: state.user.firstName,
-              lastName: state.user.lastName,
-              followers: state.user.followers,
-              following: followingList,
-              posts: state.user.posts,
-              profilePicture: state.user.profilePicture,
-            ),
-            currentlyLookedUpUser: User(
-              friends: state.currentlyLookedUpUser.friends,
-              username: state.currentlyLookedUpUser.username,
-              likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
-              bio: state.currentlyLookedUpUser.bio,
-              uid: state.currentlyLookedUpUser.uid,
-              expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
-              authorizedExpenseTrackers: state.currentlyLookedUpUser.authorizedExpenseTrackers,
-              firstName: state.currentlyLookedUpUser.firstName,
-              lastName: state.currentlyLookedUpUser.lastName,
-              followers: followersList,
-              following: state.currentlyLookedUpUser.following,
-              posts: state.currentlyLookedUpUser.posts,
-              profilePicture: state.currentlyLookedUpUser.profilePicture,
-            )
-          ));
+              user: User(
+                friends: state.user.friends,
+                username: state.user.username,
+                likedPostsIds: state.user.likedPostsIds,
+                bio: state.user.bio,
+                uid: state.user.uid,
+                authorizedExpenseTrackers: state.user.authorizedExpenseTrackers,
+                expensesTrackers: state.user.expensesTrackers,
+                firstName: state.user.firstName,
+                lastName: state.user.lastName,
+                followers: state.user.followers,
+                following: followingList,
+                posts: state.user.posts,
+                profilePicture: state.user.profilePicture,
+              ),
+              currentlyLookedUpUser: User(
+                friends: state.currentlyLookedUpUser.friends,
+                username: state.currentlyLookedUpUser.username,
+                likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
+                bio: state.currentlyLookedUpUser.bio,
+                uid: state.currentlyLookedUpUser.uid,
+                expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
+                authorizedExpenseTrackers:
+                    state.currentlyLookedUpUser.authorizedExpenseTrackers,
+                firstName: state.currentlyLookedUpUser.firstName,
+                lastName: state.currentlyLookedUpUser.lastName,
+                followers: followersList,
+                following: state.currentlyLookedUpUser.following,
+                posts: state.currentlyLookedUpUser.posts,
+                profilePicture: state.currentlyLookedUpUser.profilePicture,
+              )));
         }
       });
     });
@@ -212,20 +205,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
         emit(state.copyWith(
           currentlyLookedUpUser: User(
-              friends: [...state.currentlyLookedUpUser.friends, user.uid],
-              username: state.currentlyLookedUpUser.username,
-              likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
-              bio: state.currentlyLookedUpUser.bio,
-              uid: state.currentlyLookedUpUser.uid,
-              expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
-              authorizedExpenseTrackers: state.currentlyLookedUpUser.authorizedExpenseTrackers,
-              firstName: state.currentlyLookedUpUser.firstName,
-              lastName: state.currentlyLookedUpUser.lastName,
-              followers: state.currentlyLookedUpUser.followers,
-              following: state.currentlyLookedUpUser.following,
-              posts: state.currentlyLookedUpUser.posts,
-              profilePicture: state.currentlyLookedUpUser.profilePicture,
-            ),
+            friends: [...state.currentlyLookedUpUser.friends, user.uid],
+            username: state.currentlyLookedUpUser.username,
+            likedPostsIds: state.currentlyLookedUpUser.likedPostsIds,
+            bio: state.currentlyLookedUpUser.bio,
+            uid: state.currentlyLookedUpUser.uid,
+            expensesTrackers: state.currentlyLookedUpUser.expensesTrackers,
+            authorizedExpenseTrackers:
+                state.currentlyLookedUpUser.authorizedExpenseTrackers,
+            firstName: state.currentlyLookedUpUser.firstName,
+            lastName: state.currentlyLookedUpUser.lastName,
+            followers: state.currentlyLookedUpUser.followers,
+            following: state.currentlyLookedUpUser.following,
+            posts: state.currentlyLookedUpUser.posts,
+            profilePicture: state.currentlyLookedUpUser.profilePicture,
+          ),
         ));
       });
     });

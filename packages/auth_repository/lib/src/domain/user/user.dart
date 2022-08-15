@@ -39,5 +39,23 @@ class User with _$User {
         friends: [],
       );
 
+  factory User.fromEdited(User user, String username, String bio,
+          String firstName, String lastName) =>
+      User(
+        authorizedExpenseTrackers: user.authorizedExpenseTrackers,
+        username: username,
+        bio: bio,
+        firstName: firstName,
+        lastName: lastName,
+        friends: user.friends,
+        profilePicture: user.profilePicture,
+        posts: user.posts,
+        followers: user.followers,
+        expensesTrackers: user.expensesTrackers,
+        uid: user.uid,
+        likedPostsIds: user.likedPostsIds,
+        following: user.following,
+      );
+
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 }

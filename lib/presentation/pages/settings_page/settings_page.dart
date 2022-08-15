@@ -14,63 +14,65 @@ class SettingsPage extends StatelessWidget {
     final height = context.dims.height;
     final width = context.dims.width;
 
-    return Scaffold(
-      backgroundColor: primaryColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * 0.035,
-          vertical: height * 0.05,
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: height * 0.025),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Settings',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 0.5,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: primaryColor,
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.035,
+            vertical: height * 0.05,
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: height * 0.025),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Settings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 0.5,
+                      ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () => context.router.pop(),
-                    child: const Icon(Icons.close, color: Colors.white),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () => context.router.pop(),
+                      child: const Icon(Icons.close, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SettingWidget(
-              icon: Icons.account_circle,
-              text: 'Edit Profile',
-              redirectRoute: EditProfileRoute(),
-            ),
-            const SettingWidget(
-              icon: Icons.privacy_tip_outlined,
-              text: 'Privacy Policy',
-              redirectRoute: PrivacyPolicyRoute(),
-            ),
-            const SettingWidget(
-              icon: Icons.security_rounded,
-              text: 'Terms of service',
-              redirectRoute: TermsOfServiceRoute(),
-            ),
-            const SettingWidget(
-              icon: Icons.people_outline,
-              text: 'Community Guidelines',
-              redirectRoute: CommunityGuidelinesRoute(),
-            ),
-            const SettingWidget(
-              icon: Icons.logout,
-              text: 'Log out',
-              redirectRoute: LoginRoute(),
-              logout: true,
-            ),
-          ],
+              const SettingWidget(
+                icon: Icons.account_circle,
+                text: 'Edit Profile',
+                redirectRoute: EditProfileRoute(),
+              ),
+              const SettingWidget(
+                icon: Icons.privacy_tip_outlined,
+                text: 'Privacy Policy',
+                redirectRoute: PrivacyPolicyRoute(),
+              ),
+              const SettingWidget(
+                icon: Icons.security_rounded,
+                text: 'Terms of service',
+                redirectRoute: TermsOfServiceRoute(),
+              ),
+              const SettingWidget(
+                icon: Icons.people_outline,
+                text: 'Community Guidelines',
+                redirectRoute: CommunityGuidelinesRoute(),
+              ),
+              const SettingWidget(
+                icon: Icons.logout,
+                text: 'Log out',
+                redirectRoute: LoginRoute(),
+                logout: true,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -49,13 +49,13 @@ class TravelCardWidget extends StatelessWidget {
                   ),
                   Text(DateFormat.yMd().format(journey.startDate),
                       style: _topTravelInfoStyle),
-                  Expanded(
+                  const Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: InkWell(
-                        onTap: () =>
-                            context.router.push(const EditJourneyRoute()),
-                        child: const Icon(Icons.more_horiz, color: Colors.grey),
+                        // onTap: () =>
+                        // context.router.push(const EditJourneyRoute()),
+                        child: Icon(Icons.more_horiz, color: Colors.grey),
                       ),
                     ),
                   ),

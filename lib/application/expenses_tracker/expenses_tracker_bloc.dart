@@ -41,7 +41,6 @@ class ExpensesTrackerBloc
       });
     });
 
-
     on<CurrentlyLookedUpTrackerSet>((event, emit) {
       emit(state.copyWith(currentlyLookedUpTracker: event.tracker));
     });
