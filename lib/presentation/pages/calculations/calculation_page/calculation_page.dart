@@ -27,9 +27,9 @@ class CalculationPage extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                const SizedBox(height: 10),
+                SizedBox(height: height * 0.05),
                 Container(
-                  height: height * 0.85,
+                  height: height * 0.82,
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.symmetric(

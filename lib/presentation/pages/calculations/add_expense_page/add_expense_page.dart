@@ -68,6 +68,7 @@ class _AddExpenseView extends StatelessWidget {
                   const TextFieldWidget(
                     textFormField: MoneyAmountFieldWidget('Money amount'),
                   ),
+                  const SizedBox(height: 20),
                   const AddPeopleClickableWidget(),
                   const _AddCalculationButtonWidget(),
                 ],
