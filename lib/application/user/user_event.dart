@@ -2,8 +2,6 @@ part of 'user_bloc.dart';
 
 @freezed
 class UserEvent with _$UserEvent {
-  const factory UserEvent.authCheckRequested() = AuthCheckRequested;
-
   const factory UserEvent.userSignedIn(User user) = UserSignedIn;
 
   const factory UserEvent.signedOut() = SignedOut;

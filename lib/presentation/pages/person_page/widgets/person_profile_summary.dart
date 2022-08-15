@@ -1,9 +1,11 @@
-import 'package:auth_repository/auth_repository.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/user/user_bloc.dart';
 import '../../../core/constants/constant_colors.dart';
+import '../../../core/constants/constant_strings.dart';
 import '../../../core/extensions.dart';
 
 class PersonProfileSummary extends StatelessWidget {
@@ -29,14 +31,35 @@ class PersonProfileSummary extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 32,
                   backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage(
-                      'assets/images/profile_picture.jpeg',
-                    ),
+                  child: FutureBuilder(
+                    future:
+                        context.read<DataRepository>().getUserProfilePictureUrl(
+                              state.currentlyLookedUpUser.profilePicture,
+                            ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final result = snapshot.data as RequestResult<String>;
+                        return result.fold(
+                          (_) => const CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage(defaultAvatarPath),
+                          ),
+                          (url) => CachedNetworkImage(
+                            imageUrl: url,
+                            fit: BoxFit.cover,
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              radius: 30,
+                              backgroundImage: imageProvider,
+                            ),
+                          ),
+                        );
+                      }
+                      return const CircularProgressIndicator();
+                    },
                   ),
                 ),
                 Padding(

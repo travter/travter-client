@@ -7,3 +7,4 @@
 6. refactor those cringe blocs with getsignedinuser
 7. fetchowanie trackerow i journeys
 8. fix error z routami przy logowaniu
+9. very bad rebuild na person page po daniu followka

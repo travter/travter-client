@@ -46,7 +46,7 @@ class FriendsLookupWidget extends StatelessWidget {
                     (_) {},
                     (users) {
                       children = [
-                        Column(
+                        Row(
                           children: [
                             for (final user in users)
                               PersonCardClickableWidget(user),
@@ -55,8 +55,14 @@ class FriendsLookupWidget extends StatelessWidget {
                       ];
                     },
                   );
-                  return Column(
-                    children: children,
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: children,
+                      ),
+                    ),
                   );
                 },
               ),

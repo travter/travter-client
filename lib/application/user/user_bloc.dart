@@ -11,21 +11,6 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this._authRepo, this._dataRepository) : super(UserState.initial()) {
-    on<AuthCheckRequested>((event, emit) async {
-      final userOption = await _authRepo.getSignedInUser();
-      userOption.fold(
-        () {
-          emit(state.copyWith(
-            authStatus: AuthenticationStatus.unauthenticated,
-          ));
-        },
-        (_) {
-          emit(state.copyWith(
-            authStatus: AuthenticationStatus.authenticated,
-          ));
-        },
-      );
-    });
     on<SignedOut>((event, emit) async {
       await _authRepo.signOut();
       emit(state.copyWith(
@@ -48,11 +33,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<FetchUserDataRequested>((event, emit) async {
       final signedUser = await _authRepo.getSignedInUser();
-      await signedUser.fold(() => null, (user) async {
+      await signedUser.fold((){
+        emit(state.copyWith(
+          authStatus: AuthenticationStatus.unauthenticated,
+        ));
+      }, (user) async {
         final _user = await _dataRepository.getUserData(user.uid);
         _user.fold((l) => null, (user) {
           emit(state.copyWith(
             user: user,
+            authStatus: AuthenticationStatus.authenticated,
           ));
         });
       });

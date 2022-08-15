@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/user/user_bloc.dart';
 import '../../core/constants/constant_colors.dart';
+import '../../core/constants/constant_dimensions.dart';
+import '../../core/extensions.dart';
 import 'widgets/person_profile_summary.dart';
 
 class PersonPage extends StatelessWidget {
@@ -15,41 +17,50 @@ class PersonPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: lightPrimaryColor,
-        body: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  PersonProfileSummary(),
-                  ElevatedButton(
-                      onPressed: () => context
-                          .read<UserBloc>()
-                          .add(UserEvent.userFollowToggled(person.uid)),
-                      child: context
-                              .watch<UserBloc>()
-                              .state
-                              .user
-                              .following
-                              .contains(person.uid)
-                          ? const Text('Unfollow')
-                          : const Text('Follow')),
-                  if (context
-                      .watch<UserBloc>()
-                      .state
-                      .user
-                      .friends
-                      .contains(person.uid))
-                    Container()
-                  else
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.dims.width * homePageHorizontalPadding,
+          ),
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PersonProfileSummary(),
                     ElevatedButton(
                         onPressed: () => context
                             .read<UserBloc>()
+                            .add(UserEvent.userFollowToggled(person.uid)),
+                        child: context
+                                .watch<UserBloc>()
+                                .state
+                                .user
+                                .following
+                                .contains(person.uid)
+                            ? const Text('Unfollow')
+                            : const Text('Follow')),
+                    if (context
+                        .watch<UserBloc>()
+                        .state
+                        .user
+                        .friends
+                        .contains(person.uid))
+                      Container()
+                    else
+                      ElevatedButton(
+                        onPressed: () => context
+                            .read<UserBloc>()
                             .add(UserEvent.addToFriendsPressed(person.uid)),
-                        child: const Text('Add to friends')),
-                ],
-              ),
-            )
-          ],
+                        child: const Text('Add to friends'),
+                      ),
+                    const Text(
+                      'Profile page is going to contain much more stuff, stay tuned 😎',
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
