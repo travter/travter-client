@@ -11,6 +11,10 @@ import '../../../core/constants/constant_dimensions.dart';
 import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/close_page_clickable_widget.dart';
 import '../../../core/widgets/friends_list_widget.dart';
+import '../widgets/clickable/add_people_clickable_widget.dart';
+import '../widgets/expense_field_name_widget.dart';
+import '../widgets/money_amount_field_widget.dart';
+import '../widgets/text_field_widget.dart';
 
 class AddExpenseTrackerPage extends StatelessWidget {
   const AddExpenseTrackerPage({Key? key}) : super(key: key);
@@ -40,10 +44,7 @@ class AddCalculationView extends StatelessWidget {
     final height = context.dims.height;
     final width = context.dims.width;
 
-    return BlocConsumer<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<ExpensesTrackerFormBloc, ExpensesTrackerFormState>(
       builder: (context, state) {
         return Padding(
           padding: EdgeInsets.symmetric(
@@ -58,14 +59,14 @@ class AddCalculationView extends StatelessWidget {
                   SizedBox(
                     height: height * 0.025,
                   ),
-                  const _TextFieldWidget(
+                  const TextFieldWidget(
                     textFormField: _TrackerNameFieldWidget('Tracker Name'),
                   ),
                   const _AddExpenseWidget(),
                   SizedBox(
                     height: height * 0.025,
                   ),
-                  const _AddPeopleClickableWidget(),
+                  const AddPeopleClickableWidget(),
                   const _AddCalculationButtonWidget(),
                 ],
               ),
@@ -85,36 +86,6 @@ class AddCalculationView extends StatelessWidget {
   }
 }
 
-class _TextFieldWidget extends StatelessWidget {
-  const _TextFieldWidget({
-    required this.textFormField,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget textFormField;
-
-  @override
-  Widget build(BuildContext context) {
-    final width = context.dims.width;
-    final height = context.dims.height;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: height * 0.01,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(left: width * 0.05),
-          child: textFormField,
-        ),
-      ),
-    );
-  }
-}
 
 class _TrackerNameFieldWidget extends StatelessWidget {
   const _TrackerNameFieldWidget(this._text, {Key? key}) : super(key: key);
@@ -171,11 +142,11 @@ class _AddExpenseWidget extends StatelessWidget {
               ),
             ),
           ),
-          const _TextFieldWidget(
-            textFormField: _ExpenseNameFieldWidget('Expense Name'),
+          const TextFieldWidget(
+            textFormField: ExpenseNameFieldWidget('Expense Name'),
           ),
-          const _TextFieldWidget(
-            textFormField: _MoneyAmountFieldWidget('Money amount'),
+          const TextFieldWidget(
+            textFormField: MoneyAmountFieldWidget('Money amount'),
           ),
         ],
       ),
@@ -183,44 +154,9 @@ class _AddExpenseWidget extends StatelessWidget {
   }
 }
 
-class _ExpenseNameFieldWidget extends StatelessWidget {
-  const _ExpenseNameFieldWidget(this._text, {Key? key}) : super(key: key);
 
-  final String _text;
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: const TextStyle(
-        color: Colors.white,
-      ),
-      decoration: _getInputDecoration(_text),
-      onChanged: (value) => context.read<ExpensesTrackerFormBloc>().add(
-            ExpensesTrackerFormEvent.expenseNameChanged(value),
-          ),
-    );
-  }
-}
 
-class _MoneyAmountFieldWidget extends StatelessWidget {
-  const _MoneyAmountFieldWidget(this._text, {Key? key}) : super(key: key);
-
-  final String _text;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: const TextStyle(
-        color: Colors.white,
-      ),
-      decoration: _getInputDecoration(_text),
-      onChanged: (value) => context.read<ExpensesTrackerFormBloc>().add(
-            ExpensesTrackerFormEvent.expenseAmountChanged(
-                double.tryParse(value) ?? 0),
-          ),
-    );
-  }
-}
 
 class _AddCalculationButtonWidget extends StatelessWidget {
   const _AddCalculationButtonWidget({Key? key}) : super(key: key);
@@ -286,36 +222,4 @@ InputDecoration _getInputDecoration(String hintText) {
   );
 }
 
-class _AddPeopleClickableWidget extends StatelessWidget {
-  const _AddPeopleClickableWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = context.dims.width;
-
-    return InkWell(
-      onTap: () => context.read<ExpensesTrackerFormBloc>().add(
-            const ExpensesTrackerFormEvent.addPeopleStarted(),
-          ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.add_circle_outline,
-            color: Colors.white,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: screenWidth * 0.015,
-            ),
-            child: const Text(
-              'Add people to this expenses tracker',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
