@@ -73,7 +73,7 @@ class CalculationsPage extends StatelessWidget {
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
     InkWell(
-      onTap: () => context.router.push(const AddCalculationRoute()),
+      onTap: () => context.router.push(const AddExpenseTrackerRoute()),
       child: const Icon(Icons.add_circle_outline, color: Colors.white),
     ),
   ];

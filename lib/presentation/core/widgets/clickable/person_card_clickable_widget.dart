@@ -25,7 +25,6 @@ class PersonCardClickableWidget extends StatelessWidget {
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        // TODO: implement listener
         if(state.currentlyLookedUpUser == _user) {
           context.router.push(const PersonRoute());
         }

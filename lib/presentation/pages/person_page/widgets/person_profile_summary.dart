@@ -65,7 +65,7 @@ class PersonProfileSummary extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.01),
                   child: Text(
-                    '${state.currentlyLookedUpUser.firstName} ${state.currentlyLookedUpUser.lastName}',
+                    '${state.currentlyLookedUpUser.firstName} ${state.currentlyLookedUpUser.lastName} @${state.currentlyLookedUpUser.username}',
                     style: const TextStyle(
                       color: Colors.white,
                     ),

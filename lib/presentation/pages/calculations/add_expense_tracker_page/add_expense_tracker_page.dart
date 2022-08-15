@@ -12,8 +12,8 @@ import '../../../core/extensions.dart';
 import '../../../core/widgets/clickable/close_page_clickable_widget.dart';
 import '../../../core/widgets/friends_list_widget.dart';
 
-class AddCalculationPage extends StatelessWidget {
-  const AddCalculationPage({Key? key}) : super(key: key);
+class AddExpenseTrackerPage extends StatelessWidget {
+  const AddExpenseTrackerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

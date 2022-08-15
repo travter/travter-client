@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 
+import '../pages/calculations/add_expense_page/add_expense_page.dart';
 import '../pages/complete_profile/complete_profile.dart';
 import '../pages/complete_profile/complete_profile_page.dart';
 import '../pages/pages.dart';
@@ -18,7 +19,8 @@ import '../pages/pages.dart';
     AutoRoute<EditProfilePage>(page: EditProfilePage),
     AutoRoute<AddJourneyPage>(page: AddJourneyPage),
     AutoRoute<SearchPage>(page: SearchPage),
-    AutoRoute<AddCalculationPage>(page: AddCalculationPage),
+    AutoRoute<AddExpenseTrackerPage>(page: AddExpenseTrackerPage),
+    AutoRoute<AddExpensePage>(page:AddExpensePage),
     AutoRoute<CalculationPage>(page: CalculationPage),
     AutoRoute<CalculationsPage>(page: CalculationsPage),
     AutoRoute<FavoriteEntriesPage>(page: FavoriteEntriesPage),
