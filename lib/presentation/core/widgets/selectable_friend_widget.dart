@@ -42,10 +42,13 @@ class SelectableFriendWidget extends StatelessWidget {
       children: [
         Row(
           children: [
+            /*
             const CircleAvatar(
               backgroundImage: AssetImage('assets/images/brad_pitt.jpeg'),
               radius: 20,
             ),
+
+             */
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(

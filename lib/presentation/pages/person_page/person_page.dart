@@ -5,6 +5,7 @@ import '../../../application/user/user_bloc.dart';
 import '../../core/constants/constant_colors.dart';
 import '../../core/constants/constant_dimensions.dart';
 import '../../core/extensions.dart';
+import '../../core/widgets/clickable/go_back_clickable_widget.dart';
 import 'widgets/person_profile_summary.dart';
 
 class PersonPage extends StatelessWidget {
@@ -26,7 +27,9 @@ class PersonPage extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    PersonProfileSummary(),
+                    const SizedBox(height: 10),
+                    const GoBackClickableWidget(),
+                    const PersonProfileSummary(),
                     ElevatedButton(
                         onPressed: () => context
                             .read<UserBloc>()
@@ -53,8 +56,13 @@ class PersonPage extends StatelessWidget {
                             .add(UserEvent.addToFriendsPressed(person.uid)),
                         child: const Text('Add to friends'),
                       ),
+                    const SizedBox(height: 40),
                     const Text(
                       'Profile page is going to contain much more stuff, stay tuned 😎',
+                      style: TextStyle(
+                        color: lightGreenColor,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
