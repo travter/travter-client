@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "packages/functionalities_repository.yml/**"
-      - ".github/workflows/functionalities_repository.yml.yml"
+      - ".github/workflows/functionalities_repository.yml"
 
 jobs:
   build:
