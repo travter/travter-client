@@ -1,7 +1,7 @@
 name: data_repository
 
 on:
-  pull_request:
+  push:
     paths:
       - "packages/data_repository/**"
       - ".github/workflows/data_repository.yml"

@@ -1,7 +1,7 @@
 name: auth_repository
 
 on:
-  pull_request:
+  push:
     paths:
       - "packages/auth_repository/**"
       - ".github/workflows/auth_repository.yml"
