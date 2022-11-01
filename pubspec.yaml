@@ -1,4 +1,4 @@
-name: traveler
+name: travter
 description: A new Flutter project.
 
 publish_to: 'none'
@@ -66,3 +66,9 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    -
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icon.png"
+  min_sdk_android: 21
