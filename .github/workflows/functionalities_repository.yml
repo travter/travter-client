@@ -1,10 +1,10 @@
-name: main
+name: functionalities_repository.yml
 
 on:
   pull_request:
     paths:
-      - "./**"
-      - ".github/workflows/auth_repository.yml"
+      - "packages/functionalities_repository.yml/**"
+      - ".github/workflows/functionalities_repository.yml.yml"
 
 jobs:
   build:
