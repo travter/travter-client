@@ -53,18 +53,6 @@ class _AppView extends StatelessWidget {
           )..add(const ExpensesTrackerEvent.fetchTrackersRequested()),
         ),
         BlocProvider(
-          create: (_) => JourneyBloc(
-            context.read<DataRepository>(),
-            context.read<AuthenticationRepository>(),
-          )..add(const JourneyEvent.fetchJourneysRequested()),
-        ),
-        BlocProvider(
-          create: (_) => CollaborativeJourneyBloc(
-            context.read<DataRepository>(),
-            context.read<AuthenticationRepository>(),
-          )..add(const CollaborativeJourneyEvent.fetchJourneysRequested()),
-        ),
-        BlocProvider(
           create: (_) => SearchBloc(context.read<DataRepository>()),
         ),
       ],

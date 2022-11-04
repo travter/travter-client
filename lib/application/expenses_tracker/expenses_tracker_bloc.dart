@@ -24,6 +24,7 @@ class ExpensesTrackerBloc
           status: TrackersOverviewStatus.failure,
         ));
       }, (user) async {
+        /*
         final trackers =
             await _dataRepository.getAllUsersExpenseTrackers(user.uid);
         await trackers.fold((_) => null, (stream) async {
@@ -37,7 +38,9 @@ class ExpensesTrackerBloc
               status: TrackersOverviewStatus.failure,
             ),
           );
+
         });
+         */
       });
     });
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>44286658247-9i282mp791suu7h1l4fvgtpjurbdfec3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.44286658247-9i282mp791suu7h1l4fvgtpjurbdfec3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA4gAfAS3XD2dwq8hf-ws7rflTkaPwIt_o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>44286658247</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.travterClient</string>
+	<key>PROJECT_ID</key>
+	<string>travter-98471</string>
+	<key>STORAGE_BUCKET</key>
+	<string>travter-98471.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:44286658247:ios:653bed8f1709ff27f820e2</string>
+</dict>
+</plist>

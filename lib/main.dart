@@ -15,10 +15,5 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  BlocOverrides.runZoned(
-    () {
-      runApp(MyAppWidget());
-    },
-    blocObserver: SimpleBlocObserver(),
-  );
+  runApp(MyAppWidget());
 }

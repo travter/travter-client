@@ -26,8 +26,8 @@ class FriendsLookupWidget extends StatelessWidget {
               horizontal: context.dims.width * homePageHorizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
+            children: const [
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'Friends',
@@ -36,6 +36,7 @@ class FriendsLookupWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              /*
               FutureBuilder<Either<RequestFailure, List<User>>>(
                 future: context.read<DataRepository>().fetchUsersFriends(
                       context.read<UserBloc>().state.user.friends,
@@ -55,6 +56,7 @@ class FriendsLookupWidget extends StatelessWidget {
                       ];
                     },
                   );
+
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
@@ -66,6 +68,7 @@ class FriendsLookupWidget extends StatelessWidget {
                   );
                 },
               ),
+               */
             ],
           ),
         ),

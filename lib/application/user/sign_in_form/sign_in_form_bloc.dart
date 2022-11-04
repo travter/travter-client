@@ -48,7 +48,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         await failureOrSuccess.fold((l) => null, (_) async {
           final currentUser = await _authFacade.getSignedInUser();
           await currentUser.fold(() => null, (user) async {
-            await _dataRepository.saveAndRetrieveUser(user);
+            // await _dataRepository.saveAndRetrieveUser(user);
           });
         });
       }

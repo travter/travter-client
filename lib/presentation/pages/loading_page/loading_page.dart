@@ -15,11 +15,11 @@ class LoadingPage extends StatelessWidget {
         switch (state.authStatus) {
           case AuthenticationStatus.authenticated:
             context.router.removeLast();
-            if(state.user.username.isNotEmpty) {
+            // if(state.user.username.isNotEmpty) {
               context.router.push(const HomeRoute());
-            } else {
-              context.router.push(const CompleteProfileRoute());
-            }
+            // } else {
+              // context.router.push(const CompleteProfileRoute());
+            // }
             break;
           case AuthenticationStatus.unauthenticated:
             context.router.removeLast();

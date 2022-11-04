@@ -3,6 +3,8 @@
 *.config.dart
 **/pubspec.lock
 
+lib/firebase_options.dart
+
 pc-api-7281454279782713098-295-2755957bf372.json
 
 # Miscellaneous
@@ -54,3 +56,5 @@ app.*.map.json
 /android/app/release
 
 macos/
+/ios/firebase_app_id_file.json
+/ios/Podfile.lock

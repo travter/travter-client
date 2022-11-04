@@ -38,13 +38,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           authStatus: AuthenticationStatus.unauthenticated,
         ));
       }, (user) async {
+        /*
         final _user = await _dataRepository.getUserData(user.uid);
         _user.fold((l) => null, (user) {
-          emit(state.copyWith(
-            user: user,
-            authStatus: AuthenticationStatus.authenticated,
-          ));
         });
+
+         */
+        emit(state.copyWith(
+          user: user,
+          authStatus: AuthenticationStatus.authenticated,
+        ));
       });
     });
 

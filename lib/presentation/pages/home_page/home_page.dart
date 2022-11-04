@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                   // ResultsOptionsWidget(),
                   // PopularPlacesWidget(text:'Popular Places'),
                   // PopularPeopleWidget(),
-                  FeedSectionWidget(text: ''),
+                  // FeedSectionWidget(text: ''),
                 ]),
               ),
             ),
@@ -46,23 +46,8 @@ class HomePage extends StatelessWidget {
 List<Widget> _loadChildren(BuildContext context) {
   final _children = [
     InkWell(
-      onTap: () => context.router.push(const AddJourneyInfoRoute()),
-      child: const Icon(Icons.add_circle_outline, color: Colors.white),
-    ),
-    InkWell(
       onTap: () => context.router.push(const CalculationsRoute()),
       child: const Icon(Icons.calculate_outlined, color: Colors.white),
-    ),
-    InkWell(
-      onTap: () {
-        context.read<JourneyBloc>().add(JourneyEvent.likedJourneysRequested(
-              context.read<UserBloc>().state.user.likedPostsIds,
-            ));
-        context.router.push(
-          const FavoriteEntriesRoute(),
-        );
-      },
-      child: const Icon(Icons.favorite_border, color: Colors.white),
     ),
     InkWell(
       onTap: () => context.router.push(
