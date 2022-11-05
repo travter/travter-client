@@ -58,3 +58,4 @@ app.*.map.json
 macos/
 /ios/firebase_app_id_file.json
 /ios/Podfile.lock
+/android/app/google-services.json

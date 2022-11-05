@@ -20,6 +20,8 @@ dependencies:
   firebase_core: ^2.1.0
   functionalities_repository:
     path: packages/functionalities_repository
+  trackers:
+    path: packages/trackers
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
