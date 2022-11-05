@@ -3,7 +3,7 @@ syntax = "proto3";
 package trackers;
 
 service Tracker {
-    rpc getTrackers (GetTrackersRequest) returns (GetTrackersResponse) {}
+    rpc GetTrackers (GetTrackersRequest) returns (GetTrackersResponse) {}
 }
 
 message GetTrackersRequest {

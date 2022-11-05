@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trackers/trackers.dart';
 
 import '../../../../application/expenses_tracker/expenses_tracker_bloc.dart';
 import '../../../../application/user/user_bloc.dart';
@@ -37,8 +38,20 @@ class CalculationsPage extends StatelessWidget {
                   ),
                   child: const GoBackClickableWidget(),
                 ),
+                InkWell(
+                  onTap: () {
+                   TrackersRepository().getTracker(1);
+                  },
+                  child: const Text(
+                    'GRPC TEST ES',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Container(
-                  height: height * 0.725,
+                  height: height * 0.7,
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.only(
